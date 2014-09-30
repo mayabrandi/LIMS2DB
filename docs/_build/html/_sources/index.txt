@@ -1,7 +1,8 @@
 Welcome to PSUL's documentation!!!!
 ================================
 
-Contents:
+Guide
+^^^^^
 
 .. toctree::
    :maxdepth: 2
