@@ -11,6 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   project_summary_upload_LIMS
+   objectsDB
 
 
 Indices and tables
