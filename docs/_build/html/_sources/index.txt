@@ -8,7 +8,7 @@ Guide
    :maxdepth: 2
 
    Intro
-
+   ../objectsDB
 
 Indices and tables
 ==================
