@@ -1,11 +1,15 @@
 Welcome to PSUL's documentation!!!!
 ================================
 
+
+
+
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+    Intro
 
 Indices and tables
 ==================
@@ -40,7 +44,7 @@ Install $project by running:
     install project
 
 Contribute
-----------
+^^^^^^^^^^
 
 - Issue Tracker: github.com/$project/$project/issues
 - Source Code: github.com/$project/$project
