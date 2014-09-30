@@ -10,6 +10,9 @@ Guide
    Intro
    ../objectsDB
 
+.. automodule:: ../objectsDB
+      :members:
+
 Indices and tables
 ==================
 
