@@ -1,1 +1,1 @@
-Search.setIndex({envversion:42,terms:{text:1,modul:0,search:0,page:0,index:0},objtypes:{},objnames:{},filenames:["index","Intro"],titles:["Welcome to PSUL&#8217;s documentation!!!!","Some Intro"],objects:{},titleterms:{guid:0,welcom:0,some:1,indic:0,intro:1,tabl:0,document:0,psul:0}})
+Search.setIndex({envversion:42,terms:{text:1,modul:0,search:0,page:0,index:0},objtypes:{},objnames:{},filenames:["index","Intro"],titles:["Welcome to PSUL&#8217;s documentation!!!!","Some Intro"],objects:{},titleterms:{document:0,welcom:0,some:1,indic:0,intro:1,tabl:0,guid:0,psul:0}})

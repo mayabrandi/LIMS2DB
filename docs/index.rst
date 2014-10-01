@@ -10,6 +10,9 @@ Guide
    Intro
    ../objectsDB
 
+.. autodoc:: ../objectsDB
+         :members:
+
 .. automodule:: ../objectsDB
       :members:
 
