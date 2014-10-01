@@ -15,7 +15,13 @@ Guide
 
 .. automodule:: ProjectDB
    :members:
+   :private-members:
+   :undoc-members:
 
+.. automodule:: SampleDB
+   :members:
+   :private-members:
+   :undoc-members:
 
 Indices and tables
 ==================
