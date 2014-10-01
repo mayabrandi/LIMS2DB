@@ -5,18 +5,18 @@ statusdb with lims as the main source of information.
 
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
-import codecs
-from genologics.lims import *
-import genologics.entities as gent
-from lims_utils import *
-from scilifelab.db.statusDB_utils import *
-from helpers import *
-import os
-import couchdb
-import bcbio.pipeline.config_utils as cl
-import time
-from datetime import date
-import logging
+#import codecs
+#from genologics.lims import *
+#import genologics.entities as gent
+#from lims_utils import *
+#from scilifelab.db.statusDB_utils import *
+#from helpers import *
+#import os
+#import couchdb
+#import bcbio.pipeline.config_utils as cl
+#import time
+#from datetime import date
+#import logging
 
 ###  Functions ###
 
