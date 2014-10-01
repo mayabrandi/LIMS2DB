@@ -61,31 +61,6 @@
 statusdb with lims as the main source of information.</p>
 <p>Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.</p>
 <dl class="class">
-<dt id="objectsDB.ProcessInfo">
-<em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">ProcessInfo</tt><big>(</big><em>lims_instance</em>, <em>processes</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProcessInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProcessInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class takes a list of process type names. Eg 
-&#8216;Aggregate QC (Library Validation) 4.0&#8217; and forms  a dict with info about 
-all processes of the type specified in runs which the project has gon through.</p>
-<dl class="docutils">
-<dt>info = {24-8460:{ </dt>
-<dd><blockquote class="first">
-<div><p>&#8216;start_date&#8217;
-&#8216;samples&#8217;:{&#8216;P424_111&#8217;:{in_art_id1 : [in_art1, out_art1],</p>
-<blockquote>
-<div><blockquote>
-<div>in_art_id2: [in_art2, out_art2]},</div></blockquote>
-<dl class="docutils">
-<dt>&#8216;P424_115&#8217;: ...},</dt>
-<dd>...},</dd>
-</dl>
-</div></blockquote>
-</div></blockquote>
-<p class="last">&#8216;24-8480&#8217;:...}</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
 <dt id="objectsDB.ProjectDB">
 <em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">ProjectDB</tt><big>(</big><em>lims_instance</em>, <em>project_id</em>, <em>samp_db</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instances of this class holds a dictionary formatted for building up the 
@@ -100,29 +75,6 @@ present should be included. The values of the dictionary is sets, to avoid
 duplicated projects for a single artifact.</p>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="class">
-<dt id="objectsDB.SampleDB">
-<em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">SampleDB</tt><big>(</big><em>lims_instance</em>, <em>sample_id</em>, <em>project_name</em>, <em>samp_db</em>, <em>application=None</em>, <em>AgrLibQCs=[]</em>, <em>run_info=[]</em>, <em>processes_per_artifact=None</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Instances of this class holds a dictionary formatted for building up the 
-samples in the project database on status db. Source of information come 
-from different lims artifacts and processes.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="objectsDB.udf_dict">
-<tt class="descclassname">objectsDB.</tt><tt class="descname">udf_dict</tt><big>(</big><em>element</em>, <em>exeptions=[]</em>, <em>exclude=True</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#udf_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.udf_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes a lims element and tertuns a dictionary of its udfs, where the udf 
-names are trensformed to statusdb keys (underscore and lowercase).</p>
-<p>exeptions and exclude = False - will return a dict with only the exeptions
-exeptions and exclude = True - will return a dict without the exeptions</p>
-<dl class="docutils">
-<dt>Arguments:</dt>
-<dd>element     lims element (Sample, Artifact, Process, Project...)
-exeptions   list of exception udf keys (underscore and lowercase)
-exlude      (True/False)</dd>
-</dl>
 </dd></dl>
 
 </div>

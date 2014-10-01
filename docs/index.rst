@@ -8,13 +8,13 @@ Guide
    :maxdepth: 2
 
    Intro
-   ../objectsDB
 
-.. autodoc:: objectsDB
-         :members:
 
 .. automodule:: objectsDB
-      :members:
+
+.. autoclass:: ProjectDB
+    :members:
+
 
 Indices and tables
 ==================
