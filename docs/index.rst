@@ -12,13 +12,15 @@ Guide
 
 .. automodule:: objectsDB
    :members:
+   :private-members:
+   :undoc-members:
 
-.. automodule:: ProjectDB
+.. autoclass:: ProjectDB
    :members:
    :private-members:
    :undoc-members:
 
-.. automodule:: SampleDB
+.. autoclass:: SampleDB
    :members:
    :private-members:
    :undoc-members:
