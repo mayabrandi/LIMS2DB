@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # PSUL documentation build configuration file, created by
-# sphinx-quickstart on Tue Sep 30 16:14:24 2014.
+# sphinx-quickstart on Wed Oct  1 13:40:20 2014.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -28,7 +28,10 @@ import os
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -44,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'PSUL'
-copyright = u'2014, Maya Brandi'
+copyright = u'2014, Maya'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -197,7 +200,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'PSUL.tex', u'PSUL Documentation',
-   u'Maya Brandi', 'manual'),
+   u'Maya', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -227,7 +230,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'psul', u'PSUL Documentation',
-     [u'Maya Brandi'], 1)
+     [u'Maya'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -241,7 +244,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'PSUL', u'PSUL Documentation',
-   u'Maya Brandi', 'PSUL', 'One line description of project.',
+   u'Maya', 'PSUL', 'One line description of project.',
    'Miscellaneous'),
 ]
 
