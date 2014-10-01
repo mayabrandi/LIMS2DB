@@ -10,10 +10,10 @@ Guide
    Intro
 
 
-.. automodule:: objectsDB.ProjectDB
+.. automodule:: objectsDB
    :members:
 
-.. automodule:: objectsDB.SampleDB
+.. automodule:: ProjectDB
    :members:
 
 
