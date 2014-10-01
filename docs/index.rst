@@ -13,9 +13,6 @@ Guide
 .. automodule:: objectsDB
    :members:
 
-.. autoclass:: ProjectDB
-   :members:
-
 
 Indices and tables
 ==================
