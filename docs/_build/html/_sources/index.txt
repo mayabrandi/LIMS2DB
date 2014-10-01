@@ -11,9 +11,10 @@ Guide
 
 
 .. automodule:: objectsDB
+   :members:
 
 .. autoclass:: ProjectDB
-    :members:
+   :members:
 
 
 Indices and tables
