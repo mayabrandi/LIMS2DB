@@ -10,10 +10,10 @@ Guide
    Intro
    ../objectsDB
 
-.. autodoc:: ../objectsDB
+.. autodoc:: objectsDB
          :members:
 
-.. automodule:: ../objectsDB
+.. automodule:: objectsDB
       :members:
 
 Indices and tables
