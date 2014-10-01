@@ -15,12 +15,12 @@ Guide
    :private-members:
    :undoc-members:
 
-.. autoclass:: ProjectDB
+#.. autoclass:: ProjectDB
    :members:
    :private-members:
    :undoc-members:
 
-.. autoclass:: SampleDB
+#.. autoclass:: SampleDB
    :members:
    :private-members:
    :undoc-members:

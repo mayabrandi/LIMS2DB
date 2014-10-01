@@ -290,141 +290,38 @@ exlude      (True/False)</dd>
 </dl>
 </dd></dl>
 
-<dl class="class">
-<dt>
-<em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">ProjectDB</tt><big>(</big><em>lims_instance</em>, <em>project_id</em>, <em>samp_db</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Instances of this class holds a dictionary formatted for building up the 
-project database on statusdb. Source of information come from different lims
-artifacts and processes.</p>
-<dl class="method">
-<dt>
-<tt class="descname">_get_affiliation</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_affiliation"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_get_project_level_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_project_level_info"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_get_project_summary_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_project_summary_info"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_get_sequencing_finished</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_sequencing_finished"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Finish Date = last seq date if proj closed. Will be removed and 
-feched from lims.</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_make_DB_samples</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._make_DB_samples"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">build_processes_per_artifact</tt><big>(</big><em>lims</em>, <em>pname</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB.build_processes_per_artifact"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Constructs a dictionary linking each artifact id with its processes.
-Other artifacts can be present as keys. All processes where the project is
-present should be included. The values of the dictionary is sets, to avoid
-duplicated projects for a single artifact.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt>
-<em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">SampleDB</tt><big>(</big><em>lims_instance</em>, <em>sample_id</em>, <em>project_name</em>, <em>samp_db</em>, <em>application=None</em>, <em>AgrLibQCs=[]</em>, <em>run_info=[]</em>, <em>processes_per_artifact=None</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Instances of this class holds a dictionary formatted for building up the 
-samples in the project database on status db. Source of information come 
-from different lims artifacts and processes.</p>
-<dl class="method">
-<dt>
-<tt class="descname">_get_barcode</tt><big>(</big><em>reagent_label</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_barcode"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Extracts barcode from list of artifact.reagent_labels</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_get_firts_day</tt><big>(</big><em>sample_name</em>, <em>process_list</em>, <em>last_day=False</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_firts_day"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>process_list is a list of process type names, sample_name is a 
-sample name :)</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_get_prep_leter</tt><big>(</big><em>prep_info</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_prep_leter"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Get preps and prep names; A,B,C... based on prep dates for 
-sample_name. 
-Output: A dict where keys are prep_art_id and values are prep names.</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_get_preps_and_libval</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_preps_and_libval"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_get_sample_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_sample_info"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_get_sample_run_metrics</tt><big>(</big><em>demux_info</em>, <em>preps</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_sample_run_metrics"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Input: demux_info - instance of the ProcessInfo class with 
-DEMULTIPLEX processes as argument
-For each SEQUENCING process run on the sample, this function steps 
-bacward in the artifact history of the input artifact of the SEQUENCING 
-process to find the folowing information:</p>
-<p>dillution_and_pooling_start_date  date-run of DILSTART step
-sequencing_start_date             date-run of SEQSTART step
-sequencing_run_QC_finished        date-run of SEQUENCING step
-sequencing_finish_date            udf (&#8216;Finish Date&#8217;) of SEQUENCING step
-sample_run_metrics_id             The sample database (statusdb) _id for</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>the sample_run_metrics corresponding </dt>
-<dd>to the run, sample, lane in question.</dd>
-</dl>
-</div></blockquote>
 <dl class="docutils">
-<dt>samp_run_met_id = lane_date_fcid_barcode            </dt>
-<dd><p class="first">date and fcid:  from udf (&#8216;Run ID&#8217;) of the SEQUENCING step. 
-barcode:        The reagent-lables of the input artifact of process</p>
-<blockquote>
-<div>type AGRLIBVAL</div></blockquote>
-<dl class="last docutils">
-<dt>lane:           from the location of the input artifact to the </dt>
-<dd>SEQUENCING step</dd>
-</dl>
+<dt>#.. autoclass:: ProjectDB</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">members:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">private-members:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">undoc-members:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>#.. autoclass:: SampleDB</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">members:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">private-members:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">undoc-members:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
 </dd>
 </dl>
-<p>preps are defined as the id of the PREPSTART step in the artifact 
-history. If appllication== Finished library, prep is defined as 
-&#8220;Finnished&#8221;. These keys are used to connect the seqeuncing steps to the 
-correct preps.</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_get_top_level_agrlibval_steps</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_top_level_agrlibval_steps"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_make_sample_run_id</tt><big>(</big><em>seq_art</em>, <em>lims_run</em>, <em>prep</em>, <em>run_type</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._make_sample_run_id"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt>
-<tt class="descname">_pars_reagent_labels</tt><big>(</big><em>steps</em>, <em>last_libval</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._pars_reagent_labels"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 <div class="section" id="indices-and-tables">
