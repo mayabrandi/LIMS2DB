@@ -104,6 +104,7 @@ class ProjectDB():
         project_name    Project         Name        
         project_id      Project         id         
         ============    ============    =========== 
+
         self.obj = {'source' : 'lims',
                         'application' : None,
                         'samples':{},
