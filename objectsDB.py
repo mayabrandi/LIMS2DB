@@ -280,18 +280,18 @@ class SampleDB():
 
     def _get_sample_info(self):
         """:statusdb key-valblablka:
-=========================== ======
-Key                         Source
-=========================== ======
-scilife_name                False
-well_location               False
-details                     True
-sample_run_metrics          True
-library_prep                True
-initial_qc                  True
-first_initial_qc_start_date True
-first_prep_start_date       True
-=========================== ======"""
+        =========================== ======
+        Key                         Source
+        =========================== ======
+        scilife_name                False
+        well_location               False
+        details                     True
+        sample_run_metrics          True
+        library_prep                True
+        initial_qc                  True
+        first_initial_qc_start_date True
+        first_prep_start_date       True
+        =========================== ======"""
         self.obj['scilife_name'] = self.name
         self.obj['well_location'] = self.lims_sample.artifact.location[1]
         self.obj['details'] = udf_dict(self.lims_sample, SAMP_UDF_EXCEPTIONS)
