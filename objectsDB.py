@@ -94,7 +94,7 @@ class ProjectDB():
         """
         :project/[KEY]:
         ============    ============    =========== ================
-        KEY             lims_element    lims_field  descript
+        KEY             lims_element    lims_field  description
         ============    ============    =========== ================ 
         application     Project         Application -
         samples         Sample          Name        Dict of all samples registered for the project. Keys are sample names.
@@ -122,10 +122,11 @@ class ProjectDB():
     def _get_affiliation(self):
         """
         :project/[KEY]:
-        ===========     ======
-        KEY             Source  
-        ===========     ======
-        affiliation     Source"""
+        ============    ============    =========== ================
+        KEY             lims_element    lims_field  description
+        ============    ============    =========== ================
+        affiliation     Source
+        ============    ============    =========== ================"""
         researcher_udfs = dict(self.project.researcher.lab.udf.items())
         if researcher_udfs.has_key('Affiliation'):
             self.obj['affiliation'] = researcher_udfs['Affiliation']
@@ -134,11 +135,11 @@ class ProjectDB():
     def _get_project_summary_info(self):
         """
         :project/[KEY]:
-        =============== ======
-        KEY             Source
-        =============== ======
+        ============    ============    =========== ================
+        KEY             lims_element    lims_field  description
+        ============    ============    =========== ================
         project_summary Source
-        =============== ======"""
+        ============    ============    =========== ================"""
         project_summary = self.lims.get_processes(projectname =
                                 self.project.name, type = SUMMARY.values())
         if len(project_summary) > 0:
