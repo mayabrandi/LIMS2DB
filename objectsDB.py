@@ -93,9 +93,9 @@ class ProjectDB():
     def _get_project_level_info(self):
         """
         :project/[KEY]:
-        ============    =============   ===========
+        ============    ============    ===========
         KEY             lims_element    lims_field  
-        ============    =============   =========== 
+        ============    ============    =========== 
         application     Project         Application 
         samples         Sample          Name        
         open_date       Project         open-date   
