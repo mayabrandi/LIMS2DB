@@ -279,6 +279,20 @@ class SampleDB():
         self._get_sample_info()
 
     def _get_sample_info(self):
+        """:statusdb key-valblablka:
+        =====                       ======
+        Key                         Source
+        =====                       ======
+        scilife_name                False
+        well_location               False
+        well_location               False
+        details                     True
+        sample_run_metrics          True
+        library_prep                True
+        initial_qc                  True
+        first_initial_qc_start_date True
+        first_prep_start_date       True
+        =====                       ======"""
         self.obj['scilife_name'] = self.name
         self.obj['well_location'] = self.lims_sample.artifact.location[1]
         self.obj['details'] = udf_dict(self.lims_sample, SAMP_UDF_EXCEPTIONS)
@@ -333,13 +347,22 @@ class SampleDB():
         bacward in the artifact history of the input artifact of the SEQUENCING 
         process to find the folowing information:
 
-        dillution_and_pooling_start_date  date-run of DILSTART step
-        sequencing_start_date             date-run of SEQSTART step
-        sequencing_run_QC_finished        date-run of SEQUENCING step
-        sequencing_finish_date            udf ('Finish Date') of SEQUENCING step
-        sample_run_metrics_id             The sample database (statusdb) _id for
-                                          the sample_run_metrics corresponding 
-                                           to the run, sample, lane in question.
+
+        :statusdb key-valblablka:
+        =====                               ==========   
+        Key                                 Source
+        =====                               ==========
+        dillution_and_pooling_start_date    date-run of DILSTART step
+        sequencing_start_date               date-run of SEQSTART step
+        sequencing_run_QC_finished          date-run of SEQUENCING step
+        sequencing_finish_date              udf ('Finish Date') of SEQUENCING step
+        sample_run_metrics_id               The sample database (statusdb) _id for
+                                            the sample_run_metrics corresponding 
+                                            to the run, sample, lane in question.
+        dem_qc_flag                         True
+        seq_qc_flag                         True
+        =====                               ==========
+
         samp_run_met_id = lane_date_fcid_barcode            
             date and fcid:  from udf ('Run ID') of the SEQUENCING step. 
             barcode:        The reagent-lables of the input artifact of process 
@@ -437,7 +460,15 @@ class SampleDB():
         return prep_info_new
 
     def _get_preps_and_libval(self):
-        """"""
+        """:statusdb key-valblablka:
+        =====                       ==========   
+        Key                         Source
+        =====                       ==========
+        pre_prep_library_validation True
+        library_validation          True
+        prep_status                 True
+        reagent_label               True
+        =====                       =========="""
         top_level_agrlibval_steps = self._get_top_level_agrlibval_steps()
         preps = {}
         very_last_libval_key = {}
@@ -551,6 +582,15 @@ class InitialQC():
                                                                self.application)
 
     def set_initialqc_info(self):
+        """:statusdb key-valblablka:
+        =====               ==========   
+        Key                 Source
+        =====               ==========
+        start_date          True
+        initials            True
+        initial_qc_status   True
+        caliper_image       True
+        =====               =========="""
         self._get_initialqc_processes()
         if self.steps:
             if self.steps.initialqstart:
@@ -716,6 +756,16 @@ class Prep():
             'caliper_image' : None}
 
     def set_prep_info(self, steps, aplication):
+        """:statusdb key-valblablka:
+        =====               ==========   
+        Key                 Source
+        =====               ==========
+        prep_start_date     False
+        prep_finished_date  False
+        prep_id             False
+        workset_setup       False
+        pre_prep_start_date False   
+        =====               =========="""
         if aplication in ['Amplicon', 'Finished library']:
             self.id2AB = 'Finished'
         else:
@@ -746,6 +796,19 @@ class Prep():
 
         
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
+        """:statusdb key-valblablka:
+        =====           ==========   
+        Key             Source
+        =====           ==========   
+        finish_date     False        
+        start_date      False        
+        well_location   True         
+        prep_status     True
+        reagent_labels  True  
+        initials        True
+        average_size_bp True
+        caliper_image   True       
+        =====           ==========  """
         library_validations = {}
         start_date = libvalstart['date'] if (libvalstart and 
                                          libvalstart.has_key('date')) else None
