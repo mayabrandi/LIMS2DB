@@ -136,16 +136,6 @@ class ProjectDB():
 
 * and here the parent list continues
 
-:statusdb key-valblablka:
-=====  ==========   ======
-Key    Value type   Source
-=====  ==========   ======
-False  False        False
-True   False        False
-False  True         False
-True   True         True
-=====  ==========   ======
-
 
  """
         researcher_udfs = dict(self.project.researcher.lab.udf.items())
@@ -348,9 +338,9 @@ class SampleDB():
 
 
         :statusdb key-valblablka:
-        =====                               ==========   
+        ================================     ==========   
         Key                                 Source
-        =====                               ==========
+        ================================    ==========
         dillution_and_pooling_start_date    date-run of DILSTART step
         sequencing_start_date               date-run of SEQSTART step
         sequencing_run_QC_finished          date-run of SEQUENCING step
@@ -360,7 +350,7 @@ class SampleDB():
                                             to the run, sample, lane in question.
         dem_qc_flag                         True
         seq_qc_flag                         True
-        =====                               ==========
+        ================================    ==========
 
         samp_run_met_id = lane_date_fcid_barcode            
             date and fcid:  from udf ('Run ID') of the SEQUENCING step. 
@@ -460,14 +450,14 @@ class SampleDB():
 
     def _get_preps_and_libval(self):
         """:statusdb key-valblablka:
-        =====                       ==========   
+        =========================== ==========   
         Key                         Source
-        =====                       ==========
+        =========================== ==========
         pre_prep_library_validation True
         library_validation          True
         prep_status                 True
         reagent_label               True
-        =====                       =========="""
+        =========================== =========="""
         top_level_agrlibval_steps = self._get_top_level_agrlibval_steps()
         preps = {}
         very_last_libval_key = {}
@@ -582,14 +572,14 @@ class InitialQC():
 
     def set_initialqc_info(self):
         """:statusdb key-valblablka:
-        =====               ==========   
+        =================== ==========   
         Key                 Source
-        =====               ==========
+        =================== ==========
         start_date          True
         initials            True
         initial_qc_status   True
         caliper_image       True
-        =====               =========="""
+        =================== =========="""
         self._get_initialqc_processes()
         if self.steps:
             if self.steps.initialqstart:
@@ -756,15 +746,15 @@ class Prep():
 
     def set_prep_info(self, steps, aplication):
         """:statusdb key-valblablka:
-        =====               ==========   
+        =================== ==========   
         Key                 Source
-        =====               ==========
+        =================== ==========
         prep_start_date     False
         prep_finished_date  False
         prep_id             False
         workset_setup       False
         pre_prep_start_date False   
-        =====               =========="""
+        =================== =========="""
         if aplication in ['Amplicon', 'Finished library']:
             self.id2AB = 'Finished'
         else:
@@ -796,9 +786,9 @@ class Prep():
         
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
         """:statusdb key-valblablka:
-        =====           ==========   
+        =============== ==========   
         Key             Source
-        =====           ==========   
+        =============== ==========   
         finish_date     False        
         start_date      False        
         well_location   True         
@@ -807,7 +797,7 @@ class Prep():
         initials        True
         average_size_bp True
         caliper_image   True       
-        =====           ==========  """
+        =============== ==========  """
         library_validations = {}
         start_date = libvalstart['date'] if (libvalstart and 
                                          libvalstart.has_key('date')) else None
