@@ -93,17 +93,17 @@ class ProjectDB():
     def _get_project_level_info(self):
         """
         :project/[KEY]:
-        ============    ============    ===========
-        KEY             lims_element    lims_field  
-        ============    ============    =========== 
-        application     Project         Application 
-        samples         Sample          Name        
-        open_date       Project         open-date   
-        close_date      Project         close-date  
-        contact         Researcher      email       
-        project_name    Project         Name        
-        project_id      Project         id         
-        ============    ============    ===========""" 
+        ============    ============    =========== ================
+        KEY             lims_element    lims_field  descript
+        ============    ============    =========== ================ 
+        application     Project         Application -
+        samples         Sample          Name        hkjhkj hjkhkj jj
+        open_date       Project         open-date   -
+        close_date      Project         close-date  -
+        contact         Researcher      email       -
+        project_name    Project         Name        -
+        project_id      Project         id          -
+        ============    ============    =========== ================""" 
 
         self.obj = {'source' : 'lims',
                         'application' : None,
