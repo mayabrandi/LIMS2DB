@@ -269,9 +269,10 @@ class SampleDB():
         self._get_sample_info()
 
     def _get_sample_info(self):
-        """:statusdb key-valblablka:
+        """
+        :project/samples/[sample id]/[KEY]:
         =========================== ======
-        Key                         Source
+        KEY                         Source
         =========================== ======
         scilife_name                False
         well_location               False
@@ -337,9 +338,9 @@ class SampleDB():
         process to find the folowing information:
 
 
-        :statusdb key-valblablka:
+        :project/samples/[sample id]/library_prep/[prep id]/sample_run_metrics/[samp run id]/[KEY]:
         ================================     ==========   
-        Key                                 Source
+        KEY                                 Source
         ================================    ==========
         dillution_and_pooling_start_date    date-run of DILSTART step
         sequencing_start_date               date-run of SEQSTART step
@@ -449,9 +450,10 @@ class SampleDB():
         return prep_info_new
 
     def _get_preps_and_libval(self):
-        """:statusdb key-valblablka:
+        """
+        :project/samples/[sample id]/library_prep/[prep id]/[KEY]:
         =========================== ==========   
-        Key                         Source
+        KEY                         Source
         =========================== ==========
         pre_prep_library_validation True
         library_validation          True
@@ -571,9 +573,10 @@ class InitialQC():
                                                                self.application)
 
     def set_initialqc_info(self):
-        """:statusdb key-valblablka:
+        """
+        :project/samples/[sample id]/initial_qc/[KEY]:
         =================== ==========   
-        Key                 Source
+        KEY                 Source
         =================== ==========
         start_date          True
         initials            True
@@ -745,9 +748,10 @@ class Prep():
             'caliper_image' : None}
 
     def set_prep_info(self, steps, aplication):
-        """:statusdb key-valblablka:
+        """
+        :project/samples/[sample id]/library_prep/[lib prep id]/KEY:
         =================== ==========   
-        Key                 Source
+        KEY                 Source
         =================== ==========
         prep_start_date     False
         prep_finished_date  False
@@ -785,9 +789,10 @@ class Prep():
 
         
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
-        """:statusdb key-valblablka:
+        """
+        :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[libval id]/KEY:
         =============== ==========   
-        Key             Source
+        KEY             Source
         =============== ==========   
         finish_date     False        
         start_date      False        
