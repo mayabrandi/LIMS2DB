@@ -44,45 +44,7 @@ def udf_dict(element, exeptions = [], exclude = True):
     return udf_dict
 
 def get_last_first(process_list, last=True):
-    """
-    **
-    ****
-    ````
-    ``
-    |hjkhkjhkj
-    |hkjhkjhkj
-   
-
-* This is a bulleted list.
-* It has two items, the second
-  item uses two lines.
-
-1. This is a numbered list.
-2. It has two items too.
-
-#. This is a numbered list.
-#. It has two items too.
-
-
-* this is
-* a list
-
-  * with a nested list
-  * and some subitems
-
-* and here the parent list continues
-
-=====  =====  =======
-A      B      A and B
-=====  =====  =======
-False  False  False
-True   False  False
-False  True   False
-True   True   True
-=====  =====  =======
-
-
- """
+    """"""
     returned_process=None
     for pro in process_list:
         if (not returned_process) \
@@ -144,6 +106,45 @@ class ProjectDB():
         self._get_project_summary_info()
 
     def _get_affiliation(self):
+    """
+    **
+    ****
+    ````
+    ``
+    |hjkhkjhkj
+    |hkjhkjhkj
+   
+
+* This is a bulleted list.
+* It has two items, the second
+  item uses two lines.
+
+1. This is a numbered list.
+2. It has two items too.
+
+#. This is a numbered list.
+#. It has two items too.
+
+
+* this is
+* a list
+
+  * with a nested list
+  * and some subitems
+
+* and here the parent list continues
+
+=====  =====  =======
+A      B      A and B
+=====  =====  =======
+False  False  False
+True   False  False
+False  True   False
+True   True   True
+=====  =====  =======
+
+
+ """
         researcher_udfs = dict(self.project.researcher.lab.udf.items())
         if researcher_udfs.has_key('Affiliation'):
             self.obj['affiliation'] = researcher_udfs['Affiliation']
