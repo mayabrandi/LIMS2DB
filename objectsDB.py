@@ -103,7 +103,7 @@ class ProjectDB():
         contact         Researcher      email       
         project_name    Project         Name        
         project_id      Project         id         
-        ============    ============    =========== 
+        ============    ============    ===========""" 
 
         self.obj = {'source' : 'lims',
                         'application' : None,
