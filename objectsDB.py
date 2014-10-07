@@ -93,18 +93,17 @@ class ProjectDB():
     def _get_project_level_info(self):
         """
         :project/[KEY]:
-        ============    ======
-        KEY             Source
-        ============    ======
-        application     Source
-        samples         Source
-        open_date       Source
-        close_date      Source
-        entity_type     Source
-        contact         Source
-        project_name    Source
-        project_id      Source
-        ============    ======"""
+        ============    ============    =========== ================================================================================================================================
+        KEY             lims_element    lims_field  description
+        ============    ============    =========== ================================================================================================================================
+        application     Project         Application -
+        samples         Sample          Name        Dict of all samples registered for the project. Keys are sample names. Values are described by the project-samples-[sample] doc.
+        open_date       Project         open-date   -
+        close_date      Project         close-date  -
+        contact         Researcher      email       -
+        project_name    Project         Name        -
+        project_id      Project         id?         -
+        ============    ===========     =========== ================================================================================================================================"""
         self.obj = {'source' : 'lims',
                         'application' : None,
                         'samples':{},
