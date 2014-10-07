@@ -97,7 +97,7 @@ class ProjectDB():
         KEY             lims_element    lims_field  descript
         ============    ============    =========== ================ 
         application     Project         Application -
-        samples         Sample          Name        hkjhkj hjkhkj j\
+        samples         Sample          Name        hkjhkj hjkhkj jhjkhjk\
                                                     hkjhkj hjkhkj j
         open_date       Project         open-date   -
         close_date      Project         close-date  -
