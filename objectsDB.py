@@ -91,6 +91,20 @@ class ProjectDB():
         self._get_sequencing_finished()
 
     def _get_project_level_info(self):
+        """
+        :project/[KEY]:
+        ============    ======
+        KEY             Source
+        ============    ======
+        application     Source
+        samples         Source
+        open_date       Source
+        close_date      Source
+        entity_type     Source
+        contact         Source
+        project_name    Source
+        project_id      Source
+        ============    ======"""
         self.obj = {'source' : 'lims',
                         'application' : None,
                         'samples':{},
@@ -107,43 +121,24 @@ class ProjectDB():
 
     def _get_affiliation(self):
         """
-    *dgdg*
-    **dgdg**
-    ``dgdg``
-    `dgdg`
-    |hjkhkjhkj
-    |hkjhkjhkj
-   
-:hkjhkh: laaaa
-
-
-* This is a bulleted list.
-* It has two items, the second
-  item uses two lines.
-
-1. This is a numbered list.
-2. It has two items too.
-
-#. This is a numbered list.
-#. It has two items too.
-
-
-* this is
-* a list
-
-  * with a nested list
-  * and some subitems
-
-* and here the parent list continues
-
-
- """
+        :project/[KEY]:
+        ===========     ======
+        KEY             Source  
+        ===========     ======
+        affiliation     Source"""
         researcher_udfs = dict(self.project.researcher.lab.udf.items())
         if researcher_udfs.has_key('Affiliation'):
             self.obj['affiliation'] = researcher_udfs['Affiliation']
 
 
     def _get_project_summary_info(self):
+        """
+        :project/[KEY]:
+        =============== ======
+        KEY             Source
+        =============== ======
+        project_summary Source
+        =============== ======"""
         project_summary = self.lims.get_processes(projectname =
                                 self.project.name, type = SUMMARY.values())
         if len(project_summary) > 0:
@@ -152,7 +147,14 @@ class ProjectDB():
             print 'Warning. project summary process run more than once'
 
     def _get_sequencing_finished(self):
-        """Finish Date = last seq date if proj closed. Will be removed and 
+        """
+        :project/[KEY]:
+        ===============     ======
+        KEY                 Source
+        ===============     ======
+        sequencing_finished Source
+        ===============     ======
+        Finish Date = last seq date if proj closed. Will be removed and 
         feched from lims."""
         seq_fin = []
         if self.project.close_date and 'samples' in self.obj.keys():
@@ -170,6 +172,15 @@ class ProjectDB():
 
     def _make_DB_samples(self):
         ## Getting sample info
+        """
+        :project/[KEY]:
+        ================    ======
+        KEY                 Source
+        ================    ======
+        first_initial_qc    Source
+        no_of_samples       Source
+        samples             Source
+        ================    ======"""
         samples = self.lims.get_samples(projectlimsid = self.project.id)
         self.obj['no_of_samples'] = len(samples)
         if len(samples) > 0:
@@ -749,7 +760,7 @@ class Prep():
 
     def set_prep_info(self, steps, aplication):
         """
-        :project/samples/[sample id]/library_prep/[lib prep id]/KEY:
+        :project/samples/[sample id]/library_prep/[lib prep id]/[KEY]:
         =================== ==========   
         KEY                 Source
         =================== ==========
@@ -790,7 +801,7 @@ class Prep():
         
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
         """
-        :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[libval id]/KEY:
+        :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[libval id]/[KEY]:
         =============== ==========   
         KEY             Source
         =============== ==========   
