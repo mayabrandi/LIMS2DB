@@ -102,7 +102,7 @@ class ProjectDB():
         close_date      Project         close-date  
         contact         Researcher      email       
         project_name    Project         Name        
-        project_id      Project         id?         
+        project_id      Project         id         
         ============    ===========     =========== 
         self.obj = {'source' : 'lims',
                         'application' : None,
