@@ -107,10 +107,10 @@ class ProjectDB():
 
     def _get_affiliation(self):
         """
-    **
-    ****
-    ````
-    ``
+    *dgdg*
+    **dgdg**
+    ``dgdg``
+    `dgdg`
     |hjkhkjhkj
     |hkjhkjhkj
    
@@ -136,14 +136,15 @@ class ProjectDB():
 
 * and here the parent list continues
 
-=====  =====  =======
-A      B      A and B
-=====  =====  =======
-False  False  False
-True   False  False
-False  True   False
-True   True   True
-=====  =====  =======
+:statusdb key-valblablka:
+=====  ==========   ======
+Key    Value type   Source
+=====  ==========   ======
+False  False        False
+True   False        False
+False  True         False
+True   True         True
+=====  ==========   ======
 
 
  """
