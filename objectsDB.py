@@ -588,15 +588,15 @@ class InitialQC():
     def set_initialqc_info(self):
         """
         :project/samples/[sample id]/initial_qc/[KEY]:
-        =================== ============    ===========         ================
+        =================== ============    ================    ================
         KEY                 lims_element    lims_field          description
-        =================== ============    ===========         ================
+        =================== ============    ================    ================
         start_date          Process         date-run            First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps found for in the artifact history of the output artifact of one of the AGRINITQC stepst 
         finish_date         Process         date-run            One of the AGRINITQC steps
         initials            Technician      initials            technician.initials of the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
         initial_qc_status   Artifact        qc-flag             qc-flag of thre input artifact to the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
         caliper_image       Artifact        content-location    content-location of output Result files of the last of all CALIPER steps in the artifact history of the output artifact of one of the AGRINITQC steps
-        =================== ============    ===========         ================"""
+        =================== ============    ================    ================"""
 
         self._get_initialqc_processes()
         if self.steps:
