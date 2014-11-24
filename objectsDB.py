@@ -125,7 +125,7 @@ class ProjectDB():
         ============    ============    =========== ================
         KEY             lims_element    lims_field  description
         ============    ============    =========== ================
-        affiliation     Source
+        affiliation     Source          Affiliation
         ============    ============    =========== ================"""
         researcher_udfs = dict(self.project.researcher.lab.udf.items())
         if researcher_udfs.has_key('Affiliation'):
@@ -179,9 +179,10 @@ class ProjectDB():
         KEY                 lims_element    lims_field  description
         ================    ============    =========== ================
         first_initial_qc    Source
-        no_of_samples       Source
-        samples             Source
-        ================    ============    =========== ================"""
+        no_of_samples       Project         -           Number of registered samples for the project
+        samples             Sample          Name        Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.
+        ================    ============    =========== ================
+"""
         samples = self.lims.get_samples(projectlimsid = self.project.id)
         self.obj['no_of_samples'] = len(samples)
         if len(samples) > 0:
@@ -286,14 +287,14 @@ class SampleDB():
         =========================== ============    =========== ================
         KEY                         lims_element    lims_field  description
         =========================== ============    =========== ================
-        scilife_name                False
-        well_location               False
-        details                     True
-        sample_run_metrics          True
-        library_prep                True
-        initial_qc                  True
-        first_initial_qc_start_date True
-        first_prep_start_date       True
+        scilife_name                Sample          name
+        well_location               Fals
+        details                     Sample          udf         All Sample level udfs exept SAMP_UDF_EXCEPTIONS defined in lims_utils.py
+        sample_run_metrics          -               -           Keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf ('Run ID') of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.
+        library_prep                Process         date-run    The keys of this dict are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-> prep A, second date -> prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.
+        initial_qc                  Process         -           Dict ...
+        first_initial_qc_start_date Process         date-run    If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step
+        first_prep_start_date       ....
         =========================== ============    =========== ================"""
         self.obj['scilife_name'] = self.name
         self.obj['well_location'] = self.lims_sample.artifact.location[1]
@@ -354,27 +355,14 @@ class SampleDB():
         ================================    ============    =========== ================
         KEY                                 lims_element    lims_field  description
         ================================    ============    =========== ================
-        dillution_and_pooling_start_date    date-run of DILSTART step
-        sequencing_start_date               date-run of SEQSTART step
-        sequencing_run_QC_finished          date-run of SEQUENCING step
-        sequencing_finish_date              udf ('Finish Date') of SEQUENCING step
-        sample_run_metrics_id               The sample database (statusdb) _id for
-                                            the sample_run_metrics corresponding 
-                                            to the run, sample, lane in question.
-        dem_qc_flag                         True
-        seq_qc_flag                         True
-        ================================    ============    =========== ================
-
-        samp_run_met_id = lane_date_fcid_barcode            
-            date and fcid:  from udf ('Run ID') of the SEQUENCING step. 
-            barcode:        The reagent-lables of the input artifact of process 
-                            type AGRLIBVAL
-            lane:           from the location of the input artifact to the 
-                            SEQUENCING step    
-        preps are defined as the id of the PREPSTART step in the artifact 
-        history. If appllication== Finished library, prep is defined as 
-        "Finnished". These keys are used to connect the seqeuncing steps to the 
-        correct preps."""
+        dillution_and_pooling_start_date    Process         date-run    date-run of DILSTART step
+        sequencing_start_date               Process         date-run    ate-run of SEQSTART step
+        sequencing_run_QC_finished          Process         date-run    date-run of SEQUENCING step
+        sequencing_finish_date              Process         Finish Date udf ('Finish Date') of SEQUENCING step
+        sample_run_metrics_id               -               -           The sample database (statusdb) _id for the sample_run_metrics corresponding to the run, sample, lane in question.
+        dem_qc_flag                         ...
+        seq_qc_flag                         ...
+        ================================    ============    =========== ================"""
         sample_runs = {}
         for id, run in demux_info.items():
             if run['samples'].has_key(self.name):
@@ -468,7 +456,7 @@ class SampleDB():
         KEY                         lims_element    lims_field  description
         =========================== ============    =========== ================
         pre_prep_library_validation True
-        library_validation          True
+        library_validation          
         prep_status                 True
         reagent_label               True
         =========================== ============    =========== ================
@@ -810,13 +798,13 @@ class Prep():
         =============== ============    =========== ================
         KEY             lims_element    lims_field  description
         =============== ============    =========== ================
-        finish_date     False        
-        start_date      False        
+        finish_date     Process         date-run    date-run of AGRLIBVAL step 
+        start_date      Process         date-run    First of all LIBVAL steps found for in the artifact history of the output artifact of one of the AGRLIBVAL step
         well_location   True         
         prep_status     True
         reagent_labels  True  
         initials        True
-        average_size_bp True
+        average_size_bp Artifact        Size (bp)   udf ('Size (bp)') of the input artifact to the process AGRLIBVAL
         caliper_image   True       
         =============== ============    =========== ================  """
         library_validations = {}
