@@ -570,21 +570,6 @@ class InitialQC():
         self.steps = None
         self.application = application
 
-    def _get_initialqc_processes(self):
-        outarts = self.lims.get_artifacts(sample_name = self.sample_name,
-                                          process_type = AGRINITQC.values())
-        if outarts:
-            outart = Artifact(lims, id = max(map(lambda a: a.id, outarts)))
-            latestInitQc = outart.parent_process
-            inart = latestInitQc.input_per_sample(self.sample_name)[0].id
-            history = gent.SampleHistory(sample_name = self.sample_name, 
-                                      output_artifact = outart.id,
-                                      input_artifact = inart, lims = self.lims,
-                                      pro_per_art = self.processes_per_artifact)
-            if history.history_list:
-                self.steps = ProcessSpec(history.history, history.history_list,
-                                                               self.application)
-
     def set_initialqc_info(self):
         """
         :project/samples/[sample id]/initial_qc/[KEY]:
@@ -616,6 +601,21 @@ class InitialQC():
                                                  self.steps.latestCaliper['id'])
         return delete_Nones(self.initialqc_info)
 
+    def _get_initialqc_processes(self):
+        """"""
+        outarts = self.lims.get_artifacts(sample_name = self.sample_name,
+                                          process_type = AGRINITQC.values())
+        if outarts:
+            outart = Artifact(lims, id = max(map(lambda a: a.id, outarts)))
+            latestInitQc = outart.parent_process
+            inart = latestInitQc.input_per_sample(self.sample_name)[0].id
+            history = gent.SampleHistory(sample_name = self.sample_name,
+                                      output_artifact = outart.id,
+                                      input_artifact = inart, lims = self.lims,
+                                      pro_per_art = self.processes_per_artifact)
+            if history.history_list:
+                self.steps = ProcessSpec(history.history, history.history_list,
+                                                               self.application)
 
 class ProcessSpec():
     def __init__(self, hist_sort, hist_list, application):
@@ -768,12 +768,13 @@ class Prep():
         =================== ============    =========== ================
         KEY                 lims_element    lims_field  description
         =================== ============    =========== ================
-        prep_start_date     False
-        prep_finished_date  False
-        prep_id             False
+        prep_start_date     Process         date-run    The date-run of a PREPSTART step
+        prep_finished_date  Process         date-run    The date-run of a PREPEND step
+        prep_id             Process         id          The lims id of a PREPEND step
         workset_setup       False
-        pre_prep_start_date False   
+        pre_prep_start_date Process         date-run    The date-run of process 'Shear DNA (SS XT) 4.0'. Only for 'Exome capture' projects   
         =================== ============    =========== ================"""
+
         if aplication in ['Amplicon', 'Finished library']:
             self.id2AB = 'Finished'
         else:
