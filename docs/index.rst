@@ -1,13 +1,21 @@
 Welcome to PSUL's documentation!!!!
 ================================
 
-Process Categories
+
+Code
 ^^^^^
 
 .. toctree::
    :maxdepth: 2
 
    _templates/api/modules
+
+Process Categories
+^^^^^
+
+.. toctree::
+   :maxdepth: 2
+
    process_categories
 
 .. automodule:: objectsDB
