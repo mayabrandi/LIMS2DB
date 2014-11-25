@@ -15,6 +15,12 @@ Guide
    :private-members:
    :undoc-members:
 
+
+.. autodata:: process_categories
+   :members:
+   :private-members:
+
+
 #.. autoclass:: ProjectDB
    :members:
    :private-members:
