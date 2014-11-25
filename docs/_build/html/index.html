@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="PSUL 1 documentation" href="#" />
-    <link rel="next" title="NITALQCFINISHEDLIB" href="INITALQCFINISHEDLIB.html" /> 
+    <link rel="next" title="lims_utils" href="_templates/api/modules.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,7 +37,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="INITALQCFINISHEDLIB.html" title="NITALQCFINISHEDLIB"
+          <a href="_templates/api/modules.html" title="lims_utils"
              accesskey="N">next</a> |</li>
         <li><a href="#">PSUL 1 documentation</a> &raquo;</li> 
       </ul>
@@ -54,6 +54,10 @@
 <h2>Process Categories<a class="headerlink" href="#process-categories" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="_templates/api/modules.html">lims_utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_templates/api/lims_utils.html">lims_utils package</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="INITALQCFINISHEDLIB.html">NITALQCFINISHEDLIB</a></li>
 </ul>
 </div>
@@ -71,58 +75,7 @@ statusdb with lims as the main source of information.</p>
 <dl class="method">
 <dt id="objectsDB.InitialQC.set_initialqc_info">
 <tt class="descname">set_initialqc_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#InitialQC.set_initialqc_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.InitialQC.set_initialqc_info" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/initial_qc/[KEY]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="9%" />
-<col width="6%" />
-<col width="7%" />
-<col width="78%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>start_date</td>
-<td>Process</td>
-<td>date-run</td>
-<td>First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps found for in the artifact history of the output artifact of one of the AGRINITQC stepst</td>
-</tr>
-<tr class="row-odd"><td>finish_date</td>
-<td>Process</td>
-<td>date-run</td>
-<td>One of the AGRINITQC steps</td>
-</tr>
-<tr class="row-even"><td>initials</td>
-<td>Technician</td>
-<td>initials</td>
-<td>technician.initials of the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps</td>
-</tr>
-<tr class="row-odd"><td>initial_qc_status</td>
-<td>Artifact</td>
-<td>qc-flag</td>
-<td>qc-flag of thre input artifact to the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps</td>
-</tr>
-<tr class="row-even"><td>caliper_image</td>
-<td>Artifact</td>
-<td>content-location</td>
-<td>content-location of output Result files of the last of all CALIPER steps in the artifact history of the output artifact of one of the AGRINITQC steps</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -132,129 +85,12 @@ statusdb with lims as the main source of information.</p>
 <dd><dl class="method">
 <dt id="objectsDB.Prep._get_lib_val_info">
 <tt class="descname">_get_lib_val_info</tt><big>(</big><em>agrlibQCsteps</em>, <em>libvalstart</em>, <em>latest_caliper_id=None</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#Prep._get_lib_val_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.Prep._get_lib_val_info" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[libval id]/[KEY]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="10%" />
-<col width="8%" />
-<col width="7%" />
-<col width="74%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>finish_date</td>
-<td>Process</td>
-<td>date-run</td>
-<td>date-run of AGRLIBVAL step</td>
-</tr>
-<tr class="row-odd"><td>start_date</td>
-<td>Process</td>
-<td>date-run</td>
-<td>First of all LIBVAL steps found for in the artifact history of the output artifact of one of the AGRLIBVAL step</td>
-</tr>
-<tr class="row-even"><td>well_location</td>
-<td>True</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>prep_status</td>
-<td>True</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>reagent_labels</td>
-<td>True</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>initials</td>
-<td>True</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>average_size_bp</td>
-<td>Artifact</td>
-<td>Size (bp)</td>
-<td>udf (&#8216;Size (bp)&#8217;) of the input artifact to the process AGRLIBVAL</td>
-</tr>
-<tr class="row-odd"><td>caliper_image</td>
-<td>True</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="objectsDB.Prep.set_prep_info">
 <tt class="descname">set_prep_info</tt><big>(</big><em>steps</em>, <em>aplication</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#Prep.set_prep_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.Prep.set_prep_info" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[lib prep id]/[KEY]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="15%" />
-<col width="10%" />
-<col width="9%" />
-<col width="66%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>prep_start_date</td>
-<td>Process</td>
-<td>date-run</td>
-<td>The date-run of a PREPSTART step</td>
-</tr>
-<tr class="row-odd"><td>prep_finished_date</td>
-<td>Process</td>
-<td>date-run</td>
-<td>The date-run of a PREPEND step</td>
-</tr>
-<tr class="row-even"><td>prep_id</td>
-<td>Process</td>
-<td>id</td>
-<td>The lims id of a PREPEND step</td>
-</tr>
-<tr class="row-odd"><td>workset_setup</td>
-<td>False</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>pre_prep_start_date</td>
-<td>Process</td>
-<td>date-run</td>
-<td>The date-run of process &#8216;Shear DNA (SS XT) 4.0&#8217;. Only for &#8216;Exome capture&#8217; projects</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -307,222 +143,29 @@ artifacts and processes.</p>
 <dl class="method">
 <dt id="objectsDB.ProjectDB._get_affiliation">
 <tt class="descname">_get_affiliation</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_affiliation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB._get_affiliation" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="24%" />
-<col width="24%" />
-<col width="22%" />
-<col width="31%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>affiliation</td>
-<td>Source</td>
-<td>Affiliation</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="objectsDB.ProjectDB._get_project_level_info">
 <tt class="descname">_get_project_level_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_project_level_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB._get_project_level_info" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="11%" />
-<col width="11%" />
-<col width="10%" />
-<col width="67%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>application</td>
-<td>Project</td>
-<td>Application</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>samples</td>
-<td>Sample</td>
-<td>Name</td>
-<td>Dict of all samples registered for the project. Keys are sample names.</td>
-</tr>
-<tr class="row-even"><td>open_date</td>
-<td>Project</td>
-<td>open-date</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>close_date</td>
-<td>Project</td>
-<td>close-date</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>contact</td>
-<td>Researcher</td>
-<td>email</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>project_name</td>
-<td>Project</td>
-<td>Name</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>project_id</td>
-<td>Project</td>
-<td>id</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="objectsDB.ProjectDB._get_project_summary_info">
 <tt class="descname">_get_project_summary_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_project_summary_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB._get_project_summary_info" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="28%" />
-<col width="22%" />
-<col width="20%" />
-<col width="30%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>project_summary</td>
-<td>Source</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="objectsDB.ProjectDB._get_sequencing_finished">
 <tt class="descname">_get_sequencing_finished</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_sequencing_finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB._get_sequencing_finished" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="33%" />
-<col width="21%" />
-<col width="19%" />
-<col width="28%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>sequencing_finished</td>
-<td>Source</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-<p>Finish Date = last seq date if proj closed. Will be removed and 
+<dd><p>Finish Date = last seq date if proj closed. Will be removed and 
 feched from lims.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="objectsDB.ProjectDB._make_DB_samples">
 <tt class="descname">_make_DB_samples</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._make_DB_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB._make_DB_samples" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="10%" />
-<col width="7%" />
-<col width="7%" />
-<col width="77%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>first_initial_qc</td>
-<td>Source</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>no_of_samples</td>
-<td>Project</td>
-<td><ul class="first last simple">
-<li></li>
-</ul>
-</td>
-<td>Number of registered samples for the project</td>
-</tr>
-<tr class="row-even"><td>samples</td>
-<td>Sample</td>
-<td>Name</td>
-<td>Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="objectsDB.ProjectDB.build_processes_per_artifact">
@@ -565,133 +208,12 @@ Output: A dict where keys are prep_art_id and values are prep names.</p>
 <dl class="method">
 <dt id="objectsDB.SampleDB._get_preps_and_libval">
 <tt class="descname">_get_preps_and_libval</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_preps_and_libval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._get_preps_and_libval" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[prep id]/[KEY]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="41%" />
-<col width="18%" />
-<col width="17%" />
-<col width="24%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>pre_prep_library_validation</td>
-<td>True</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>library_validation</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>prep_status</td>
-<td>True</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>reagent_label</td>
-<td>True</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="objectsDB.SampleDB._get_sample_info">
 <tt class="descname">_get_sample_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_sample_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._get_sample_info" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/[KEY]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="7%" />
-<col width="3%" />
-<col width="3%" />
-<col width="86%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>scilife_name</td>
-<td>Sample</td>
-<td>name</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td>well_location</td>
-<td>Fals</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>details</td>
-<td>Sample</td>
-<td>udf</td>
-<td>All Sample level udfs exept SAMP_UDF_EXCEPTIONS defined in lims_utils.py</td>
-</tr>
-<tr class="row-odd"><td>sample_run_metrics</td>
-<td><ul class="first last simple">
-<li></li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li></li>
-</ul>
-</td>
-<td>Keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf (&#8216;Run ID&#8217;) of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.</td>
-</tr>
-<tr class="row-even"><td>library_prep</td>
-<td>Process</td>
-<td>date-run</td>
-<td>The keys of this dict are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-&gt; prep A, second date -&gt; prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.</td>
-</tr>
-<tr class="row-odd"><td>initial_qc</td>
-<td>Process</td>
-<td><ul class="first last simple">
-<li></li>
-</ul>
-</td>
-<td>Dict ...</td>
-</tr>
-<tr class="row-even"><td>first_initial_qc_start_date</td>
-<td>Process</td>
-<td>date-run</td>
-<td>If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step</td>
-</tr>
-<tr class="row-odd"><td>first_prep_start_date</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="objectsDB.SampleDB._get_sample_run_metrics">
@@ -701,73 +223,33 @@ DEMULTIPLEX processes as argument
 For each SEQUENCING process run on the sample, this function steps 
 bacward in the artifact history of the input artifact of the SEQUENCING 
 process to find the folowing information:</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[prep id]/sample_run_metrics/[samp run id]/[KEY]:</th></tr>
-<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="7%" />
-<col width="7%" />
-<col width="67%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">KEY</th>
-<th class="head">lims_element</th>
-<th class="head">lims_field</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>dillution_and_pooling_start_date</td>
-<td>Process</td>
-<td>date-run</td>
-<td>date-run of DILSTART step</td>
-</tr>
-<tr class="row-odd"><td>sequencing_start_date</td>
-<td>Process</td>
-<td>date-run</td>
-<td>ate-run of SEQSTART step</td>
-</tr>
-<tr class="row-even"><td>sequencing_run_QC_finished</td>
-<td>Process</td>
-<td>date-run</td>
-<td>date-run of SEQUENCING step</td>
-</tr>
-<tr class="row-odd"><td>sequencing_finish_date</td>
-<td>Process</td>
-<td>Finish Date</td>
-<td>udf (&#8216;Finish Date&#8217;) of SEQUENCING step</td>
-</tr>
-<tr class="row-even"><td>sample_run_metrics_id</td>
-<td><ul class="first last simple">
-<li></li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li></li>
-</ul>
-</td>
-<td>The sample database (statusdb) _id for the sample_run_metrics corresponding to the run, sample, lane in question.</td>
-</tr>
-<tr class="row-odd"><td>dem_qc_flag</td>
-<td>...</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>seq_qc_flag</td>
-<td>...</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
+<p>dillution_and_pooling_start_date  date-run of DILSTART step
+sequencing_start_date             date-run of SEQSTART step
+sequencing_run_QC_finished        date-run of SEQUENCING step
+sequencing_finish_date            udf (&#8216;Finish Date&#8217;) of SEQUENCING step
+sample_run_metrics_id             The sample database (statusdb) _id for</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>the sample_run_metrics corresponding </dt>
+<dd>to the run, sample, lane in question.</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>samp_run_met_id = lane_date_fcid_barcode            </dt>
+<dd><p class="first">date and fcid:  from udf (&#8216;Run ID&#8217;) of the SEQUENCING step. 
+barcode:        The reagent-lables of the input artifact of process</p>
+<blockquote>
+<div>type AGRLIBVAL</div></blockquote>
+<dl class="last docutils">
+<dt>lane:           from the location of the input artifact to the </dt>
+<dd>SEQUENCING step</dd>
+</dl>
+</dd>
+</dl>
+<p>preps are defined as the id of the PREPSTART step in the artifact 
+history. If appllication== Finished library, prep is defined as 
+&#8220;Finnished&#8221;. These keys are used to connect the seqeuncing steps to the 
+correct preps.</p>
 </dd></dl>
 
 <dl class="method">
@@ -839,8 +321,8 @@ exlude      (True/False)</dd>
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="INITALQCFINISHEDLIB.html"
-                        title="next chapter">NITALQCFINISHEDLIB</a></p>
+  <p class="topless"><a href="_templates/api/modules.html"
+                        title="next chapter">lims_utils</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/index.txt"
@@ -873,7 +355,7 @@ exlude      (True/False)</dd>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="INITALQCFINISHEDLIB.html" title="NITALQCFINISHEDLIB"
+          <a href="_templates/api/modules.html" title="lims_utils"
              >next</a> |</li>
         <li><a href="#">PSUL 1 documentation</a> &raquo;</li> 
       </ul>

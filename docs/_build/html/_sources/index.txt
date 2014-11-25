@@ -7,6 +7,7 @@ Process Categories
 .. toctree::
    :maxdepth: 2
 
+   _templates/api/modules
    INITALQCFINISHEDLIB
    INITALQC
    AGRINITQC

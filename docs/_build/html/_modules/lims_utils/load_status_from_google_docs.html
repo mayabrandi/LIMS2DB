@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lims_utils.load_status_from_google_docs &mdash; PSUL 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="PSUL 1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">PSUL 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for lims_utils.load_status_from_google_docs</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span>  <span class="nn">datetime</span>  <span class="kn">import</span>  <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">uuid4</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">from</span> <span class="nn">optparse</span> <span class="kn">import</span> <span class="n">OptionParser</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">bcbio.pipeline.config_utils</span> <span class="kn">as</span> <span class="nn">cl</span>
+<span class="kn">from</span> <span class="nn">scilifelab.google.google_docs</span> <span class="kn">import</span> <span class="n">SpreadSheet</span>
+<span class="kn">from</span> <span class="nn">scilifelab.google</span> <span class="kn">import</span> <span class="n">get_credentials</span>
+<span class="kn">import</span> <span class="nn">couchdb</span>
+
+
+<span class="c">#           GOOGLE DOCS</span>
+<div class="viewcode-block" id="get_google_document"><a class="viewcode-back" href="../../_templates/api/lims_utils.html#lims_utils.load_status_from_google_docs.get_google_document">[docs]</a><span class="k">def</span> <span class="nf">get_google_document</span><span class="p">(</span><span class="n">ssheet_title</span><span class="p">,</span> <span class="n">wsheet_title</span><span class="p">,</span> <span class="n">client</span><span class="p">):</span>
+    <span class="n">ssheet</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_spreadsheet</span><span class="p">(</span><span class="n">ssheet_title</span><span class="p">)</span>
+    <span class="n">wsheet</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_worksheet</span><span class="p">(</span><span class="n">wsheet_title</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_cell_content</span><span class="p">(</span><span class="n">wsheet</span><span class="p">)</span>
+    <span class="n">ss_key</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_key</span><span class="p">(</span><span class="n">ssheet</span><span class="p">)</span>
+    <span class="n">ws_key</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_key</span><span class="p">(</span><span class="n">wsheet</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">content</span><span class="p">,</span> <span class="n">ws_key</span><span class="p">,</span> <span class="n">ss_key</span>
+</div>
+<div class="viewcode-block" id="get_column"><a class="viewcode-back" href="../../_templates/api/lims_utils.html#lims_utils.load_status_from_google_docs.get_column">[docs]</a><span class="k">def</span> <span class="nf">get_column</span><span class="p">(</span><span class="n">ssheet_content</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">col_cond</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">colindex</span><span class="o">=</span><span class="s">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ssheet_content</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">colindex</span> <span class="o">==</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">col_cond</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="ow">and</span> <span class="n">colindex</span> <span class="o">==</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">col</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">header</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">):</span>
+                        <span class="n">colindex</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rowindex</span> <span class="o">=</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span>
+            <span class="k">return</span> <span class="n">rowindex</span><span class="p">,</span> <span class="n">colindex</span>
+
+<span class="c"># NAME STRIP</span></div>
+<div class="viewcode-block" id="strip_index"><a class="viewcode-back" href="../../_templates/api/lims_utils.html#lims_utils.load_status_from_google_docs.strip_index">[docs]</a><span class="k">def</span> <span class="nf">strip_index</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">indexes</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;_nxdual&#39;</span><span class="p">,</span><span class="s">&#39;_index&#39;</span><span class="p">,</span><span class="s">&#39;_rpi&#39;</span><span class="p">,</span><span class="s">&#39;_agilent&#39;</span><span class="p">,</span><span class="s">&#39;_mondrian&#39;</span><span class="p">,</span><span class="s">&#39;_haloht&#39;</span><span class="p">,</span>
+        <span class="s">&#39;_halo&#39;</span><span class="p">,</span><span class="s">&#39;_sureselect&#39;</span><span class="p">,</span><span class="s">&#39;_dual&#39;</span><span class="p">,</span><span class="s">&#39;_hht&#39;</span><span class="p">,</span><span class="s">&#39;_ss&#39;</span><span class="p">,</span><span class="s">&#39;_i&#39;</span><span class="p">,</span><span class="s">&#39;_r&#39;</span><span class="p">,</span><span class="s">&#39;_a&#39;</span><span class="p">,</span><span class="s">&#39;_m&#39;</span><span class="p">,</span><span class="s">&#39;_h&#39;</span><span class="p">]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">:</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">preps</span><span class="o">=</span><span class="s">&#39;FBCDEF&#39;</span>
+    <span class="k">for</span> <span class="n">prep</span> <span class="ow">in</span> <span class="n">preps</span><span class="p">:</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">prep</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">name</span>
+</div>
+<div class="viewcode-block" id="get_20158_info"><a class="viewcode-back" href="../../_templates/api/lims_utils.html#lims_utils.load_status_from_google_docs.get_20158_info">[docs]</a><span class="k">def</span> <span class="nf">get_20158_info</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="n">project_name_swe</span><span class="p">):</span>
+    <span class="n">versions</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;01&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;Sample name Scilife&#39;</span><span class="p">,</span> <span class="s">&quot;Total reads per sample&quot;</span><span class="p">,</span> <span class="s">&quot;Sheet1&quot;</span><span class="p">,</span><span class="s">&quot;Passed=P/ not passed=NP*&quot;</span><span class="p">],</span>
+            <span class="s">&quot;02&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Sample name (SciLifeLab)&quot;</span><span class="p">,</span> <span class="s">&quot;Total number of reads (Millions)&quot;</span><span class="p">,</span><span class="s">&quot;Sheet1&quot;</span><span class="p">,</span>
+              <span class="s">&quot;Based on total number of reads after mapping and duplicate removal&quot;</span><span class="p">],</span>
+            <span class="s">&quot;03&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Sample name (SciLifeLab)&quot;</span><span class="p">,</span> <span class="s">&quot;Total number of reads (Millions)&quot;</span><span class="p">,</span><span class="s">&quot;Sheet1&quot;</span><span class="p">,</span>
+              <span class="s">&quot;Based on total number of reads after mapping and duplicate removal &quot;</span><span class="p">],</span>
+            <span class="s">&quot;05&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Sample name (from Project read counts)&quot;</span><span class="p">,</span> <span class="s">&quot;Total number&quot;</span><span class="p">,</span><span class="s">&quot;Sheet1&quot;</span><span class="p">,</span>
+              <span class="s">&quot;Based on total number of reads&quot;</span><span class="p">,</span><span class="s">&quot;Based on total number of reads after mapping and duplicate removal&quot;</span><span class="p">],</span>
+            <span class="s">&quot;06&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;Sample name (from Project read counts)&quot;</span><span class="p">,</span> <span class="s">&quot;Total number&quot;</span><span class="p">,</span><span class="s">&quot;Sheet1&quot;</span><span class="p">,</span>
+              <span class="s">&quot;Based on total number of reads&quot;</span><span class="p">,</span><span class="s">&quot;Based on total number of reads after mapping and duplicate removal&quot;</span><span class="p">]}</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">SpreadSheet</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+    <span class="n">feed</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_spreadsheets_feed</span><span class="p">(</span><span class="n">project_name_swe</span> <span class="o">+</span> <span class="s">&#39;_20158&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">feed</span><span class="o">.</span><span class="n">entry</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ssheet</span> <span class="o">=</span> <span class="n">feed</span><span class="o">.</span><span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">ssheet</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s">&#39;_20158_&#39;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">SpreadSheet</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="n">ssheet</span><span class="p">)</span>
+        <span class="n">content</span><span class="p">,</span> <span class="n">ws_key</span><span class="p">,</span> <span class="n">ss_key</span> <span class="o">=</span> <span class="n">get_google_document</span><span class="p">(</span><span class="n">ssheet</span><span class="p">,</span>  <span class="n">versions</span><span class="p">[</span><span class="n">version</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">client</span><span class="p">)</span>
+        <span class="n">dummy</span><span class="p">,</span> <span class="n">P_NP_colindex</span> <span class="o">=</span> <span class="n">get_column</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">versions</span><span class="p">[</span><span class="n">version</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">dummy</span><span class="p">,</span> <span class="n">No_reads_sequenced_colindex</span> <span class="o">=</span> <span class="n">get_column</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">versions</span><span class="p">[</span><span class="n">version</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">row_ind</span><span class="p">,</span> <span class="n">scilife_names_colindex</span> <span class="o">=</span> <span class="n">get_column</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">versions</span><span class="p">[</span><span class="n">version</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">version</span><span class="o">==</span><span class="s">&quot;05&quot;</span><span class="p">)</span><span class="o">|</span> <span class="p">(</span><span class="n">version</span><span class="o">==</span><span class="s">&quot;06&quot;</span><span class="p">):</span>
+            <span class="n">dummy</span><span class="p">,</span> <span class="n">P_NP_duprem_colindex</span> <span class="o">=</span> <span class="n">get_column</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">versions</span><span class="p">[</span><span class="n">version</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span> <span class="c">## [version][4] for dup rem</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">P_NP_duprem_colindex</span><span class="o">=</span><span class="s">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="n">row_ind</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">sci_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">scilife_names_colindex</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="n">striped_name</span> <span class="o">=</span> <span class="n">strip_index</span><span class="p">(</span><span class="n">sci_name</span><span class="p">)</span>
+                    <span class="n">no_reads</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">No_reads_sequenced_colindex</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">P_NP_duprem_colindex</span><span class="o">!=</span><span class="s">&#39;&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">P_NP_duprem_colindex</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">!=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
+                        <span class="n">status</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">P_NP_duprem_colindex</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">status</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">P_NP_colindex</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="n">info</span><span class="p">[</span><span class="n">striped_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">status</span><span class="p">,</span><span class="n">no_reads</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">info</span><span class="o">=</span><span class="bp">None</span>
+    <span class="k">return</span> <span class="n">info</span>
+</div>
+<div class="viewcode-block" id="get"><a class="viewcode-back" href="../../_templates/api/lims_utils.html#lims_utils.load_status_from_google_docs.get">[docs]</a><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">project_ID</span><span class="p">,</span> <span class="n">proj</span><span class="p">):</span>
+    <span class="n">CREDENTIALS_FILE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;HOME&#39;</span><span class="p">],</span> <span class="s">&#39;opt/config/gdocs_credentials&#39;</span><span class="p">)</span>
+    <span class="n">credentials</span> <span class="o">=</span> <span class="n">get_credentials</span><span class="p">(</span><span class="n">CREDENTIALS_FILE</span><span class="p">)</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">get_20158_info</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="n">project_ID</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">info</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">proj</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;samples&#39;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">proj</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">info</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">proj</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">][</span><span class="n">sample</span><span class="p">][</span><span class="s">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">proj</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">][</span><span class="n">sample</span><span class="p">][</span><span class="s">&#39;m_reads_sequenced&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">proj</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">][</span><span class="n">sample</span><span class="p">]</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;details&#39;</span><span class="p">):</span>
+                        <span class="n">proj</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">][</span><span class="n">sample</span><span class="p">][</span><span class="s">&#39;details&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                                            <span class="s">&#39;status_(manual)&#39;</span> <span class="p">:</span> <span class="n">info</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                            <span class="s">&#39;total_reads_(m)&#39;</span> <span class="p">:</span> <span class="n">info</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="mi">1</span><span class="p">]}</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">proj</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">][</span><span class="n">sample</span><span class="p">][</span><span class="s">&#39;details&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;status_(manual)&#39;</span><span class="p">):</span>
+                            <span class="n">proj</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">][</span><span class="n">sample</span><span class="p">][</span><span class="s">&#39;details&#39;</span><span class="p">][</span><span class="s">&#39;status_(manual)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">proj</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">][</span><span class="n">sample</span><span class="p">][</span><span class="s">&#39;details&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;total_reads_(m)&#39;</span><span class="p">):</span>
+                            <span class="n">proj</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">][</span><span class="n">sample</span><span class="p">][</span><span class="s">&#39;details&#39;</span><span class="p">][</span><span class="s">&#39;total_reads_(m)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="n">sample</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">proj</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">PSUL 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Maya.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
