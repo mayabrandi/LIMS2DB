@@ -230,15 +230,8 @@ class ProjectDB():
 class ProcessInfo():
     """This class takes a list of process type names. Eg 
     'Aggregate QC (Library Validation) 4.0' and forms  a dict with info about 
-    all processes of the type specified in runs which the project has gon through.
+    all processes of the type specified in runs which the project has gon through."""
 
-    info = {24-8460:{ 
-              'start_date'
-              'samples':{'P424_111':{in_art_id1 : [in_art1, out_art1],
-                         in_art_id2: [in_art2, out_art2]},
-                     'P424_115': ...},
-                       ...},
-        '24-8480':...}"""
     def __init__(self, lims_instance, processes):
         self.lims = lims_instance
         self.info = self._get_process_info(processes)
@@ -251,7 +244,7 @@ class ProcessInfo():
                                 'samples' : {}}
             in_arts=[]
             for in_art_id, out_art_id in process.input_output_maps:
-                in_art = in_art_id['uri']       #these are actually artifacts
+                in_art = in_art_id['uri']
                 out_art = out_art_id['uri']
                 samples = in_art.samples
                 if in_art.id not in in_arts:
@@ -261,7 +254,6 @@ class ProcessInfo():
                             process_info[process.id]['samples'][samp.name] = {}
                         process_info[process.id]['samples'][samp.name][in_art.id] = [in_art, out_art]
         return process_info
-
 
 class SampleDB():
     """Instances of this class holds a dictionary formatted for building up the 
@@ -282,20 +274,22 @@ class SampleDB():
         self._get_sample_info()
 
     def _get_sample_info(self):
-        """
-        :project/samples/[sample id]/[KEY]:
+        """:project/samples/[sample id]/[KEY]:
+
         =========================== ============    =========== ================
         KEY                         lims_element    lims_field  description
         =========================== ============    =========== ================
-        scilife_name                Sample          name
-        well_location               Fals
+        scilife_name                Sample          name        ..
+        well_location               Fals            ..          ..
         details                     Sample          udf         All Sample level udfs exept SAMP_UDF_EXCEPTIONS defined in lims_utils.py
         sample_run_metrics          -               -           Keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf ('Run ID') of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.
         library_prep                Process         date-run    The keys of this dict are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-> prep A, second date -> prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.
         initial_qc                  Process         -           Dict ...
         first_initial_qc_start_date Process         date-run    If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step
-        first_prep_start_date       ....
-        =========================== ============    =========== ================"""
+        first_prep_start_date       ..              ..          Fals
+        =========================== ============    =========== ================
+
+        """
         self.obj['scilife_name'] = self.name
         self.obj['well_location'] = self.lims_sample.artifact.location[1]
         self.obj['details'] = udf_dict(self.lims_sample, SAMP_UDF_EXCEPTIONS)
@@ -560,7 +554,7 @@ class InitialQC():
 
     def set_initialqc_info(self):
         """
-        :project/samples/[sample id]/initial_qc/[KEY]:
+        :project/samples/[sample id]/initial_qc/[KEY]: 
         =================== ============    ================    ================
         KEY                 lims_element    lims_field          description
         =================== ============    ================    ================
@@ -570,7 +564,6 @@ class InitialQC():
         initial_qc_status   Artifact        qc-flag             qc-flag of thre input artifact to the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
         caliper_image       Artifact        content-location    content-location of output Result files of the last of all CALIPER steps in the artifact history of the output artifact of one of the AGRINITQC steps
         =================== ============    ================    ================"""
-
         self._get_initialqc_processes()
         if self.steps:
             if self.steps.initialqstart:
@@ -762,7 +755,6 @@ class Prep():
         workset_setup       False
         pre_prep_start_date Process         date-run    The date-run of process 'Shear DNA (SS XT) 4.0'. Only for 'Exome capture' projects   
         =================== ============    =========== ================"""
-
         if aplication in ['Amplicon', 'Finished library']:
             self.id2AB = 'Finished'
         else:
@@ -806,7 +798,7 @@ class Prep():
         initials        True
         average_size_bp Artifact        Size (bp)   udf ('Size (bp)') of the input artifact to the process AGRLIBVAL
         caliper_image   True       
-        =============== ============    =========== ================  """
+        =============== ============    =========== ================"""
         library_validations = {}
         start_date = libvalstart['date'] if (libvalstart and 
                                          libvalstart.has_key('date')) else None

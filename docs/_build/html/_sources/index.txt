@@ -9,9 +9,6 @@ Process Categories
 
    _templates/api/modules
    INITALQCFINISHEDLIB
-   INITALQC
-   AGRINITQC
-   PREPREPSTART
 
 
 .. automodule:: objectsDB
