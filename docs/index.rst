@@ -16,7 +16,7 @@ Guide
    :undoc-members:
 
 
-.. automodule:: process_categories
+.. autofunction:: process_categories
    :members:
    :private-members:
    :undoc-members:
