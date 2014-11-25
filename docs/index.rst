@@ -8,9 +8,7 @@ Process Categories
    :maxdepth: 2
 
    _templates/api/modules
-   INITALQCFINISHEDLIB
-   INITALQC
-
+   process_categories
 
 .. automodule:: objectsDB
    :members:
