@@ -12,3 +12,4 @@ ID  process Name                            Finished Libraries
 67  Qubit QC (Library Validation) 4.0       X
 20  CaliperGX QC (DNA)                      X
 17  Bioanalyzer QC (Library Validation) 4.0 X
+==  ======================================= ==================
