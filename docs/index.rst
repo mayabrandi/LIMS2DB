@@ -9,6 +9,7 @@ Process Categories
 
    _templates/api/modules
    INITALQCFINISHEDLIB
+   INITALQC
 
 
 .. automodule:: objectsDB
