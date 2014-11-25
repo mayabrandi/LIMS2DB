@@ -1,13 +1,16 @@
 Welcome to PSUL's documentation!!!!
 ================================
 
-Guide
+Process Categories
 ^^^^^
 
 .. toctree::
    :maxdepth: 2
 
-   Intro
+   INITALQCFINISHEDLIB
+   INITALQC
+   AGRINITQC
+   PREPREPSTART
 
 
 .. automodule:: objectsDB
@@ -15,15 +18,6 @@ Guide
    :private-members:
    :undoc-members:
 
-#.. autoclass:: ProjectDB
-   :members:
-   :private-members:
-   :undoc-members:
-
-#.. autoclass:: SampleDB
-   :members:
-   :private-members:
-   :undoc-members:
 
 Indices and tables
 ==================
