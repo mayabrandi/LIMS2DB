@@ -19,11 +19,6 @@ Process Categories
    :undoc-members:
 
 
-.. autofunction:: process_categories
-   :members:
-   :private-members:
-   :undoc-members:
-
 Indices and tables
 ==================
 
