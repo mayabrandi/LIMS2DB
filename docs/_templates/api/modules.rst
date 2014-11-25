@@ -1,7 +1,7 @@
-lims_utils
+objectsDB
 ==========
 
 .. toctree::
    :maxdepth: 4
 
-   lims_utils
+   objectsDB
