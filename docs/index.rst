@@ -16,17 +16,7 @@ Guide
    :undoc-members:
 
 
-.. autodata:: process_categories
-   :members:
-   :private-members:
-
-
-#.. autoclass:: ProjectDB
-   :members:
-   :private-members:
-   :undoc-members:
-
-#.. autoclass:: SampleDB
+.. automodule:: process_categories
    :members:
    :private-members:
    :undoc-members:
