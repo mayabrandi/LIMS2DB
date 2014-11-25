@@ -9,6 +9,8 @@ Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 #from genologics.lims import *
 #import genologics.entities as gent
 #from lims_utils import *
+import process_categories as pc
+#pc.FINISHED_LIBRARIES
 #from scilifelab.db.statusDB_utils import *
 #from helpers import *
 #import os
