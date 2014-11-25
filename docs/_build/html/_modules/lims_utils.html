@@ -6,39 +6,38 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>lims_utils.lims_utils &mdash; PSUL 1 documentation</title>
+    <title>lims_utils &mdash; PSUL 1 documentation</title>
     
-    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
+        URL_ROOT:    '../',
         VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="PSUL 1 documentation" href="../../index.html" />
-    <link rel="up" title="lims_utils" href="../lims_utils.html" /> 
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="PSUL 1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
+          <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
+          <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">PSUL 1 documentation</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../lims_utils.html" accesskey="U">lims_utils</a> &raquo;</li> 
+        <li><a href="../index.html">PSUL 1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -47,8 +46,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <h1>Source code for lims_utils.lims_utils</h1><div class="highlight"><pre>
-<span class="c">#!/usr/bin/env python</span>
+  <h1>Source code for lims_utils</h1><div class="highlight"><pre>
+<span class="c">#!/home/maya.brandi/anaconda/envs/test/bin/python</span>
 
 <span class="sd">&quot;&quot;&quot;A module with lims help functions.</span>
 
@@ -63,6 +62,7 @@
 <span class="sd">In the lims_utils context, processes are categorised into groups that define, </span>
 <span class="sd">or are used to define a certain type of statusdb key. The categories and their </span>
 <span class="sd">processes are defined here:&quot;&quot;&quot;</span> <span class="s">&#39;hh&#39;</span>
+
 
 <span class="n">INITALQCFINISHEDLIB</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;24&#39;</span> <span class="p">:</span> <span class="s">&#39;Customer Gel QC&#39;</span><span class="p">,</span>
     <span class="s">&#39;62&#39;</span> <span class="p">:</span> <span class="s">&#39;qPCR QC (Library Validation) 4.0&#39;</span><span class="p">,</span>
@@ -98,9 +98,12 @@
     <span class="s">&#39;47&#39;</span> <span class="p">:</span> <span class="s">&#39;mRNA Purification, Fragmentation &amp; cDNA synthesis (TruSeq RNA) 4.0&#39;</span><span class="p">,</span>
     <span class="s">&#39;33&#39;</span> <span class="p">:</span> <span class="s">&#39;Fragment DNA (TruSeq DNA) 4.0&#39;</span><span class="p">,</span>
     <span class="s">&#39;407&#39;</span> <span class="p">:</span> <span class="s">&#39;Fragment DNA (ThruPlex)&#39;</span><span class="p">,</span>
+    <span class="s">&#39;454&#39;</span> <span class="p">:</span> <span class="s">&#39;ThruPlex template preparation and synthesis&#39;</span><span class="p">,</span>
     <span class="s">&#39;308&#39;</span><span class="p">:</span> <span class="s">&#39;Library Pooling (TruSeq Small RNA) 1.0&#39;</span><span class="p">,</span>
     <span class="s">&#39;117&#39;</span> <span class="p">:</span> <span class="s">&#39;Applications Generic Process&#39;</span><span class="p">,</span>
+    <span class="s">&#39;605&#39;</span> <span class="p">:</span> <span class="s">&#39;Tagmentation, Strand displacement and AMPure purification&#39;</span><span class="p">,</span>
     <span class="s">&#39;405&#39;</span> <span class="p">:</span> <span class="s">&#39;RiboZero depletion&#39;</span><span class="p">}</span>
+
 <span class="n">PREPEND</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;157&#39;</span><span class="p">:</span> <span class="s">&#39;Applications Finish Prep&#39;</span><span class="p">,</span>
     <span class="s">&#39;109&#39;</span> <span class="p">:</span> <span class="s">&#39;CA Purification&#39;</span><span class="p">,</span>
     <span class="s">&#39;456&#39;</span> <span class="p">:</span> <span class="s">&#39;Purification (ThruPlex)&#39;</span><span class="p">,</span>
@@ -137,8 +140,7 @@
 
 <span class="n">CALIPER</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;20&#39;</span> <span class="p">:</span> <span class="s">&#39;CaliperGX QC (DNA)&#39;</span><span class="p">,</span><span class="s">&#39;116&#39;</span> <span class="p">:</span> <span class="s">&#39;CaliperGX QC (RNA)&#39;</span><span class="p">}</span>
 
-
-<div class="viewcode-block" id="procHistory"><a class="viewcode-back" href="../../_templates/api/lims_utils.html#lims_utils.lims_utils.procHistory">[docs]</a><span class="k">def</span> <span class="nf">procHistory</span><span class="p">(</span><span class="n">proc</span><span class="p">,</span> <span class="n">samplename</span><span class="p">):</span>
+<div class="viewcode-block" id="procHistory"><a class="viewcode-back" href="../_templates/api/lims_utils.html#lims_utils.procHistory">[docs]</a><span class="k">def</span> <span class="nf">procHistory</span><span class="p">(</span><span class="n">proc</span><span class="p">,</span> <span class="n">samplename</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Quick wat to get the ids of parent processes from the given process, </span>
 <span class="sd">    while staying in a sample scope&quot;&quot;&quot;</span>
     <span class="n">hist</span><span class="o">=</span><span class="p">[]</span>
@@ -165,7 +167,7 @@
                 <span class="k">break</span> <span class="c"># breaks the for artifacts if we matched the current one</span>
     <span class="k">return</span> <span class="n">hist</span> 
 </div>
-<div class="viewcode-block" id="get_run_qcs"><a class="viewcode-back" href="../../_templates/api/lims_utils.html#lims_utils.lims_utils.get_run_qcs">[docs]</a><span class="k">def</span> <span class="nf">get_run_qcs</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="n">lanesobj</span><span class="p">):</span>
+<div class="viewcode-block" id="get_run_qcs"><a class="viewcode-back" href="../_templates/api/lims_utils.html#lims_utils.get_run_qcs">[docs]</a><span class="k">def</span> <span class="nf">get_run_qcs</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="n">lanesobj</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">fc</span><span class="o">.</span><span class="n">all_inputs</span><span class="p">():</span>
         <span class="n">lane</span><span class="o">=</span><span class="n">art</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">lane</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lanesobj</span><span class="p">:</span>
@@ -189,7 +191,7 @@
 
         
 </div>
-<div class="viewcode-block" id="get_sequencing_info"><a class="viewcode-back" href="../../_templates/api/lims_utils.html#lims_utils.lims_utils.get_sequencing_info">[docs]</a><span class="k">def</span> <span class="nf">get_sequencing_info</span><span class="p">(</span><span class="n">fc</span><span class="p">):</span>
+<div class="viewcode-block" id="get_sequencing_info"><a class="viewcode-back" href="../_templates/api/lims_utils.html#lims_utils.get_sequencing_info">[docs]</a><span class="k">def</span> <span class="nf">get_sequencing_info</span><span class="p">(</span><span class="n">fc</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Input: a process object &#39;fc&#39;, of type &#39;Illumina Sequencing (Illumina SBS) 4.0&#39;,</span>
 <span class="sd">    Output: A dictionary where keys are lanes 1,2,...,8, and values are lane artifact udfs&quot;&quot;&quot;</span>
     <span class="n">fc_summary</span><span class="o">=</span><span class="p">{}</span>
@@ -201,7 +203,7 @@
             <span class="n">fc_summary</span><span class="p">[</span><span class="n">lane</span><span class="p">][</span><span class="s">&#39;qc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">art</span><span class="o">.</span><span class="n">qc_flag</span>
     <span class="k">return</span> <span class="n">fc_summary</span>
 </div>
-<div class="viewcode-block" id="make_sample_artifact_maps"><a class="viewcode-back" href="../../_templates/api/lims_utils.html#lims_utils.lims_utils.make_sample_artifact_maps">[docs]</a><span class="k">def</span> <span class="nf">make_sample_artifact_maps</span><span class="p">(</span><span class="n">sample_name</span><span class="p">):</span>
+<div class="viewcode-block" id="make_sample_artifact_maps"><a class="viewcode-back" href="../_templates/api/lims_utils.html#lims_utils.make_sample_artifact_maps">[docs]</a><span class="k">def</span> <span class="nf">make_sample_artifact_maps</span><span class="p">(</span><span class="n">sample_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;outin: connects each out_art for a specific sample to its </span>
 <span class="sd">    corresponding in_art and process. one-one relation&quot;&quot;&quot;</span>
     <span class="n">outin</span> <span class="o">=</span> <span class="p">{}</span>
@@ -226,7 +228,7 @@
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
-    <form class="search" action="../../search.html" method="get">
+    <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
@@ -245,14 +247,13 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
+          <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
+          <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">PSUL 1 documentation</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../lims_utils.html" >lims_utils</a> &raquo;</li> 
+        <li><a href="../index.html">PSUL 1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
