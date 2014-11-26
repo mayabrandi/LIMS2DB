@@ -1,5 +1,5 @@
 objectsDB
-==========
+=========
 
 .. toctree::
    :maxdepth: 4

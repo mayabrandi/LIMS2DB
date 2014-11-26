@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="PSUL 1 documentation" href="#" />
-    <link rel="next" title="lims_utils" href="_templates/api/modules.html" /> 
+    <link rel="next" title="objectsDB" href="_templates/api/modules.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,7 +37,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="_templates/api/modules.html" title="lims_utils"
+          <a href="_templates/api/modules.html" title="objectsDB"
              accesskey="N">next</a> |</li>
         <li><a href="#">PSUL 1 documentation</a> &raquo;</li> 
       </ul>
@@ -54,8 +54,8 @@
 <h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="_templates/api/modules.html">lims_utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="_templates/api/lims_utils.html">lims_utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_templates/api/modules.html">objectsDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_templates/api/objectsDB.html">objectsDB package</a></li>
 </ul>
 </li>
 </ul>
@@ -86,7 +86,240 @@
 <li class="toctree-l1"><a class="reference internal" href="process_categories.html#agrlibval">AGRLIBVAL</a></li>
 </ul>
 </div>
-<span class="target" id="module-objectsDB"></span></div>
+<span class="target" id="module-objectsDB"></span><p>A module for building up the project objects that build up the project database on 
+statusdb with lims as the main source of information.</p>
+<p>Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.</p>
+<dl class="class">
+<dt id="objectsDB.InitialQC">
+<em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">InitialQC</tt><big>(</big><em>lims_inst</em>, <em>sample</em>, <em>procs_per_art</em>, <em>application</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#InitialQC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.InitialQC" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="objectsDB.InitialQC._get_initialqc_processes">
+<tt class="descname">_get_initialqc_processes</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#InitialQC._get_initialqc_processes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.InitialQC._get_initialqc_processes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.InitialQC.set_initialqc_info">
+<tt class="descname">set_initialqc_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#InitialQC.set_initialqc_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.InitialQC.set_initialqc_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="objectsDB.Prep">
+<em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">Prep</tt><big>(</big><em>sample_name</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#Prep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.Prep" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="objectsDB.Prep._get_lib_val_info">
+<tt class="descname">_get_lib_val_info</tt><big>(</big><em>agrlibQCsteps</em>, <em>libvalstart</em>, <em>latest_caliper_id=None</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#Prep._get_lib_val_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.Prep._get_lib_val_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.Prep.set_prep_info">
+<tt class="descname">set_prep_info</tt><big>(</big><em>steps</em>, <em>aplication</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#Prep.set_prep_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.Prep.set_prep_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="objectsDB.ProcessInfo">
+<em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">ProcessInfo</tt><big>(</big><em>lims_instance</em>, <em>processes</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProcessInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProcessInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class takes a list of process type names. Eg 
+&#8216;Aggregate QC (Library Validation) 4.0&#8217; and forms  a dict with info about 
+all processes of the type specified in runs which the project has gon through.</p>
+<dl class="docutils">
+<dt>info = {24-8460:{ </dt>
+<dd><blockquote class="first">
+<div><p>&#8216;start_date&#8217;
+&#8216;samples&#8217;:{&#8216;P424_111&#8217;:{in_art_id1 : [in_art1, out_art1],</p>
+<blockquote>
+<div><blockquote>
+<div>in_art_id2: [in_art2, out_art2]},</div></blockquote>
+<dl class="docutils">
+<dt>&#8216;P424_115&#8217;: ...},</dt>
+<dd>...},</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<p class="last">&#8216;24-8480&#8217;:...}</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="objectsDB.ProcessInfo._get_process_info">
+<tt class="descname">_get_process_info</tt><big>(</big><em>processes</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProcessInfo._get_process_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProcessInfo._get_process_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="objectsDB.ProcessSpec">
+<em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">ProcessSpec</tt><big>(</big><em>hist_sort</em>, <em>hist_list</em>, <em>application</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProcessSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProcessSpec" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="objectsDB.ProcessSpec._set_prep_processes">
+<tt class="descname">_set_prep_processes</tt><big>(</big><em>hist_sort</em>, <em>hist_list</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProcessSpec._set_prep_processes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProcessSpec._set_prep_processes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="objectsDB.ProjectDB">
+<em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">ProjectDB</tt><big>(</big><em>lims_instance</em>, <em>project_id</em>, <em>samp_db</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instances of this class holds a dictionary formatted for building up the 
+project database on statusdb. Source of information come from different lims
+artifacts and processes.</p>
+<dl class="method">
+<dt id="objectsDB.ProjectDB._get_affiliation">
+<tt class="descname">_get_affiliation</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_affiliation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB._get_affiliation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.ProjectDB._get_project_level_info">
+<tt class="descname">_get_project_level_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_project_level_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB._get_project_level_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.ProjectDB._get_project_summary_info">
+<tt class="descname">_get_project_summary_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_project_summary_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB._get_project_summary_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.ProjectDB._get_sequencing_finished">
+<tt class="descname">_get_sequencing_finished</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._get_sequencing_finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB._get_sequencing_finished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finish Date = last seq date if proj closed. Will be removed and 
+feched from lims.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.ProjectDB._make_DB_samples">
+<tt class="descname">_make_DB_samples</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB._make_DB_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB._make_DB_samples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.ProjectDB.build_processes_per_artifact">
+<tt class="descname">build_processes_per_artifact</tt><big>(</big><em>lims</em>, <em>pname</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#ProjectDB.build_processes_per_artifact"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.ProjectDB.build_processes_per_artifact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a dictionary linking each artifact id with its processes.
+Other artifacts can be present as keys. All processes where the project is
+present should be included. The values of the dictionary is sets, to avoid
+duplicated projects for a single artifact.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="objectsDB.SampleDB">
+<em class="property">class </em><tt class="descclassname">objectsDB.</tt><tt class="descname">SampleDB</tt><big>(</big><em>lims_instance</em>, <em>sample_id</em>, <em>project_name</em>, <em>samp_db</em>, <em>application=None</em>, <em>AgrLibQCs=[]</em>, <em>run_info=[]</em>, <em>processes_per_artifact=None</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instances of this class holds a dictionary formatted for building up the 
+samples in the project database on status db. Source of information come 
+from different lims artifacts and processes.</p>
+<dl class="method">
+<dt id="objectsDB.SampleDB._get_barcode">
+<tt class="descname">_get_barcode</tt><big>(</big><em>reagent_label</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_barcode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._get_barcode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts barcode from list of artifact.reagent_labels</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.SampleDB._get_firts_day">
+<tt class="descname">_get_firts_day</tt><big>(</big><em>sample_name</em>, <em>process_list</em>, <em>last_day=False</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_firts_day"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._get_firts_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>process_list is a list of process type names, sample_name is a 
+sample name :)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.SampleDB._get_prep_leter">
+<tt class="descname">_get_prep_leter</tt><big>(</big><em>prep_info</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_prep_leter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._get_prep_leter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get preps and prep names; A,B,C... based on prep dates for 
+sample_name. 
+Output: A dict where keys are prep_art_id and values are prep names.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.SampleDB._get_preps_and_libval">
+<tt class="descname">_get_preps_and_libval</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_preps_and_libval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._get_preps_and_libval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.SampleDB._get_sample_info">
+<tt class="descname">_get_sample_info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_sample_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._get_sample_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.SampleDB._get_sample_run_metrics">
+<tt class="descname">_get_sample_run_metrics</tt><big>(</big><em>demux_info</em>, <em>preps</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_sample_run_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._get_sample_run_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input: demux_info - instance of the ProcessInfo class with 
+DEMULTIPLEX processes as argument
+For each SEQUENCING process run on the sample, this function steps 
+bacward in the artifact history of the input artifact of the SEQUENCING 
+process to find the folowing information:</p>
+<p>dillution_and_pooling_start_date  date-run of DILSTART step
+sequencing_start_date             date-run of SEQSTART step
+sequencing_run_QC_finished        date-run of SEQUENCING step
+sequencing_finish_date            udf (&#8216;Finish Date&#8217;) of SEQUENCING step
+sample_run_metrics_id             The sample database (statusdb) _id for</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>the sample_run_metrics corresponding </dt>
+<dd>to the run, sample, lane in question.</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>samp_run_met_id = lane_date_fcid_barcode            </dt>
+<dd><p class="first">date and fcid:  from udf (&#8216;Run ID&#8217;) of the SEQUENCING step. 
+barcode:        The reagent-lables of the input artifact of process</p>
+<blockquote>
+<div>type AGRLIBVAL</div></blockquote>
+<dl class="last docutils">
+<dt>lane:           from the location of the input artifact to the </dt>
+<dd>SEQUENCING step</dd>
+</dl>
+</dd>
+</dl>
+<p>preps are defined as the id of the PREPSTART step in the artifact 
+history. If appllication== Finished library, prep is defined as 
+&#8220;Finnished&#8221;. These keys are used to connect the seqeuncing steps to the 
+correct preps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.SampleDB._get_top_level_agrlibval_steps">
+<tt class="descname">_get_top_level_agrlibval_steps</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._get_top_level_agrlibval_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._get_top_level_agrlibval_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.SampleDB._make_sample_run_id">
+<tt class="descname">_make_sample_run_id</tt><big>(</big><em>seq_art</em>, <em>lims_run</em>, <em>prep</em>, <em>run_type</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._make_sample_run_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._make_sample_run_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="objectsDB.SampleDB._pars_reagent_labels">
+<tt class="descname">_pars_reagent_labels</tt><big>(</big><em>steps</em>, <em>last_libval</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#SampleDB._pars_reagent_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.SampleDB._pars_reagent_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="objectsDB.get_caliper_img">
+<tt class="descclassname">objectsDB.</tt><tt class="descname">get_caliper_img</tt><big>(</big><em>sample_name</em>, <em>caliper_id</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#get_caliper_img"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.get_caliper_img" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="objectsDB.get_last_first">
+<tt class="descclassname">objectsDB.</tt><tt class="descname">get_last_first</tt><big>(</big><em>process_list</em>, <em>last=True</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#get_last_first"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.get_last_first" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="objectsDB.udf_dict">
+<tt class="descclassname">objectsDB.</tt><tt class="descname">udf_dict</tt><big>(</big><em>element</em>, <em>exeptions=[]</em>, <em>exclude=True</em><big>)</big><a class="reference internal" href="_modules/objectsDB.html#udf_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#objectsDB.udf_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a lims element and tertuns a dictionary of its udfs, where the udf 
+names are trensformed to statusdb keys (underscore and lowercase).</p>
+<p>exeptions and exclude = False - will return a dict with only the exeptions
+exeptions and exclude = True - will return a dict without the exeptions</p>
+<dl class="docutils">
+<dt>Arguments:</dt>
+<dd>element     lims element (Sample, Artifact, Process, Project...)
+exeptions   list of exception udf keys (underscore and lowercase)
+exlude      (True/False)</dd>
+</dl>
+</dd></dl>
+
+</div>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -115,7 +348,7 @@
 
   <h4>Next topic</h4>
   <p class="topless"><a href="_templates/api/modules.html"
-                        title="next chapter">lims_utils</a></p>
+                        title="next chapter">objectsDB</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/index.txt"
@@ -148,7 +381,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="_templates/api/modules.html" title="lims_utils"
+          <a href="_templates/api/modules.html" title="objectsDB"
              >next</a> |</li>
         <li><a href="#">PSUL 1 documentation</a> &raquo;</li> 
       </ul>

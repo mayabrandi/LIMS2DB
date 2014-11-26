@@ -69,7 +69,7 @@
 
 <span class="c">###  Functions ###</span>
 
-<div class="viewcode-block" id="udf_dict"><a class="viewcode-back" href="../index.html#objectsDB.udf_dict">[docs]</a><span class="k">def</span> <span class="nf">udf_dict</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">exeptions</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">exclude</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="udf_dict"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.udf_dict">[docs]</a><span class="k">def</span> <span class="nf">udf_dict</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">exeptions</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">exclude</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Takes a lims element and tertuns a dictionary of its udfs, where the udf </span>
 <span class="sd">    names are trensformed to statusdb keys (underscore and lowercase).</span>
 <span class="sd">    </span>
@@ -92,7 +92,7 @@
             <span class="n">udf_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
     <span class="k">return</span> <span class="n">udf_dict</span>
 </div>
-<div class="viewcode-block" id="get_last_first"><a class="viewcode-back" href="../index.html#objectsDB.get_last_first">[docs]</a><span class="k">def</span> <span class="nf">get_last_first</span><span class="p">(</span><span class="n">process_list</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="get_last_first"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.get_last_first">[docs]</a><span class="k">def</span> <span class="nf">get_last_first</span><span class="p">(</span><span class="n">process_list</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
     <span class="n">returned_process</span><span class="o">=</span><span class="bp">None</span>
     <span class="k">for</span> <span class="n">pro</span> <span class="ow">in</span> <span class="n">process_list</span><span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">returned_process</span><span class="p">)</span> \
@@ -101,7 +101,7 @@
             <span class="n">returned_process</span><span class="o">=</span> <span class="n">pro</span>
     <span class="k">return</span> <span class="n">returned_process</span>
 </div>
-<div class="viewcode-block" id="get_caliper_img"><a class="viewcode-back" href="../index.html#objectsDB.get_caliper_img">[docs]</a><span class="k">def</span> <span class="nf">get_caliper_img</span><span class="p">(</span><span class="n">sample_name</span><span class="p">,</span> <span class="n">caliper_id</span><span class="p">):</span>
+<div class="viewcode-block" id="get_caliper_img"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.get_caliper_img">[docs]</a><span class="k">def</span> <span class="nf">get_caliper_img</span><span class="p">(</span><span class="n">sample_name</span><span class="p">,</span> <span class="n">caliper_id</span><span class="p">):</span>
     <span class="n">caliper_image</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">last_caliper</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span><span class="nb">id</span> <span class="o">=</span> <span class="n">caliper_id</span><span class="p">)</span>
@@ -120,7 +120,7 @@
 
 <span class="c">### Classes  ###</span>
 </div>
-<div class="viewcode-block" id="ProjectDB"><a class="viewcode-back" href="../index.html#objectsDB.ProjectDB">[docs]</a><span class="k">class</span> <span class="nc">ProjectDB</span><span class="p">():</span>
+<div class="viewcode-block" id="ProjectDB"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.ProjectDB">[docs]</a><span class="k">class</span> <span class="nc">ProjectDB</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Instances of this class holds a dictionary formatted for building up the </span>
 <span class="sd">    project database on statusdb. Source of information come from different lims</span>
 <span class="sd">    artifacts and processes.&quot;&quot;&quot;</span>
@@ -212,7 +212,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">delete_Nones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">)</span>
 
 </div>
-<div class="viewcode-block" id="ProjectDB.build_processes_per_artifact"><a class="viewcode-back" href="../index.html#objectsDB.ProjectDB.build_processes_per_artifact">[docs]</a>    <span class="k">def</span> <span class="nf">build_processes_per_artifact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lims</span><span class="p">,</span> <span class="n">pname</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDB.build_processes_per_artifact"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.ProjectDB.build_processes_per_artifact">[docs]</a>    <span class="k">def</span> <span class="nf">build_processes_per_artifact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lims</span><span class="p">,</span> <span class="n">pname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructs a dictionary linking each artifact id with its processes.</span>
 <span class="sd">        Other artifacts can be present as keys. All processes where the project is</span>
 <span class="sd">        present should be included. The values of the dictionary is sets, to avoid</span>
@@ -230,7 +230,7 @@
 
         <span class="k">return</span> <span class="n">processes_per_artifact</span>
 </div></div>
-<div class="viewcode-block" id="ProcessInfo"><a class="viewcode-back" href="../index.html#objectsDB.ProcessInfo">[docs]</a><span class="k">class</span> <span class="nc">ProcessInfo</span><span class="p">():</span>
+<div class="viewcode-block" id="ProcessInfo"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.ProcessInfo">[docs]</a><span class="k">class</span> <span class="nc">ProcessInfo</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;This class takes a list of process type names. Eg </span>
 <span class="sd">    &#39;Aggregate QC (Library Validation) 4.0&#39; and forms  a dict with info about </span>
 <span class="sd">    all processes of the type specified in runs which the project has gon through.</span>
@@ -266,7 +266,7 @@
         <span class="k">return</span> <span class="n">process_info</span>
 
 </div></div>
-<div class="viewcode-block" id="SampleDB"><a class="viewcode-back" href="../index.html#objectsDB.SampleDB">[docs]</a><span class="k">class</span> <span class="nc">SampleDB</span><span class="p">():</span>
+<div class="viewcode-block" id="SampleDB"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.SampleDB">[docs]</a><span class="k">class</span> <span class="nc">SampleDB</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Instances of this class holds a dictionary formatted for building up the </span>
 <span class="sd">    samples in the project database on status db. Source of information come </span>
 <span class="sd">    from different lims artifacts and processes.&quot;&quot;&quot;</span>
@@ -531,7 +531,7 @@
                             <span class="n">topLevel_AgrLibQC</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">AgrLibQC</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">topLevel_AgrLibQC</span>
 </div></div>
-<div class="viewcode-block" id="InitialQC"><a class="viewcode-back" href="../index.html#objectsDB.InitialQC">[docs]</a><span class="k">class</span> <span class="nc">InitialQC</span><span class="p">():</span>
+<div class="viewcode-block" id="InitialQC"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.InitialQC">[docs]</a><span class="k">class</span> <span class="nc">InitialQC</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lims_inst</span> <span class="p">,</span><span class="n">sample</span><span class="p">,</span> <span class="n">procs_per_art</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lims</span> <span class="o">=</span> <span class="n">lims_inst</span>
@@ -556,7 +556,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="n">ProcessSpec</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">,</span> <span class="n">history</span><span class="o">.</span><span class="n">history_list</span><span class="p">,</span>
                                                                <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="InitialQC.set_initialqc_info"><a class="viewcode-back" href="../index.html#objectsDB.InitialQC.set_initialqc_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_initialqc_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InitialQC.set_initialqc_info"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.InitialQC.set_initialqc_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_initialqc_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_initialqc_processes</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">initialqstart</span><span class="p">:</span>
@@ -576,7 +576,7 @@
         <span class="k">return</span> <span class="n">delete_Nones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initialqc_info</span><span class="p">)</span>
 
 </div></div>
-<div class="viewcode-block" id="ProcessSpec"><a class="viewcode-back" href="../index.html#objectsDB.ProcessSpec">[docs]</a><span class="k">class</span> <span class="nc">ProcessSpec</span><span class="p">():</span>
+<div class="viewcode-block" id="ProcessSpec"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.ProcessSpec">[docs]</a><span class="k">class</span> <span class="nc">ProcessSpec</span><span class="p">():</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hist_sort</span><span class="p">,</span> <span class="n">hist_list</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">application</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">init_qc</span> <span class="o">=</span> <span class="n">INITALQCFINISHEDLIB</span> <span class="k">if</span> <span class="n">application</span> <span class="ow">in</span> <span class="n">FINLIB</span> <span class="k">else</span> <span class="n">INITALQC</span>
@@ -696,7 +696,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dilstart</span> <span class="o">=</span> <span class="n">get_last_first</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dilstarts</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seqstart</span> <span class="o">=</span> <span class="n">get_last_first</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seqstarts</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
 </div></div>
-<div class="viewcode-block" id="Prep"><a class="viewcode-back" href="../index.html#objectsDB.Prep">[docs]</a><span class="k">class</span> <span class="nc">Prep</span><span class="p">():</span>
+<div class="viewcode-block" id="Prep"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.Prep">[docs]</a><span class="k">class</span> <span class="nc">Prep</span><span class="p">():</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample_name</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sample_name</span><span class="o">=</span><span class="n">sample_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prep_info</span> <span class="o">=</span> <span class="p">{</span>
@@ -721,7 +721,7 @@
             <span class="s">&#39;initials&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
             <span class="s">&#39;caliper_image&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
 
-<div class="viewcode-block" id="Prep.set_prep_info"><a class="viewcode-back" href="../index.html#objectsDB.Prep.set_prep_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_prep_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">aplication</span><span class="p">):</span>
+<div class="viewcode-block" id="Prep.set_prep_info"><a class="viewcode-back" href="../_templates/api/objectsDB.html#objectsDB.Prep.set_prep_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_prep_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">aplication</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">aplication</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;Amplicon&#39;</span><span class="p">,</span> <span class="s">&#39;Finished library&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">id2AB</span> <span class="o">=</span> <span class="s">&#39;Finished&#39;</span>
         <span class="k">else</span><span class="p">:</span>
