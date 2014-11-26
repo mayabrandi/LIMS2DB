@@ -8,11 +8,9 @@ Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 #import codecs
 #from genologics.lims import *
 #import genologics.entities as gent
-#from lims_utils import *
-import process_categories as pc
-#pc.FINISHED_LIBRARIES
-#from scilifelab.db.statusDB_utils import *
 #from functions import *
+#import process_categories as pc                #pc.FINISHED_LIBRARIES
+#from scilifelab.db.statusDB_utils import *
 #import os
 #import couchdb
 #import bcbio.pipeline.config_utils as cl
