@@ -9,6 +9,7 @@ LIMS2DB.objectsDB.functions module
 
 .. automodule:: LIMS2DB.objectsDB.functions
     :members:
+    :private-members:
     :undoc-members:
     :show-inheritance:
 
@@ -17,6 +18,7 @@ LIMS2DB.objectsDB.load_status_from_google_docs module
 
 .. automodule:: LIMS2DB.objectsDB.load_status_from_google_docs
     :members:
+    :private-members:
     :undoc-members:
     :show-inheritance:
 
@@ -25,6 +27,7 @@ LIMS2DB.objectsDB.objectsDB module
 
 .. automodule:: LIMS2DB.objectsDB.objectsDB
     :members:
+    :private-members:
     :undoc-members:
     :show-inheritance:
 
@@ -33,6 +36,7 @@ LIMS2DB.objectsDB.process_categories module
 
 .. automodule:: LIMS2DB.objectsDB.process_categories
     :members:
+    :private-members:
     :undoc-members:
     :show-inheritance:
 
