@@ -13,11 +13,32 @@ from pprint import pprint
 from genologics.lims import *
 from genologics.config import BASEURI, USERNAME, PASSWORD
 from datetime import date
-from lims_utils import *
 from scilifelab.db.statusDB_utils import *
 import scilifelab.log
 lims = Lims(BASEURI, USERNAME, PASSWORD)
 LOG = scilifelab.log.minimal_logger('LOG')
+
+def get_run_qcs(fc, lanesobj):
+    for art in fc.all_inputs():
+        lane=art.location[1][0]
+        if lane not in lanesobj:
+            #should never happen if pm works
+            lanesobj[lane]={}
+        lanesobj[lane]['seq_qc_flag']=art.qc_flag
+        dem=lims.get_processes(type=DEMULTIPLEX.values(), inputartifactlimsid=art.id)
+        try:
+            for outart in dem[0].all_outputs():
+                if "FASTQ reads" not in outart.name:
+                    continue
+                else:
+                    for outsample in outart.samples:
+                        #this should be only one
+                        lanesobj[lane][outsample.name]={}
+                        lanesobj[lane][outsample.name]['dem_qc_flag']=outart.qc_flag
+
+        except IndexError:
+            #No demutiplexing found. this is fine.
+            pass
 
 def  main(flowcell, all_flowcells,days,conf):
     """If all_flowcells: all runs run less than a moth ago are uppdated"""
