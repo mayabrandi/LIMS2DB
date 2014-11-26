@@ -1,6 +1,0 @@
-objectsDB.py
-setup.py
-scilifelab_parsers.egg-info/PKG-INFO
-scilifelab_parsers.egg-info/SOURCES.txt
-scilifelab_parsers.egg-info/dependency_links.txt
-scilifelab_parsers.egg-info/top_level.txt
