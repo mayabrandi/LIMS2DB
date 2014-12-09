@@ -14,7 +14,7 @@ from genologics.lims import *
 from genologics.config import BASEURI, USERNAME, PASSWORD
 from datetime import date
 from lims_utils import *
-from scilifelab.db.statusDB_utils import *
+from statusdb.db.utils import *
 import scilifelab.log
 lims = Lims(BASEURI, USERNAME, PASSWORD)
 

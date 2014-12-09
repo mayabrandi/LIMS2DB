@@ -5,18 +5,18 @@ statusdb with lims as the main source of information.
 
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
-#import codecs
-#from genologics.lims import *
-#import genologics.entities as gent
-#from functions import *
-#import process_categories as pc                #pc.FINISHED_LIBRARIES
-#from scilifelab.db.statusDB_utils import *
-#import os
-#import couchdb
-#import bcbio.pipeline.config_utils as cl
-#import time
-#from datetime import date
-#import logging
+import codecs
+from genologics.lims import *
+import genologics.entities as gent
+from genologics.lims_utils import *
+from process_categories import *
+from statusdb.db.utils import *
+from functions import *
+import os
+import couchdb
+import time
+from datetime import date
+import logging
 
 class ProjectDB():
     """Instances of this class holds a dictionary formatted for building up the 
@@ -35,6 +35,21 @@ class ProjectDB():
         self._get_project_level_info()
         self._make_DB_samples()
         self._get_sequencing_finished()
+        self._get_open_escalations()
+
+    def _get_open_escalations(self):
+        escalation_ids=[]
+        processes=self.lims.get_processes(projectname=self.project.name)
+        for p in processes:
+            step=gent.Step(self.lims, id=p.id)
+            if step.actions.escalation:
+                samples_escalated=set()
+                if step.actions.escalation['status'] == "Pending":
+                    shortid=step.id.split("-")[1]
+                    escalation_ids.append(shortid)
+        if escalation_ids:
+            self.obj['escalations']=escalation_ids
+
 
     def _get_project_level_info(self):
         """
@@ -49,7 +64,7 @@ class ProjectDB():
         contact         Researcher      email       
         project_name    Project         Name        
         project_id      Project         id          
-        ============    ============    =========== ================""" 
+        ============    ============    =========== ================"""
 
         self.obj = {'source' : 'lims',
                         'application' : None,
@@ -91,7 +106,7 @@ class ProjectDB():
         if len(project_summary) > 0:
             self.obj['project_summary'] = udf_dict(project_summary[0])
         if len(project_summary) > 1:
-            print 'Warning. project summary process run more than once'
+            logging.warn('Warning. project summary process run more than once')
 
     def _get_sequencing_finished(self):
         """
@@ -127,8 +142,7 @@ class ProjectDB():
         first_initial_qc    Source
         no_of_samples       Project         -           Number of registered samples for the project
         samples             Sample          Name        Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.
-        ================    ============    =========== ================
-"""
+        ================    ============    =========== ================"""
         samples = self.lims.get_samples(projectlimsid = self.project.id)
         self.obj['no_of_samples'] = len(samples)
         if len(samples) > 0:
@@ -177,7 +191,6 @@ class ProcessInfo():
     """This class takes a list of process type names. Eg 
     'Aggregate QC (Library Validation) 4.0' and forms  a dict with info about 
     all processes of the type specified in runs which the project has gon through."""
-
     def __init__(self, lims_instance, processes):
         self.lims = lims_instance
         self.info = self._get_process_info(processes)
@@ -190,7 +203,7 @@ class ProcessInfo():
                                 'samples' : {}}
             in_arts=[]
             for in_art_id, out_art_id in process.input_output_maps:
-                in_art = in_art_id['uri']
+                in_art = in_art_id['uri']       #these are actually artifacts
                 out_art = out_art_id['uri']
                 samples = in_art.samples
                 if in_art.id not in in_arts:
@@ -200,6 +213,7 @@ class ProcessInfo():
                             process_info[process.id]['samples'][samp.name] = {}
                         process_info[process.id]['samples'][samp.name][in_art.id] = [in_art, out_art]
         return process_info
+
 
 class SampleDB():
     """Instances of this class holds a dictionary formatted for building up the 
@@ -233,9 +247,7 @@ class SampleDB():
         initial_qc                  Process         -           Dict ...
         first_initial_qc_start_date Process         date-run    If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step
         first_prep_start_date       ..              ..          Fals
-        =========================== ============    =========== ================
-
-        """
+        =========================== ============    =========== ================"""
         self.obj['scilife_name'] = self.name
         self.obj['well_location'] = self.lims_sample.artifact.location[1]
         self.obj['details'] = udf_dict(self.lims_sample, SAMP_UDF_EXCEPTIONS)
@@ -400,7 +412,7 @@ class SampleDB():
         prep_status                 True
         reagent_label               True
         =========================== ============    =========== ================
-"""
+        """
         top_level_agrlibval_steps = self._get_top_level_agrlibval_steps()
         preps = {}
         very_last_libval_key = {}
@@ -498,6 +510,21 @@ class InitialQC():
         self.steps = None
         self.application = application
 
+    def _get_initialqc_processes(self):
+        outarts = self.lims.get_artifacts(sample_name = self.sample_name,
+                                          process_type = AGRINITQC.values())
+        if outarts:
+            outart = Artifact(lims, id = max(map(lambda a: a.id, outarts)))
+            latestInitQc = outart.parent_process
+            inart = latestInitQc.input_per_sample(self.sample_name)[0].id
+            history = gent.SampleHistory(sample_name = self.sample_name, 
+                                      output_artifact = outart.id,
+                                      input_artifact = inart, lims = self.lims,
+                                      pro_per_art = self.processes_per_artifact)
+            if history.history_list:
+                self.steps = ProcessSpec(history.history, history.history_list,
+                                                               self.application)
+
     def set_initialqc_info(self):
         """
         :project/samples/[sample id]/initial_qc/[KEY]: 
@@ -525,24 +552,9 @@ class InitialQC():
             if self.steps.latestCaliper:
                 self.initialqc_info['caliper_image'] = get_caliper_img(
                                                                self.sample_name,
-                                                 self.steps.latestCaliper['id'])
+                                           self.steps.latestCaliper['id'], lims)
         return delete_Nones(self.initialqc_info)
 
-    def _get_initialqc_processes(self):
-        """"""
-        outarts = self.lims.get_artifacts(sample_name = self.sample_name,
-                                          process_type = AGRINITQC.values())
-        if outarts:
-            outart = Artifact(lims, id = max(map(lambda a: a.id, outarts)))
-            latestInitQc = outart.parent_process
-            inart = latestInitQc.input_per_sample(self.sample_name)[0].id
-            history = gent.SampleHistory(sample_name = self.sample_name,
-                                      output_artifact = outart.id,
-                                      input_artifact = inart, lims = self.lims,
-                                      pro_per_art = self.processes_per_artifact)
-            if history.history_list:
-                self.steps = ProcessSpec(history.history, history.history_list,
-                                                               self.application)
 
 class ProcessSpec():
     def __init__(self, hist_sort, hist_list, application):
@@ -764,8 +776,8 @@ class Prep():
             if library_validation.has_key("size_(bp)"):
                 average_size_bp = library_validation.pop("size_(bp)")
                 library_validation["average_size_bp"] = average_size_bp
-            if latest_caliper_id:
+            if latest_caliper_id and (Process(lims, id=latest_caliper_id['id'])).date_run >= (Process(lims, id=libvalstart['id']).date_run):
                 library_validation["caliper_image"] = get_caliper_img(self.sample_name,
-                                                            latest_caliper_id['id'])
+                                                        latest_caliper_id['id'], lims)
             library_validations[agrlibQCstep['id']] = delete_Nones(library_validation)
         return delete_Nones(library_validations) 

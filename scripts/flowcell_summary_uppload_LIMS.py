@@ -11,9 +11,10 @@ import codecs
 from optparse import OptionParser
 from pprint import pprint
 from genologics.lims import *
+from genologics.lims_utils import *
 from genologics.config import BASEURI, USERNAME, PASSWORD
 from datetime import date
-from scilifelab.db.statusDB_utils import *
+from statusdb.db.utils import *
 import scilifelab.log
 lims = Lims(BASEURI, USERNAME, PASSWORD)
 LOG = scilifelab.log.minimal_logger('LOG')

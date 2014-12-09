@@ -42,8 +42,8 @@ import sys
 import os
 import codecs
 from optparse import OptionParser
-from scilifelab.db.statusDB_utils import *
-from helpers import *
+from statusdb.db.utils import *
+from functions import *
 from pprint import pprint
 from genologics.lims import *
 from genologics.config import BASEURI, USERNAME, PASSWORD

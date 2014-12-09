@@ -42,7 +42,7 @@ import sys
 import os
 import codecs
 from optparse import OptionParser
-from scilifelab.db.statusDB_utils import *
+from statusdb.db.utils import *
 from helpers import *
 from pprint import pprint
 import objectsDB as DB

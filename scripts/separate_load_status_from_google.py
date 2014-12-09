@@ -13,7 +13,7 @@ from scilifelab.google import get_credentials
 import couchdb
 from genologics.lims import *
 from genologics.config import BASEURI, USERNAME, PASSWORD
-from scilifelab.db.statusDB_utils import *
+from statusdb.db.utils import *
 lims = Lims(BASEURI, USERNAME, PASSWORD)
 
 #           GOOGLE DOCS
