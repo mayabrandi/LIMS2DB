@@ -54,18 +54,18 @@
 
 <span class="sd">Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="c">#import codecs</span>
-<span class="c">#from genologics.lims import *</span>
-<span class="c">#import genologics.entities as gent</span>
-<span class="c">#from functions import *</span>
-<span class="c">#import process_categories as pc                #pc.FINISHED_LIBRARIES</span>
-<span class="c">#from scilifelab.db.statusDB_utils import *</span>
-<span class="c">#import os</span>
-<span class="c">#import couchdb</span>
-<span class="c">#import bcbio.pipeline.config_utils as cl</span>
-<span class="c">#import time</span>
-<span class="c">#from datetime import date</span>
-<span class="c">#import logging</span>
+<span class="kn">import</span> <span class="nn">codecs</span>
+<span class="kn">from</span> <span class="nn">genologics.lims</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">genologics.entities</span> <span class="kn">as</span> <span class="nn">gent</span>
+<span class="kn">from</span> <span class="nn">genologics.lims_utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">process_categories</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">statusdb.db.utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">functions</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">couchdb</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
 <div class="viewcode-block" id="ProjectDB"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB">[docs]</a><span class="k">class</span> <span class="nc">ProjectDB</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Instances of this class holds a dictionary formatted for building up the </span>
@@ -84,7 +84,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_project_level_info</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_make_DB_samples</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_sequencing_finished</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_open_escalations</span><span class="p">()</span>
 
+<div class="viewcode-block" id="ProjectDB._get_open_escalations"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_open_escalations">[docs]</a>    <span class="k">def</span> <span class="nf">_get_open_escalations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">escalation_ids</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">processes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="o">.</span><span class="n">get_processes</span><span class="p">(</span><span class="n">projectname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
+            <span class="n">step</span><span class="o">=</span><span class="n">gent</span><span class="o">.</span><span class="n">Step</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">step</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">escalation</span><span class="p">:</span>
+                <span class="n">samples_escalated</span><span class="o">=</span><span class="nb">set</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">step</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">escalation</span><span class="p">[</span><span class="s">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;Pending&quot;</span><span class="p">:</span>
+                    <span class="n">shortid</span><span class="o">=</span><span class="n">step</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">escalation_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shortid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">escalation_ids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;escalations&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">escalation_ids</span>
+
+</div>
 <div class="viewcode-block" id="ProjectDB._get_project_level_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_project_level_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/[KEY]:</span>
@@ -98,7 +113,7 @@
 <span class="sd">        contact         Researcher      email       </span>
 <span class="sd">        project_name    Project         Name        </span>
 <span class="sd">        project_id      Project         id          </span>
-<span class="sd">        ============    ============    =========== ================&quot;&quot;&quot;</span> 
+<span class="sd">        ============    ============    =========== ================&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;source&#39;</span> <span class="p">:</span> <span class="s">&#39;lims&#39;</span><span class="p">,</span>
                         <span class="s">&#39;application&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
@@ -140,7 +155,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">project_summary</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;project_summary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">udf_dict</span><span class="p">(</span><span class="n">project_summary</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">project_summary</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&#39;Warning. project summary process run more than once&#39;</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;Warning. project summary process run more than once&#39;</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="ProjectDB._get_sequencing_finished"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished">[docs]</a>    <span class="k">def</span> <span class="nf">_get_sequencing_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -176,8 +191,7 @@
 <span class="sd">        first_initial_qc    Source</span>
 <span class="sd">        no_of_samples       Project         -           Number of registered samples for the project</span>
 <span class="sd">        samples             Sample          Name        Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.</span>
-<span class="sd">        ================    ============    =========== ================</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ================    ============    =========== ================&quot;&quot;&quot;</span>
         <span class="n">samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="n">projectlimsid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;no_of_samples&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -226,7 +240,6 @@
     <span class="sd">&quot;&quot;&quot;This class takes a list of process type names. Eg </span>
 <span class="sd">    &#39;Aggregate QC (Library Validation) 4.0&#39; and forms  a dict with info about </span>
 <span class="sd">    all processes of the type specified in runs which the project has gon through.&quot;&quot;&quot;</span>
-
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lims_instance</span><span class="p">,</span> <span class="n">processes</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lims</span> <span class="o">=</span> <span class="n">lims_instance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_process_info</span><span class="p">(</span><span class="n">processes</span><span class="p">)</span>
@@ -239,7 +252,7 @@
                                 <span class="s">&#39;samples&#39;</span> <span class="p">:</span> <span class="p">{}}</span>
             <span class="n">in_arts</span><span class="o">=</span><span class="p">[]</span>
             <span class="k">for</span> <span class="n">in_art_id</span><span class="p">,</span> <span class="n">out_art_id</span> <span class="ow">in</span> <span class="n">process</span><span class="o">.</span><span class="n">input_output_maps</span><span class="p">:</span>
-                <span class="n">in_art</span> <span class="o">=</span> <span class="n">in_art_id</span><span class="p">[</span><span class="s">&#39;uri&#39;</span><span class="p">]</span>
+                <span class="n">in_art</span> <span class="o">=</span> <span class="n">in_art_id</span><span class="p">[</span><span class="s">&#39;uri&#39;</span><span class="p">]</span>       <span class="c">#these are actually artifacts</span>
                 <span class="n">out_art</span> <span class="o">=</span> <span class="n">out_art_id</span><span class="p">[</span><span class="s">&#39;uri&#39;</span><span class="p">]</span>
                 <span class="n">samples</span> <span class="o">=</span> <span class="n">in_art</span><span class="o">.</span><span class="n">samples</span>
                 <span class="k">if</span> <span class="n">in_art</span><span class="o">.</span><span class="n">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">in_arts</span><span class="p">:</span>
@@ -249,6 +262,7 @@
                             <span class="n">process_info</span><span class="p">[</span><span class="n">process</span><span class="o">.</span><span class="n">id</span><span class="p">][</span><span class="s">&#39;samples&#39;</span><span class="p">][</span><span class="n">samp</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
                         <span class="n">process_info</span><span class="p">[</span><span class="n">process</span><span class="o">.</span><span class="n">id</span><span class="p">][</span><span class="s">&#39;samples&#39;</span><span class="p">][</span><span class="n">samp</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">in_art</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">in_art</span><span class="p">,</span> <span class="n">out_art</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">process_info</span>
+
 </div></div>
 <div class="viewcode-block" id="SampleDB"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB">[docs]</a><span class="k">class</span> <span class="nc">SampleDB</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Instances of this class holds a dictionary formatted for building up the </span>
@@ -282,9 +296,7 @@
 <span class="sd">        initial_qc                  Process         -           Dict ...</span>
 <span class="sd">        first_initial_qc_start_date Process         date-run    If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step</span>
 <span class="sd">        first_prep_start_date       ..              ..          Fals</span>
-<span class="sd">        =========================== ============    =========== ================</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        =========================== ============    =========== ================&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;scilife_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;well_location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lims_sample</span><span class="o">.</span><span class="n">artifact</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;details&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">udf_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lims_sample</span><span class="p">,</span> <span class="n">SAMP_UDF_EXCEPTIONS</span><span class="p">)</span>
@@ -449,7 +461,7 @@
 <span class="sd">        prep_status                 True</span>
 <span class="sd">        reagent_label               True</span>
 <span class="sd">        =========================== ============    =========== ================</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">top_level_agrlibval_steps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_top_level_agrlibval_steps</span><span class="p">()</span>
         <span class="n">preps</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">very_last_libval_key</span> <span class="o">=</span> <span class="p">{}</span>
@@ -547,6 +559,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">application</span>
 
+<div class="viewcode-block" id="InitialQC._get_initialqc_processes"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.InitialQC._get_initialqc_processes">[docs]</a>    <span class="k">def</span> <span class="nf">_get_initialqc_processes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">outarts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="o">.</span><span class="n">get_artifacts</span><span class="p">(</span><span class="n">sample_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_name</span><span class="p">,</span>
+                                          <span class="n">process_type</span> <span class="o">=</span> <span class="n">AGRINITQC</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">outarts</span><span class="p">:</span>
+            <span class="n">outart</span> <span class="o">=</span> <span class="n">Artifact</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">outarts</span><span class="p">)))</span>
+            <span class="n">latestInitQc</span> <span class="o">=</span> <span class="n">outart</span><span class="o">.</span><span class="n">parent_process</span>
+            <span class="n">inart</span> <span class="o">=</span> <span class="n">latestInitQc</span><span class="o">.</span><span class="n">input_per_sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+            <span class="n">history</span> <span class="o">=</span> <span class="n">gent</span><span class="o">.</span><span class="n">SampleHistory</span><span class="p">(</span><span class="n">sample_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_name</span><span class="p">,</span> 
+                                      <span class="n">output_artifact</span> <span class="o">=</span> <span class="n">outart</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                                      <span class="n">input_artifact</span> <span class="o">=</span> <span class="n">inart</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="p">,</span>
+                                      <span class="n">pro_per_art</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processes_per_artifact</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">history</span><span class="o">.</span><span class="n">history_list</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="n">ProcessSpec</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">,</span> <span class="n">history</span><span class="o">.</span><span class="n">history_list</span><span class="p">,</span>
+                                                               <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="InitialQC.set_initialqc_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_initialqc_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/samples/[sample id]/initial_qc/[KEY]: </span>
@@ -574,24 +601,9 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">latestCaliper</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">initialqc_info</span><span class="p">[</span><span class="s">&#39;caliper_image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_caliper_img</span><span class="p">(</span>
                                                                <span class="bp">self</span><span class="o">.</span><span class="n">sample_name</span><span class="p">,</span>
-                                                 <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">latestCaliper</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">latestCaliper</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">],</span> <span class="n">lims</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">delete_Nones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initialqc_info</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="InitialQC._get_initialqc_processes"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.InitialQC._get_initialqc_processes">[docs]</a>    <span class="k">def</span> <span class="nf">_get_initialqc_processes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
-        <span class="n">outarts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="o">.</span><span class="n">get_artifacts</span><span class="p">(</span><span class="n">sample_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_name</span><span class="p">,</span>
-                                          <span class="n">process_type</span> <span class="o">=</span> <span class="n">AGRINITQC</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-        <span class="k">if</span> <span class="n">outarts</span><span class="p">:</span>
-            <span class="n">outart</span> <span class="o">=</span> <span class="n">Artifact</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">outarts</span><span class="p">)))</span>
-            <span class="n">latestInitQc</span> <span class="o">=</span> <span class="n">outart</span><span class="o">.</span><span class="n">parent_process</span>
-            <span class="n">inart</span> <span class="o">=</span> <span class="n">latestInitQc</span><span class="o">.</span><span class="n">input_per_sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
-            <span class="n">history</span> <span class="o">=</span> <span class="n">gent</span><span class="o">.</span><span class="n">SampleHistory</span><span class="p">(</span><span class="n">sample_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_name</span><span class="p">,</span>
-                                      <span class="n">output_artifact</span> <span class="o">=</span> <span class="n">outart</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-                                      <span class="n">input_artifact</span> <span class="o">=</span> <span class="n">inart</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="p">,</span>
-                                      <span class="n">pro_per_art</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processes_per_artifact</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">history</span><span class="o">.</span><span class="n">history_list</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="n">ProcessSpec</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">,</span> <span class="n">history</span><span class="o">.</span><span class="n">history_list</span><span class="p">,</span>
-                                                               <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
+
 </div></div>
 <div class="viewcode-block" id="ProcessSpec"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProcessSpec">[docs]</a><span class="k">class</span> <span class="nc">ProcessSpec</span><span class="p">():</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hist_sort</span><span class="p">,</span> <span class="n">hist_list</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
@@ -813,9 +825,9 @@
             <span class="k">if</span> <span class="n">library_validation</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;size_(bp)&quot;</span><span class="p">):</span>
                 <span class="n">average_size_bp</span> <span class="o">=</span> <span class="n">library_validation</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&quot;size_(bp)&quot;</span><span class="p">)</span>
                 <span class="n">library_validation</span><span class="p">[</span><span class="s">&quot;average_size_bp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">average_size_bp</span>
-            <span class="k">if</span> <span class="n">latest_caliper_id</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">latest_caliper_id</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Process</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">latest_caliper_id</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">date_run</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">Process</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">libvalstart</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">date_run</span><span class="p">):</span>
                 <span class="n">library_validation</span><span class="p">[</span><span class="s">&quot;caliper_image&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_caliper_img</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_name</span><span class="p">,</span>
-                                                            <span class="n">latest_caliper_id</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span>
+                                                        <span class="n">latest_caliper_id</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">],</span> <span class="n">lims</span><span class="p">)</span>
             <span class="n">library_validations</span><span class="p">[</span><span class="n">agrlibQCstep</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">delete_Nones</span><span class="p">(</span><span class="n">library_validation</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">delete_Nones</span><span class="p">(</span><span class="n">library_validations</span><span class="p">)</span> </div></div>
 </pre></div>

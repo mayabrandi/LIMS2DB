@@ -76,7 +76,7 @@
 
 <dl class="function">
 <dt id="LIMS2DB.objectsDB.functions.get_caliper_img">
-<tt class="descclassname">LIMS2DB.objectsDB.functions.</tt><tt class="descname">get_caliper_img</tt><big>(</big><em>sample_name</em>, <em>caliper_id</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/functions.html#get_caliper_img"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.functions.get_caliper_img" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">LIMS2DB.objectsDB.functions.</tt><tt class="descname">get_caliper_img</tt><big>(</big><em>sample_name</em>, <em>caliper_id</em>, <em>lims</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/functions.html#get_caliper_img"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.functions.get_caliper_img" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -100,33 +100,8 @@ exlude      (True/False)</dd>
 </dd></dl>
 
 </div>
-<div class="section" id="module-LIMS2DB.objectsDB.load_status_from_google_docs">
-<span id="lims2db-objectsdb-load-status-from-google-docs-module"></span><h2>LIMS2DB.objectsDB.load_status_from_google_docs module<a class="headerlink" href="#module-LIMS2DB.objectsDB.load_status_from_google_docs" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="LIMS2DB.objectsDB.load_status_from_google_docs.get">
-<tt class="descclassname">LIMS2DB.objectsDB.load_status_from_google_docs.</tt><tt class="descname">get</tt><big>(</big><em>project_ID</em>, <em>proj</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/load_status_from_google_docs.html#get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.load_status_from_google_docs.get" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="LIMS2DB.objectsDB.load_status_from_google_docs.get_20158_info">
-<tt class="descclassname">LIMS2DB.objectsDB.load_status_from_google_docs.</tt><tt class="descname">get_20158_info</tt><big>(</big><em>credentials</em>, <em>project_name_swe</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/load_status_from_google_docs.html#get_20158_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.load_status_from_google_docs.get_20158_info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="LIMS2DB.objectsDB.load_status_from_google_docs.get_column">
-<tt class="descclassname">LIMS2DB.objectsDB.load_status_from_google_docs.</tt><tt class="descname">get_column</tt><big>(</big><em>ssheet_content</em>, <em>header</em>, <em>col_cond=0</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/load_status_from_google_docs.html#get_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.load_status_from_google_docs.get_column" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="LIMS2DB.objectsDB.load_status_from_google_docs.get_google_document">
-<tt class="descclassname">LIMS2DB.objectsDB.load_status_from_google_docs.</tt><tt class="descname">get_google_document</tt><big>(</big><em>ssheet_title</em>, <em>wsheet_title</em>, <em>client</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/load_status_from_google_docs.html#get_google_document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.load_status_from_google_docs.get_google_document" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="LIMS2DB.objectsDB.load_status_from_google_docs.strip_index">
-<tt class="descclassname">LIMS2DB.objectsDB.load_status_from_google_docs.</tt><tt class="descname">strip_index</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/load_status_from_google_docs.html#strip_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.load_status_from_google_docs.strip_index" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<div class="section" id="lims2db-objectsdb-load-status-from-google-docs-module">
+<h2>LIMS2DB.objectsDB.load_status_from_google_docs module<a class="headerlink" href="#lims2db-objectsdb-load-status-from-google-docs-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-LIMS2DB.objectsDB.objectsDB">
 <span id="lims2db-objectsdb-objectsdb-module"></span><h2>LIMS2DB.objectsDB.objectsDB module<a class="headerlink" href="#module-LIMS2DB.objectsDB.objectsDB" title="Permalink to this headline">¶</a></h2>
@@ -394,6 +369,11 @@ artifacts and processes.</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_open_escalations">
+<tt class="descname">_get_open_escalations</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_open_escalations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_open_escalations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info">
@@ -863,7 +843,7 @@ process to find the folowing information:</p>
 <li><a class="reference internal" href="#">LIMS2DB.objectsDB package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-LIMS2DB.objectsDB.functions">LIMS2DB.objectsDB.functions module</a></li>
-<li><a class="reference internal" href="#module-LIMS2DB.objectsDB.load_status_from_google_docs">LIMS2DB.objectsDB.load_status_from_google_docs module</a></li>
+<li><a class="reference internal" href="#lims2db-objectsdb-load-status-from-google-docs-module">LIMS2DB.objectsDB.load_status_from_google_docs module</a></li>
 <li><a class="reference internal" href="#module-LIMS2DB.objectsDB.objectsDB">LIMS2DB.objectsDB.objectsDB module</a></li>
 <li><a class="reference internal" href="#module-LIMS2DB.objectsDB.process_categories">LIMS2DB.objectsDB.process_categories module</a></li>
 <li><a class="reference internal" href="#module-LIMS2DB.objectsDB">Module contents</a></li>

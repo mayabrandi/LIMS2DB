@@ -50,7 +50,32 @@
 <span class="c">#!/usr/bin/env python</span>
 
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="kn">from</span> <span class="nn">genologics.lims</span> <span class="kn">import</span> <span class="o">*</span>
 
+<div class="viewcode-block" id="comp_dates"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.comp_dates">[docs]</a><span class="k">def</span> <span class="nf">comp_dates</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Dates in isoformat. Is a &lt; b?&quot;&quot;&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="p">))</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+    <span class="k">if</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="delete_Nones"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.delete_Nones">[docs]</a><span class="k">def</span> <span class="nf">delete_Nones</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="s">&quot;Deletes None type items from dict.&quot;</span>
+    <span class="n">new_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span><span class="o">==</span><span class="s">&#39;null&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">val</span><span class="o">==</span><span class="s">&#39;2000-10-10&#39;</span> <span class="ow">or</span> <span class="n">val</span><span class="o">==</span><span class="s">&#39;3000-10-10&#39;</span><span class="p">):</span>
+                        <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">if</span> <span class="n">new_dict</span> <span class="o">!=</span> <span class="p">{}:</span>
+        <span class="k">return</span> <span class="n">new_dict</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
 <div class="viewcode-block" id="udf_dict"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.udf_dict">[docs]</a><span class="k">def</span> <span class="nf">udf_dict</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">exeptions</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">exclude</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Takes a lims element and tertuns a dictionary of its udfs, where the udf </span>
 <span class="sd">    names are trensformed to statusdb keys (underscore and lowercase).</span>
@@ -75,7 +100,6 @@
     <span class="k">return</span> <span class="n">udf_dict</span>
 </div>
 <div class="viewcode-block" id="get_last_first"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.get_last_first">[docs]</a><span class="k">def</span> <span class="nf">get_last_first</span><span class="p">(</span><span class="n">process_list</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
     <span class="n">returned_process</span><span class="o">=</span><span class="bp">None</span>
     <span class="k">for</span> <span class="n">pro</span> <span class="ow">in</span> <span class="n">process_list</span><span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">returned_process</span><span class="p">)</span> \
@@ -84,7 +108,7 @@
             <span class="n">returned_process</span><span class="o">=</span> <span class="n">pro</span>
     <span class="k">return</span> <span class="n">returned_process</span>
 </div>
-<div class="viewcode-block" id="get_caliper_img"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.get_caliper_img">[docs]</a><span class="k">def</span> <span class="nf">get_caliper_img</span><span class="p">(</span><span class="n">sample_name</span><span class="p">,</span> <span class="n">caliper_id</span><span class="p">):</span>
+<div class="viewcode-block" id="get_caliper_img"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.get_caliper_img">[docs]</a><span class="k">def</span> <span class="nf">get_caliper_img</span><span class="p">(</span><span class="n">sample_name</span><span class="p">,</span> <span class="n">caliper_id</span><span class="p">,</span> <span class="n">lims</span><span class="p">):</span>
     <span class="n">caliper_image</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">last_caliper</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span><span class="nb">id</span> <span class="o">=</span> <span class="n">caliper_id</span><span class="p">)</span>
@@ -100,31 +124,7 @@
         <span class="c">#Should happen when no caliper processes are found</span>
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">caliper_image</span>
-</div>
-<div class="viewcode-block" id="comp_dates"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.comp_dates">[docs]</a><span class="k">def</span> <span class="nf">comp_dates</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Dates in isoformat. Is a &lt; b?&quot;&quot;&quot;</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="p">))</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="p">))</span>
-    <span class="n">delta</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
-    <span class="k">if</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">False</span>
-</div>
-<div class="viewcode-block" id="delete_Nones"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.delete_Nones">[docs]</a><span class="k">def</span> <span class="nf">delete_Nones</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-    <span class="s">&quot;Deletes None type items from dict.&quot;</span>
-    <span class="n">new_dict</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">if</span> <span class="nb">dict</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span><span class="o">==</span><span class="s">&#39;null&#39;</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">val</span><span class="o">==</span><span class="s">&#39;2000-10-10&#39;</span> <span class="ow">or</span> <span class="n">val</span><span class="o">==</span><span class="s">&#39;3000-10-10&#39;</span><span class="p">):</span>
-                        <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
-    <span class="k">if</span> <span class="n">new_dict</span> <span class="o">!=</span> <span class="p">{}:</span>
-        <span class="k">return</span> <span class="n">new_dict</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span></div>
-</pre></div>
+</pre></div></div>
 
           </div>
         </div>
