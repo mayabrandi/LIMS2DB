@@ -6,7 +6,7 @@ Code
 ^^^^^
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    _templates/api/modules
 
