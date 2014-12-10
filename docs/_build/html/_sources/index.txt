@@ -1,5 +1,5 @@
 Welcome to PSUL's documentation!!!!
-================================
+====================================
 
 
 Code
@@ -11,18 +11,12 @@ Code
    _templates/api/modules
 
 Process Categories
-^^^^^
+^^^^^^^^^^^^^^^^^^^
 
 .. toctree::
    :maxdepth: 2
 
    process_categories
-
-.. automodule:: objectsDB
-   :members:
-   :private-members:
-   :undoc-members:
-
 
 Indices and tables
 ==================
