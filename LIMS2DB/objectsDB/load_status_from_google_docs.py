@@ -1,16 +1,16 @@
 #!/usr/bin/env python
-import sys
-import os
-import time
-from  datetime  import  datetime
-from uuid import uuid4
-import hashlib
-from optparse import OptionParser
-import logging
-import bcbio.pipeline.config_utils as cl
-from scilifelab.google.google_docs import SpreadSheet
-from scilifelab.google import get_credentials
-import couchdb
+#import sys
+#import os
+#import time
+#from  datetime  import  datetime
+#from uuid import uuid4
+#import hashlib
+#from optparse import OptionParser
+#import logging
+#import bcbio.pipeline.config_utils as cl
+#from scilifelab.google.google_docs import SpreadSheet
+#from scilifelab.google import get_credentials
+#import couchdb
 
 
 #           GOOGLE DOCS
