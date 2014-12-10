@@ -14,4 +14,5 @@ Module contents
 .. automodule:: LIMS2DB
     :members:
     :undoc-members:
+    :private-members:
     :show-inheritance:
