@@ -21,7 +21,7 @@ import logging
 class ProjectDB():
     """Instances of this class holds a dictionary formatted for building up the 
     project database on statusdb. Source of information come from different lims
-    artifacts and processes."""
+    artifacts and processes.""" 
 
     def __init__(self, lims_instance, project_id, samp_db):
         self.lims = lims_instance 
@@ -48,7 +48,7 @@ class ProjectDB():
                     shortid=step.id.split("-")[1]
                     escalation_ids.append(shortid)
         if escalation_ids:
-            self.obj['escalations']=escalation_ids
+            self.obj['escalations']=escalation_ids  
 
 
     def _get_project_level_info(self):
@@ -64,7 +64,7 @@ class ProjectDB():
         contact         Researcher      email       
         project_name    Project         Name        
         project_id      Project         id          
-        ============    ============    =========== ================"""
+        ============    ============    =========== ================""" 
 
         self.obj = {'source' : 'lims',
                         'application' : None,
@@ -88,6 +88,7 @@ class ProjectDB():
         ============    ============    =========== ================
         affiliation     Source          Affiliation
         ============    ============    =========== ================"""
+
         researcher_udfs = dict(self.project.researcher.lab.udf.items())
         if researcher_udfs.has_key('Affiliation'):
             self.obj['affiliation'] = researcher_udfs['Affiliation']
@@ -100,7 +101,8 @@ class ProjectDB():
         KEY             lims_element    lims_field  description
         =============== ============    =========== ================
         project_summary Source
-        =============== ============    =========== ================"""
+        =============== ============    =========== ================""" 
+
         project_summary = self.lims.get_processes(projectname =
                                 self.project.name, type = SUMMARY.values())
         if len(project_summary) > 0:
@@ -117,7 +119,8 @@ class ProjectDB():
         sequencing_finished Source
         =================== ============    =========== ================
         Finish Date = last seq date if proj closed. Will be removed and 
-        feched from lims."""
+        feched from lims.""" 
+
         seq_fin = []
         if self.project.close_date and 'samples' in self.obj.keys():
             for samp in self.obj['samples'].values():
@@ -142,7 +145,8 @@ class ProjectDB():
         first_initial_qc    Source
         no_of_samples       Project         -           Number of registered samples for the project
         samples             Sample          Name        Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.
-        ================    ============    =========== ================"""
+        ================    ============    =========== ================""" 
+
         samples = self.lims.get_samples(projectlimsid = self.project.id)
         self.obj['no_of_samples'] = len(samples)
         if len(samples) > 0:
@@ -174,7 +178,8 @@ class ProjectDB():
         Other artifacts can be present as keys. All processes where the project is
         present should be included. The values of the dictionary is sets, to avoid
         duplicated projects for a single artifact.
-        """
+        """ 
+
         processes = lims.get_processes(projectname = pname)
         processes_per_artifact = {}
         for process in processes:
@@ -190,7 +195,8 @@ class ProjectDB():
 class ProcessInfo():
     """This class takes a list of process type names. Eg 
     'Aggregate QC (Library Validation) 4.0' and forms  a dict with info about 
-    all processes of the type specified in runs which the project has gon through."""
+    all processes of the type specified in runs which the project has gon through.""" 
+
     def __init__(self, lims_instance, processes):
         self.lims = lims_instance
         self.info = self._get_process_info(processes)
@@ -218,7 +224,8 @@ class ProcessInfo():
 class SampleDB():
     """Instances of this class holds a dictionary formatted for building up the 
     samples in the project database on status db. Source of information come 
-    from different lims artifacts and processes."""
+    from different lims artifacts and processes.""" 
+
     def __init__(self, lims_instance , sample_id, project_name, samp_db,
                         application = None, AgrLibQCs = [], run_info = [],
                         processes_per_artifact = None): 
@@ -247,7 +254,8 @@ class SampleDB():
         initial_qc                  Process         -           Dict ...
         first_initial_qc_start_date Process         date-run    If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step
         first_prep_start_date       ..              ..          Fals
-        =========================== ============    =========== ================"""
+        =========================== ============    =========== ================""" 
+
         self.obj['scilife_name'] = self.name
         self.obj['well_location'] = self.lims_sample.artifact.location[1]
         self.obj['details'] = udf_dict(self.lims_sample, SAMP_UDF_EXCEPTIONS)
@@ -274,7 +282,8 @@ class SampleDB():
 
     def _get_firts_day(self, sample_name ,process_list, last_day = False):
         """process_list is a list of process type names, sample_name is a 
-        sample name :)"""
+        sample name :)""" 
+
         arts = self.lims.get_artifacts(sample_name = sample_name, 
                                         process_type = process_list)
         index = -1 if last_day else 0 
@@ -285,7 +294,8 @@ class SampleDB():
             return None
 
     def _get_barcode(self, reagent_label):
-        """Extracts barcode from list of artifact.reagent_labels"""
+        """Extracts barcode from list of artifact.reagent_labels""" 
+
         if reagent_label:
             try:
                 index = reagent_label.split('(')[1].strip(')')
@@ -314,7 +324,8 @@ class SampleDB():
         sample_run_metrics_id               -               -           The sample database (statusdb) _id for the sample_run_metrics corresponding to the run, sample, lane in question.
         dem_qc_flag                         ...
         seq_qc_flag                         ...
-        ================================    ============    =========== ================"""
+        ================================    ============    =========== ================""" 
+
         sample_runs = {}
         for id, run in demux_info.items():
             if run['samples'].has_key(self.name):
@@ -385,7 +396,8 @@ class SampleDB():
     def _get_prep_leter(self, prep_info):
         """Get preps and prep names; A,B,C... based on prep dates for 
         sample_name. 
-        Output: A dict where keys are prep_art_id and values are prep names."""
+        Output: A dict where keys are prep_art_id and values are prep names.""" 
+
         dates = {}
         prep_info_new = {}
         preps_keys = map(chr, range(65, 65+len(prep_info)))
@@ -412,7 +424,8 @@ class SampleDB():
         prep_status                 True
         reagent_label               True
         =========================== ============    =========== ================
-        """
+        """ 
+
         top_level_agrlibval_steps = self._get_top_level_agrlibval_steps()
         preps = {}
         very_last_libval_key = {}
@@ -536,7 +549,8 @@ class InitialQC():
         initials            Technician      initials            technician.initials of the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
         initial_qc_status   Artifact        qc-flag             qc-flag of thre input artifact to the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
         caliper_image       Artifact        content-location    content-location of output Result files of the last of all CALIPER steps in the artifact history of the output artifact of one of the AGRINITQC steps
-        =================== ============    ================    ================"""
+        =================== ============    ================    ================""" 
+
         self._get_initialqc_processes()
         if self.steps:
             if self.steps.initialqstart:
@@ -712,7 +726,8 @@ class Prep():
         prep_id             Process         id          The lims id of a PREPEND step
         workset_setup       False
         pre_prep_start_date Process         date-run    The date-run of process 'Shear DNA (SS XT) 4.0'. Only for 'Exome capture' projects   
-        =================== ============    =========== ================"""
+        =================== ============    =========== ================""" 
+
         if aplication in ['Amplicon', 'Finished library']:
             self.id2AB = 'Finished'
         else:
@@ -756,7 +771,8 @@ class Prep():
         initials        True
         average_size_bp Artifact        Size (bp)   udf ('Size (bp)') of the input artifact to the process AGRLIBVAL
         caliper_image   True       
-        =============== ============    =========== ================"""
+        =============== ============    =========== ================""" 
+
         library_validations = {}
         start_date = libvalstart['date'] if (libvalstart and 
                                          libvalstart.has_key('date')) else None
