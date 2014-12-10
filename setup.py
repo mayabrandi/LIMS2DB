@@ -3,6 +3,12 @@ import sys
 import os
 import glob
 
+try:
+    with open("requirements.txt", "r") as f:
+        install_requires = [x.strip() for x in f.readlines()]
+except IOError:
+    install_requires = []
+
 setup(name = "LIMS2DB",
     version = "1.0",
     author = "Maya Brandi",

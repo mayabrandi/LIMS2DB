@@ -6,14 +6,14 @@ statusdb with lims as the main source of information.
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
 import codecs
-from genologics.lims import *
-import genologics.entities as gent
-from genologics.lims_utils import *
+#from genologics.lims import *
+#import genologics.entities as gent
+#from genologics.lims_utils import *
 from process_categories import *
-from statusdb.db.utils import *
+#from statusdb.db.utils import *
 from functions import *
 import os
-import couchdb
+#import couchdb
 import time
 from datetime import date
 import logging
@@ -54,6 +54,7 @@ class ProjectDB():
     def _get_project_level_info(self):
         """
         :project/[KEY]:
+
         ============    ============    =========== ================
         KEY             lims_element    lims_field  description
         ============    ============    =========== ================ 
@@ -83,6 +84,7 @@ class ProjectDB():
     def _get_affiliation(self):
         """
         :project/[KEY]:
+
         ============    ============    =========== ================
         KEY             lims_element    lims_field  description
         ============    ============    =========== ================
@@ -96,6 +98,7 @@ class ProjectDB():
     def _get_project_summary_info(self):
         """
         :project/[KEY]:
+
         =============== ============    =========== ================
         KEY             lims_element    lims_field  description
         =============== ============    =========== ================
@@ -111,11 +114,13 @@ class ProjectDB():
     def _get_sequencing_finished(self):
         """
         :project/[KEY]:
+
         =================== ============    =========== ================
         KEY                 lims_element    lims_field  description
         =================== ============    =========== ================
         sequencing_finished Source
         =================== ============    =========== ================
+
         Finish Date = last seq date if proj closed. Will be removed and 
         feched from lims."""
         seq_fin = []
@@ -136,6 +141,7 @@ class ProjectDB():
         ## Getting sample info
         """
         :project/[KEY]:
+
         ================    ============    =========== ================
         KEY                 lims_element    lims_field  description
         ================    ============    =========== ================
@@ -304,6 +310,7 @@ class SampleDB():
 
 
         :project/samples/[sample id]/library_prep/[prep id]/sample_run_metrics/[samp run id]/[KEY]:
+
         ================================    ============    =========== ================
         KEY                                 lims_element    lims_field  description
         ================================    ============    =========== ================
@@ -404,6 +411,7 @@ class SampleDB():
     def _get_preps_and_libval(self):
         """
         :project/samples/[sample id]/library_prep/[prep id]/[KEY]:
+
         =========================== ============    =========== ================
         KEY                         lims_element    lims_field  description
         =========================== ============    =========== ================
@@ -528,6 +536,7 @@ class InitialQC():
     def set_initialqc_info(self):
         """
         :project/samples/[sample id]/initial_qc/[KEY]: 
+
         =================== ============    ================    ================
         KEY                 lims_element    lims_field          description
         =================== ============    ================    ================
@@ -704,6 +713,7 @@ class Prep():
     def set_prep_info(self, steps, aplication):
         """
         :project/samples/[sample id]/library_prep/[lib prep id]/[KEY]:
+
         =================== ============    =========== ================
         KEY                 lims_element    lims_field  description
         =================== ============    =========== ================
@@ -745,6 +755,7 @@ class Prep():
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
         """
         :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[libval id]/[KEY]:
+
         =============== ============    =========== ================
         KEY             lims_element    lims_field  description
         =============== ============    =========== ================

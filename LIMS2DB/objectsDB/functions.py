@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from datetime import date
-from genologics.lims import *
+#from genologics.lims import *
 
 def comp_dates(a, b):
     """Dates in isoformat. Is a < b?"""

@@ -55,14 +55,14 @@
 <span class="sd">Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">codecs</span>
-<span class="kn">from</span> <span class="nn">genologics.lims</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">genologics.entities</span> <span class="kn">as</span> <span class="nn">gent</span>
-<span class="kn">from</span> <span class="nn">genologics.lims_utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c">#from genologics.lims import *</span>
+<span class="c">#import genologics.entities as gent</span>
+<span class="c">#from genologics.lims_utils import *</span>
 <span class="kn">from</span> <span class="nn">process_categories</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">statusdb.db.utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c">#from statusdb.db.utils import *</span>
 <span class="kn">from</span> <span class="nn">functions</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">couchdb</span>
+<span class="c">#import couchdb</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -103,6 +103,7 @@
 <div class="viewcode-block" id="ProjectDB._get_project_level_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_project_level_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/[KEY]:</span>
+
 <span class="sd">        ============    ============    =========== ================</span>
 <span class="sd">        KEY             lims_element    lims_field  description</span>
 <span class="sd">        ============    ============    =========== ================ </span>
@@ -132,6 +133,7 @@
 <div class="viewcode-block" id="ProjectDB._get_affiliation"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_affiliation">[docs]</a>    <span class="k">def</span> <span class="nf">_get_affiliation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/[KEY]:</span>
+
 <span class="sd">        ============    ============    =========== ================</span>
 <span class="sd">        KEY             lims_element    lims_field  description</span>
 <span class="sd">        ============    ============    =========== ================</span>
@@ -145,6 +147,7 @@
 <div class="viewcode-block" id="ProjectDB._get_project_summary_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_summary_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_project_summary_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/[KEY]:</span>
+
 <span class="sd">        =============== ============    =========== ================</span>
 <span class="sd">        KEY             lims_element    lims_field  description</span>
 <span class="sd">        =============== ============    =========== ================</span>
@@ -160,11 +163,13 @@
 <div class="viewcode-block" id="ProjectDB._get_sequencing_finished"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished">[docs]</a>    <span class="k">def</span> <span class="nf">_get_sequencing_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/[KEY]:</span>
+
 <span class="sd">        =================== ============    =========== ================</span>
 <span class="sd">        KEY                 lims_element    lims_field  description</span>
 <span class="sd">        =================== ============    =========== ================</span>
 <span class="sd">        sequencing_finished Source</span>
 <span class="sd">        =================== ============    =========== ================</span>
+
 <span class="sd">        Finish Date = last seq date if proj closed. Will be removed and </span>
 <span class="sd">        feched from lims.&quot;&quot;&quot;</span>
         <span class="n">seq_fin</span> <span class="o">=</span> <span class="p">[]</span>
@@ -185,6 +190,7 @@
         <span class="c">## Getting sample info</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/[KEY]:</span>
+
 <span class="sd">        ================    ============    =========== ================</span>
 <span class="sd">        KEY                 lims_element    lims_field  description</span>
 <span class="sd">        ================    ============    =========== ================</span>
@@ -353,6 +359,7 @@
 
 
 <span class="sd">        :project/samples/[sample id]/library_prep/[prep id]/sample_run_metrics/[samp run id]/[KEY]:</span>
+
 <span class="sd">        ================================    ============    =========== ================</span>
 <span class="sd">        KEY                                 lims_element    lims_field  description</span>
 <span class="sd">        ================================    ============    =========== ================</span>
@@ -453,6 +460,7 @@
 <div class="viewcode-block" id="SampleDB._get_preps_and_libval"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_preps_and_libval">[docs]</a>    <span class="k">def</span> <span class="nf">_get_preps_and_libval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/samples/[sample id]/library_prep/[prep id]/[KEY]:</span>
+
 <span class="sd">        =========================== ============    =========== ================</span>
 <span class="sd">        KEY                         lims_element    lims_field  description</span>
 <span class="sd">        =========================== ============    =========== ================</span>
@@ -577,6 +585,7 @@
 <div class="viewcode-block" id="InitialQC.set_initialqc_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_initialqc_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/samples/[sample id]/initial_qc/[KEY]: </span>
+
 <span class="sd">        =================== ============    ================    ================</span>
 <span class="sd">        KEY                 lims_element    lims_field          description</span>
 <span class="sd">        =================== ============    ================    ================</span>
@@ -753,6 +762,7 @@
 <div class="viewcode-block" id="Prep.set_prep_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_prep_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">aplication</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/samples/[sample id]/library_prep/[lib prep id]/[KEY]:</span>
+
 <span class="sd">        =================== ============    =========== ================</span>
 <span class="sd">        KEY                 lims_element    lims_field  description</span>
 <span class="sd">        =================== ============    =========== ================</span>
@@ -794,6 +804,7 @@
 <div class="viewcode-block" id="Prep._get_lib_val_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.Prep._get_lib_val_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_lib_val_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agrlibQCsteps</span><span class="p">,</span> <span class="n">libvalstart</span><span class="p">,</span> <span class="n">latest_caliper_id</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[libval id]/[KEY]:</span>
+
 <span class="sd">        =============== ============    =========== ================</span>
 <span class="sd">        KEY             lims_element    lims_field  description</span>
 <span class="sd">        =============== ============    =========== ================</span>
@@ -869,7 +880,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2014, Maya.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>
