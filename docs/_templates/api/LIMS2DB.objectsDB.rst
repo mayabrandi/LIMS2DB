@@ -25,6 +25,7 @@ LIMS2DB.objectsDB.objectsDB module
 
 .. automodule:: LIMS2DB.objectsDB.objectsDB
     :members:
+    :private-memebers:
     :undoc-members:
     :show-inheritance:
 

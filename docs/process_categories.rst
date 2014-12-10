@@ -44,15 +44,15 @@ PREPREPSTART
 Process/processes that can be defined as a start of the library preparation protocol. If the work flow involves two library preparation protocols, such as for exome captue, only the steps of the first protocol should be given here.
 
 
-=== =======================================
+=== =========================================
 ID  process Name
-=== =======================================
+=== =========================================
 304	Ligate 3' adapters (TruSeq small RNA) 1.0
-=== =======================================
+=== =========================================
     
 
 INITALQCFINISHEDLIB
-==================
+====================
 All processes included in the initial qc protocol for finished libraries, except the aggregation step.
 
 
@@ -224,11 +224,11 @@ DEMULTIPLEX
 
 
 
-=== =======================================
+=== ==================================================
 ID  process Name
-=== =======================================
+=== ==================================================
 13	Bcl Conversion & Demultiplexing (Illumina SBS) 4.0
-=== =======================================
+=== ==================================================
     
 
 PREPSTART
