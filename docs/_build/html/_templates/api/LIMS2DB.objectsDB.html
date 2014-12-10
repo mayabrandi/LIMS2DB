@@ -137,6 +137,11 @@ statusdb with lims as the main source of information.</p>
 <dt id="LIMS2DB.objectsDB.objectsDB.InitialQC">
 <em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">InitialQC</tt><big>(</big><em>lims_inst</em>, <em>sample</em>, <em>procs_per_art</em>, <em>application</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#InitialQC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.InitialQC._get_initialqc_processes">
+<tt class="descname">_get_initialqc_processes</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#InitialQC._get_initialqc_processes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC._get_initialqc_processes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info">
 <tt class="descname">set_initialqc_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#InitialQC.set_initialqc_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
@@ -198,6 +203,77 @@ statusdb with lims as the main source of information.</p>
 <dt id="LIMS2DB.objectsDB.objectsDB.Prep">
 <em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">Prep</tt><big>(</big><em>sample_name</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.Prep._get_lib_val_info">
+<tt class="descname">_get_lib_val_info</tt><big>(</big><em>agrlibQCsteps</em>, <em>libvalstart</em>, <em>latest_caliper_id=None</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep._get_lib_val_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep._get_lib_val_info" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[libval id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="8%" />
+<col width="7%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>finish_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>date-run of AGRLIBVAL step</td>
+</tr>
+<tr class="row-odd"><td>start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>First of all LIBVAL steps found for in the artifact history of the output artifact of one of the AGRLIBVAL step</td>
+</tr>
+<tr class="row-even"><td>well_location</td>
+<td>True</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>prep_status</td>
+<td>True</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>reagent_labels</td>
+<td>True</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>initials</td>
+<td>True</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>average_size_bp</td>
+<td>Artifact</td>
+<td>Size (bp)</td>
+<td>udf (&#8216;Size (bp)&#8217;) of the input artifact to the process AGRLIBVAL</td>
+</tr>
+<tr class="row-odd"><td>caliper_image</td>
+<td>True</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info">
 <tt class="descname">set_prep_info</tt><big>(</big><em>steps</em>, <em>aplication</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep.set_prep_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
@@ -261,12 +337,22 @@ statusdb with lims as the main source of information.</p>
 <dd><p>This class takes a list of process type names. Eg 
 &#8216;Aggregate QC (Library Validation) 4.0&#8217; and forms  a dict with info about 
 all processes of the type specified in runs which the project has gon through.</p>
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProcessInfo._get_process_info">
+<tt class="descname">_get_process_info</tt><big>(</big><em>processes</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProcessInfo._get_process_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProcessInfo._get_process_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProcessSpec">
 <em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProcessSpec</tt><big>(</big><em>hist_sort</em>, <em>hist_list</em>, <em>application</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProcessSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProcessSpec" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProcessSpec._set_prep_processes">
+<tt class="descname">_set_prep_processes</tt><big>(</big><em>hist_sort</em>, <em>hist_list</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProcessSpec._set_prep_processes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProcessSpec._set_prep_processes" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</dd></dl>
 
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB">
@@ -274,6 +360,231 @@ all processes of the type specified in runs which the project has gon through.</
 <dd><p>Instances of this class holds a dictionary formatted for building up the 
 project database on statusdb. Source of information come from different lims
 artifacts and processes.</p>
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_affiliation">
+<tt class="descname">_get_affiliation</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_affiliation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_affiliation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="24%" />
+<col width="22%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>affiliation</td>
+<td>Source</td>
+<td>Affiliation</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_open_escalations">
+<tt class="descname">_get_open_escalations</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_open_escalations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_open_escalations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info">
+<tt class="descname">_get_project_level_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_project_level_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="10%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>application</td>
+<td>Project</td>
+<td>Application</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>samples</td>
+<td>Sample</td>
+<td>Name</td>
+<td>Dict of all samples registered for the project. Keys are sample names.</td>
+</tr>
+<tr class="row-even"><td>open_date</td>
+<td>Project</td>
+<td>open-date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>close_date</td>
+<td>Project</td>
+<td>close-date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>contact</td>
+<td>Researcher</td>
+<td>email</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>project_name</td>
+<td>Project</td>
+<td>Name</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>project_id</td>
+<td>Project</td>
+<td>id</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_summary_info">
+<tt class="descname">_get_project_summary_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_project_summary_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_summary_info" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="22%" />
+<col width="20%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>project_summary</td>
+<td>Source</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished">
+<tt class="descname">_get_sequencing_finished</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_sequencing_finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="21%" />
+<col width="19%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>sequencing_finished</td>
+<td>Source</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Finish Date = last seq date if proj closed. Will be removed and 
+feched from lims.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._make_DB_samples">
+<tt class="descname">_make_DB_samples</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._make_DB_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._make_DB_samples" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="7%" />
+<col width="7%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>first_initial_qc</td>
+<td>Source</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>no_of_samples</td>
+<td>Project</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Number of registered samples for the project</td>
+</tr>
+<tr class="row-even"><td>samples</td>
+<td>Sample</td>
+<td>Name</td>
+<td>Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB.build_processes_per_artifact">
 <tt class="descname">build_processes_per_artifact</tt><big>(</big><em>lims</em>, <em>pname</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB.build_processes_per_artifact"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB.build_processes_per_artifact" title="Permalink to this definition">¶</a></dt>
@@ -291,6 +602,250 @@ duplicated projects for a single artifact.</p>
 <dd><p>Instances of this class holds a dictionary formatted for building up the 
 samples in the project database on status db. Source of information come 
 from different lims artifacts and processes.</p>
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_barcode">
+<tt class="descname">_get_barcode</tt><big>(</big><em>reagent_label</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_barcode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_barcode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts barcode from list of artifact.reagent_labels</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_firts_day">
+<tt class="descname">_get_firts_day</tt><big>(</big><em>sample_name</em>, <em>process_list</em>, <em>last_day=False</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_firts_day"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_firts_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>process_list is a list of process type names, sample_name is a 
+sample name :)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_prep_leter">
+<tt class="descname">_get_prep_leter</tt><big>(</big><em>prep_info</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_prep_leter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_prep_leter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get preps and prep names; A,B,C... based on prep dates for 
+sample_name. 
+Output: A dict where keys are prep_art_id and values are prep names.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_preps_and_libval">
+<tt class="descname">_get_preps_and_libval</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_preps_and_libval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_preps_and_libval" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[prep id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="41%" />
+<col width="18%" />
+<col width="17%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>pre_prep_library_validation</td>
+<td>True</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>library_validation</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>prep_status</td>
+<td>True</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>reagent_label</td>
+<td>True</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_info">
+<tt class="descname">_get_sample_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_sample_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_info" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="3%" />
+<col width="3%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>scilife_name</td>
+<td>Sample</td>
+<td>name</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td>well_location</td>
+<td>Fals</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td>details</td>
+<td>Sample</td>
+<td>udf</td>
+<td>All Sample level udfs exept SAMP_UDF_EXCEPTIONS defined in lims_utils.py</td>
+</tr>
+<tr class="row-odd"><td>sample_run_metrics</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf (&#8216;Run ID&#8217;) of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.</td>
+</tr>
+<tr class="row-even"><td>library_prep</td>
+<td>Process</td>
+<td>date-run</td>
+<td>The keys of this dict are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-&gt; prep A, second date -&gt; prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.</td>
+</tr>
+<tr class="row-odd"><td>initial_qc</td>
+<td>Process</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>Dict ...</td>
+</tr>
+<tr class="row-even"><td>first_initial_qc_start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step</td>
+</tr>
+<tr class="row-odd"><td>first_prep_start_date</td>
+<td></td>
+<td></td>
+<td>Fals</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_run_metrics">
+<tt class="descname">_get_sample_run_metrics</tt><big>(</big><em>demux_info</em>, <em>preps</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_sample_run_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_run_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input: demux_info - instance of the ProcessInfo class with 
+DEMULTIPLEX processes as argument
+For each SEQUENCING process run on the sample, this function steps 
+bacward in the artifact history of the input artifact of the SEQUENCING 
+process to find the folowing information:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[prep id]/sample_run_metrics/[samp run id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="7%" />
+<col width="7%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>dillution_and_pooling_start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>date-run of DILSTART step</td>
+</tr>
+<tr class="row-odd"><td>sequencing_start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>ate-run of SEQSTART step</td>
+</tr>
+<tr class="row-even"><td>sequencing_run_QC_finished</td>
+<td>Process</td>
+<td>date-run</td>
+<td>date-run of SEQUENCING step</td>
+</tr>
+<tr class="row-odd"><td>sequencing_finish_date</td>
+<td>Process</td>
+<td>Finish Date</td>
+<td>udf (&#8216;Finish Date&#8217;) of SEQUENCING step</td>
+</tr>
+<tr class="row-even"><td>sample_run_metrics_id</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li></li>
+</ul>
+</td>
+<td>The sample database (statusdb) _id for the sample_run_metrics corresponding to the run, sample, lane in question.</td>
+</tr>
+<tr class="row-odd"><td>dem_qc_flag</td>
+<td>...</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>seq_qc_flag</td>
+<td>...</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_top_level_agrlibval_steps">
+<tt class="descname">_get_top_level_agrlibval_steps</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_top_level_agrlibval_steps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_top_level_agrlibval_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._make_sample_run_id">
+<tt class="descname">_make_sample_run_id</tt><big>(</big><em>seq_art</em>, <em>lims_run</em>, <em>prep</em>, <em>run_type</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._make_sample_run_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._make_sample_run_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._pars_reagent_labels">
+<tt class="descname">_pars_reagent_labels</tt><big>(</big><em>steps</em>, <em>last_libval</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._pars_reagent_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._pars_reagent_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>

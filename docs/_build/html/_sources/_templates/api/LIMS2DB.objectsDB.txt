@@ -27,6 +27,7 @@ LIMS2DB.objectsDB.objectsDB module
     :members:
     :undoc-members:
     :show-inheritance:
+    :private-members:
 
 LIMS2DB.objectsDB.process_categories module
 -------------------------------------------
