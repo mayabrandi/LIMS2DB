@@ -54,6 +54,7 @@ class ProjectDB():
     def _get_project_level_info(self):
         """
         :project/[KEY]:
+
         ============    ============    =========== ================
         KEY             lims_element    lims_field  description
         ============    ============    =========== ================ 
@@ -83,6 +84,7 @@ class ProjectDB():
     def _get_affiliation(self):
         """
         :project/[KEY]:
+
         ============    ============    =========== ================
         KEY             lims_element    lims_field  description
         ============    ============    =========== ================
@@ -97,6 +99,7 @@ class ProjectDB():
     def _get_project_summary_info(self):
         """
         :project/[KEY]:
+
         =============== ============    =========== ================
         KEY             lims_element    lims_field  description
         =============== ============    =========== ================
@@ -113,14 +116,15 @@ class ProjectDB():
     def _get_sequencing_finished(self):
         """
         :project/[KEY]:
+        
         =================== ============    =========== ================
         KEY                 lims_element    lims_field  description
         =================== ============    =========== ================
         sequencing_finished Source
         =================== ============    =========== ================
+
         Finish Date = last seq date if proj closed. Will be removed and 
         feched from lims.""" 
-
         seq_fin = []
         if self.project.close_date and 'samples' in self.obj.keys():
             for samp in self.obj['samples'].values():
@@ -135,10 +139,12 @@ class ProjectDB():
             else:
                 self.obj['sequencing_finished'] = None
 
+
     def _make_DB_samples(self):
         ## Getting sample info
         """
         :project/[KEY]:
+
         ================    ============    =========== ================
         KEY                 lims_element    lims_field  description
         ================    ============    =========== ================
@@ -241,7 +247,8 @@ class SampleDB():
         self._get_sample_info()
 
     def _get_sample_info(self):
-        """:project/samples/[sample id]/[KEY]:
+        """
+        :project/samples/[sample id]/[KEY]:
 
         =========================== ============    =========== ================
         KEY                         lims_element    lims_field  description
@@ -282,7 +289,7 @@ class SampleDB():
 
     def _get_firts_day(self, sample_name ,process_list, last_day = False):
         """process_list is a list of process type names, sample_name is a 
-        sample name :)""" 
+        sample name""" 
 
         arts = self.lims.get_artifacts(sample_name = sample_name, 
                                         process_type = process_list)
@@ -310,10 +317,10 @@ class SampleDB():
         DEMULTIPLEX processes as argument
         For each SEQUENCING process run on the sample, this function steps 
         bacward in the artifact history of the input artifact of the SEQUENCING 
-        process to find the folowing information:
-
+        process to find the folowing information
 
         :project/samples/[sample id]/library_prep/[prep id]/sample_run_metrics/[samp run id]/[KEY]:
+
         ================================    ============    =========== ================
         KEY                                 lims_element    lims_field  description
         ================================    ============    =========== ================
@@ -416,6 +423,7 @@ class SampleDB():
     def _get_preps_and_libval(self):
         """
         :project/samples/[sample id]/library_prep/[prep id]/[KEY]:
+
         =========================== ============    =========== ================
         KEY                         lims_element    lims_field  description
         =========================== ============    =========== ================
@@ -541,6 +549,7 @@ class InitialQC():
     def set_initialqc_info(self):
         """
         :project/samples/[sample id]/initial_qc/[KEY]: 
+
         =================== ============    ================    ================
         KEY                 lims_element    lims_field          description
         =================== ============    ================    ================
@@ -549,8 +558,10 @@ class InitialQC():
         initials            Technician      initials            technician.initials of the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
         initial_qc_status   Artifact        qc-flag             qc-flag of thre input artifact to the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
         caliper_image       Artifact        content-location    content-location of output Result files of the last of all CALIPER steps in the artifact history of the output artifact of one of the AGRINITQC steps
-        =================== ============    ================    ================""" 
-
+        =================== ============    ================    ================
+        
+        """ 
+        
         self._get_initialqc_processes()
         if self.steps:
             if self.steps.initialqstart:
@@ -718,6 +729,7 @@ class Prep():
     def set_prep_info(self, steps, aplication):
         """
         :project/samples/[sample id]/library_prep/[lib prep id]/[KEY]:
+
         =================== ============    =========== ================
         KEY                 lims_element    lims_field  description
         =================== ============    =========== ================
@@ -726,8 +738,9 @@ class Prep():
         prep_id             Process         id          The lims id of a PREPEND step
         workset_setup       False
         pre_prep_start_date Process         date-run    The date-run of process 'Shear DNA (SS XT) 4.0'. Only for 'Exome capture' projects   
-        =================== ============    =========== ================""" 
+        =================== ============    =========== ================
 
+        """
         if aplication in ['Amplicon', 'Finished library']:
             self.id2AB = 'Finished'
         else:
@@ -760,6 +773,7 @@ class Prep():
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
         """
         :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[libval id]/[KEY]:
+
         =============== ============    =========== ================
         KEY             lims_element    lims_field  description
         =============== ============    =========== ================
