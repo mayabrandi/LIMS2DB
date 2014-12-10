@@ -4,16 +4,6 @@ LIMS2DB.objectsDB package
 Submodules
 ----------
 
-LIMS2DB.objectsDB
------------------
-
-.. automodule:: LIMS2DB.objectsDB
-    :members:
-    :undoc-members:
-    :private-members:
-    :show-inheritance:
-
-
 LIMS2DB.objectsDB.functions module
 ----------------------------------
 
@@ -36,7 +26,6 @@ LIMS2DB.objectsDB.objectsDB module
 .. automodule:: LIMS2DB.objectsDB.objectsDB
     :members:
     :undoc-members:
-    :private-members:
     :show-inheritance:
 
 LIMS2DB.objectsDB.process_categories module
