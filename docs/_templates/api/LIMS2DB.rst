@@ -11,10 +11,3 @@ objectsDB module
     :show-inheritance:
 
 
-Module contents
----------------
-
-.. automodule:: LIMS2DB
-    :members:
-    :undoc-members:
-    :show-inheritance:
