@@ -5,24 +5,24 @@ from __future__ import print_function
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
 
-import sys
-import os
-import codecs
-from optparse import OptionParser
-from statusdb.db.utils import *
-from pprint import pprint
-from genologics.lims import *
-from genologics.config import BASEURI, USERNAME, PASSWORD
+#import sys
+#import os
+#import codecs
+#from optparse import OptionParser
+#from statusdb.db.utils import *
+#from pprint import pprint
+#from genologics.lims import *
+#from genologics.config import BASEURI, USERNAME, PASSWORD
 
-import LIMS2DB.objectsDB.objectsDB as DB
-from LIMS2DB.objectsDB.functions import *
+#import LIMS2DB.objectsDB.objectsDB as DB
+#from LIMS2DB.objectsDB.functions import *
 
-import datetime
-import time
-import multiprocessing as mp
-import Queue
-import logging
-import logging.handlers
+#import datetime
+#import time
+#import multiprocessing as mp
+#import Queue
+#import logging
+#import logging.handlers
 
    
 class PSUL():
