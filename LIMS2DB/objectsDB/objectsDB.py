@@ -42,17 +42,17 @@ class ProjectDB():
 
     def _get_open_escalations(self):
         # Need Denis input
-        escalation_ids=[]
-        processes=self.lims.get_processes(projectname=self.project.name)
+        escalation_ids = []
+        processes = self.lims.get_processes(projectname=self.project.name)
         for p in processes:
-            step=gent.Step(self.lims, id=p.id)
+            step = gent.Step(self.lims, id = p.id)
             if step.actions.escalation:
-                samples_escalated=set()
+                samples_escalated = set()
                 if step.actions.escalation['status'] == "Pending":
-                    shortid=step.id.split("-")[1]
+                    shortid = step.id.split("-")[1]
                     escalation_ids.append(shortid)
         if escalation_ids:
-            self.obj['escalations']=escalation_ids
+            self.obj['escalations'] = escalation_ids
 
 
     def _get_project_level_info(self):
@@ -66,9 +66,10 @@ class ProjectDB():
         samples         Sample          Name        Dict of all samples registered for the project. Keys are sample names.
         open_date       Project         open-date   
         close_date      Project         close-date  
-        contact         Researcher      email       
+        contact         Researcher      email       project.researcher.email
         project_name    Project         Name        
-        project_id      Project         id          
+        project_id      Project         id 
+        details         Project         udfs        A dict with all Project level udfs   
         ============    ============    =========== ================"""
 
         self.obj = {'source' : 'lims',
@@ -92,7 +93,7 @@ class ProjectDB():
         ============    ============    =========== ================
         KEY             lims_element    lims_field  description
         ============    ============    =========== ================
-        affiliation     Source          Affiliation
+        affiliation     Lab             Affiliation project.researcher.lab
         ============    ============    =========== ================"""
 
         researcher_udfs = dict(self.project.researcher.lab.udf.items())
@@ -107,7 +108,7 @@ class ProjectDB():
         =============== ============    =========== ================
         KEY             lims_element    lims_field  description
         =============== ============    =========== ================
-        project_summary Source
+        project_summary Process         udfs        A dict with all Process level udfs fetched from the process of type SUMMARY that has been run on the project.
         =============== ============    =========== ================"""
 
         project_summary = self.lims.get_processes(projectname =
@@ -124,12 +125,10 @@ class ProjectDB():
         =================== ============    =========== ================
         KEY                 lims_element    lims_field  description
         =================== ============    =========== ================
-        sequencing_finished Source
-        =================== ============    =========== ================
+        sequencing_finished Process         Finish Date Last sequencing_finish_date where sequencing_finish_date is the 'Finish Date' udf of a SEQUENCING step
+        =================== ============    =========== ================"""
 
-        Finish Date = last seq date if proj closed. Will be removed and 
-        feched from lims."""
-
+        ##   sequencing_finishe should be betched from some other udf in the future
         seq_fin = []
         if self.project.close_date and 'samples' in self.obj.keys():
             for samp in self.obj['samples'].values():
@@ -152,7 +151,7 @@ class ProjectDB():
         ================    ============    =========== ================
         KEY                 lims_element    lims_field  description
         ================    ============    =========== ================
-        first_initial_qc    Source
+        first_initial_qc    Process         date-run    First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps run on any sample in inte project.
         no_of_samples       Project         -           Number of registered samples for the project
         samples             Sample          Name        Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.
         ================    ============    =========== ================"""
@@ -260,8 +259,7 @@ class SampleDB():
         =========================== ============    =========== ================
         scilife_name                Sample          name        ..
         well_location               Fals            ..          ..
-        details                     Sample          udf         All Sample level udfs exept SAMP_UDF_EXCEPTIONS defined in lims_utils.py
-        sample_run_metrics          -               -           Keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf ('Run ID') of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.
+        details                     Sample          udf         All Sample level udfs
         library_prep                Process         date-run    The keys of this dict are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-> prep A, second date -> prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.
         initial_qc                  Process         -           Dict ...
         first_initial_qc_start_date Process         date-run    If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step
