@@ -533,7 +533,7 @@ class SampleDB():
         return topLevel_AgrLibQC
 
 class InitialQC():
-    """"""
+    """khkhkjk"""
     def __init__(self, lims_inst ,sample, procs_per_art, application):
         self.lims = lims_inst
         self.processes_per_artifact = procs_per_art
@@ -592,6 +592,7 @@ class InitialQC():
 
 
 class ProcessSpec():
+    """khkhkjk"""
     def __init__(self, hist_sort, hist_list, application):
         self.application = application
         self.init_qc = INITALQCFINISHEDLIB if application in FINLIB else INITALQC
@@ -712,6 +713,7 @@ class ProcessSpec():
         self.seqstart = get_last_first(self.seqstarts, last = False)
 
 class Prep():
+    """khkhkjk"""
     def __init__(self, sample_name):
         self.sample_name=sample_name
         self.prep_info = {
