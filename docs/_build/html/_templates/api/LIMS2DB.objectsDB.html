@@ -305,10 +305,10 @@ artifacts and processes.</p>
 </table>
 <table border="1" class="docutils">
 <colgroup>
-<col width="24%" />
-<col width="24%" />
-<col width="22%" />
-<col width="31%" />
+<col width="21%" />
+<col width="21%" />
+<col width="19%" />
+<col width="39%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">KEY</th>
@@ -319,9 +319,9 @@ artifacts and processes.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>affiliation</td>
-<td>Source</td>
+<td>Lab</td>
 <td>Affiliation</td>
-<td>&nbsp;</td>
+<td>project.researcher.lab</td>
 </tr>
 </tbody>
 </table>
@@ -376,7 +376,7 @@ artifacts and processes.</p>
 <tr class="row-even"><td>contact</td>
 <td>Researcher</td>
 <td>email</td>
-<td>&nbsp;</td>
+<td>project.researcher.email</td>
 </tr>
 <tr class="row-odd"><td>project_name</td>
 <td>Project</td>
@@ -387,6 +387,11 @@ artifacts and processes.</p>
 <td>Project</td>
 <td>id</td>
 <td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>details</td>
+<td>Project</td>
+<td>udfs</td>
+<td>A dict with all Project level udfs</td>
 </tr>
 </tbody>
 </table>
@@ -405,10 +410,10 @@ artifacts and processes.</p>
 </table>
 <table border="1" class="docutils">
 <colgroup>
-<col width="28%" />
-<col width="22%" />
-<col width="20%" />
-<col width="30%" />
+<col width="10%" />
+<col width="8%" />
+<col width="7%" />
+<col width="74%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">KEY</th>
@@ -419,9 +424,9 @@ artifacts and processes.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>project_summary</td>
-<td>Source</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>Process</td>
+<td>udfs</td>
+<td>A dict with all Process level udfs fetched from the process of type SUMMARY that has been run on the project.</td>
 </tr>
 </tbody>
 </table>
@@ -440,10 +445,10 @@ artifacts and processes.</p>
 </table>
 <table border="1" class="docutils">
 <colgroup>
-<col width="33%" />
-<col width="21%" />
-<col width="19%" />
-<col width="28%" />
+<col width="13%" />
+<col width="8%" />
+<col width="8%" />
+<col width="71%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">KEY</th>
@@ -454,14 +459,12 @@ artifacts and processes.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>sequencing_finished</td>
-<td>Source</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>Process</td>
+<td>Finish Date</td>
+<td>Last sequencing_finish_date where sequencing_finish_date is the &#8216;Finish Date&#8217; udf of a SEQUENCING step</td>
 </tr>
 </tbody>
 </table>
-<p>Finish Date = last seq date if proj closed. Will be removed and 
-feched from lims.</p>
 </dd></dl>
 
 <dl class="method">
@@ -491,9 +494,9 @@ feched from lims.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>first_initial_qc</td>
-<td>Source</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>Process</td>
+<td>date-run</td>
+<td>First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps run on any sample in inte project.</td>
 </tr>
 <tr class="row-odd"><td>no_of_samples</td>
 <td>Project</td>
@@ -641,25 +644,14 @@ Output: A dict where keys are prep_art_id and values are prep names.</p>
 <tr class="row-even"><td>details</td>
 <td>Sample</td>
 <td>udf</td>
-<td>All Sample level udfs exept SAMP_UDF_EXCEPTIONS defined in lims_utils.py</td>
+<td>All Sample level udfs</td>
 </tr>
-<tr class="row-odd"><td>sample_run_metrics</td>
-<td><ul class="first last simple">
-<li></li>
-</ul>
-</td>
-<td><ul class="first last simple">
-<li></li>
-</ul>
-</td>
-<td>Keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf (&#8216;Run ID&#8217;) of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.</td>
-</tr>
-<tr class="row-even"><td>library_prep</td>
+<tr class="row-odd"><td>library_prep</td>
 <td>Process</td>
 <td>date-run</td>
 <td>The keys of this dict are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-&gt; prep A, second date -&gt; prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.</td>
 </tr>
-<tr class="row-odd"><td>initial_qc</td>
+<tr class="row-even"><td>initial_qc</td>
 <td>Process</td>
 <td><ul class="first last simple">
 <li></li>
@@ -667,12 +659,12 @@ Output: A dict where keys are prep_art_id and values are prep names.</p>
 </td>
 <td>Dict ...</td>
 </tr>
-<tr class="row-even"><td>first_initial_qc_start_date</td>
+<tr class="row-odd"><td>first_initial_qc_start_date</td>
 <td>Process</td>
 <td>date-run</td>
 <td>If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step</td>
 </tr>
-<tr class="row-odd"><td>first_prep_start_date</td>
+<tr class="row-even"><td>first_prep_start_date</td>
 <td></td>
 <td></td>
 <td>Fals</td>
