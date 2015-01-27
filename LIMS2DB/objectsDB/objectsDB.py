@@ -5,18 +5,18 @@ statusdb with lims as the main source of information.
 
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
-#import codecs
-#from genologics.lims import *
-#import genologics.entities as gent
-#from genologics.lims_utils import *
+import codecs
+from genologics.lims import *
+import genologics.entities as gent
+from genologics.lims_utils import *
 from process_categories import *
-#from statusdb.db.utils import *
+from statusdb.db.utils import *
 from functions import *
 import os
-#import couchdb
-#import time
-#from datetime import date
-#import logging
+import couchdb
+import time
+from datetime import date
+import logging
 
 class ProjectDB():
     """Instances of this class holds a dictionary formatted for building up the 
