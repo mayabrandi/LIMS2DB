@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>LIMS2DB.objectsDB.functions &mdash; PSUL 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="PSUL 1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../index.html">PSUL 1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for LIMS2DB.objectsDB.functions</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+
+<span class="c">#from datetime import date</span>
+<span class="c">#from genologics.lims import *</span>
+
+<div class="viewcode-block" id="comp_dates"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.comp_dates">[docs]</a><span class="k">def</span> <span class="nf">comp_dates</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Dates in isoformat. Is a &lt; b?&quot;&quot;&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">)</span> <span class="p">))</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+    <span class="k">if</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="delete_Nones"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.delete_Nones">[docs]</a><span class="k">def</span> <span class="nf">delete_Nones</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="s">&quot;Deletes None type items from dict.&quot;</span>
+    <span class="n">new_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span><span class="o">==</span><span class="s">&#39;null&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">val</span><span class="o">==</span><span class="s">&#39;2000-10-10&#39;</span> <span class="ow">or</span> <span class="n">val</span><span class="o">==</span><span class="s">&#39;3000-10-10&#39;</span><span class="p">):</span>
+                        <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">if</span> <span class="n">new_dict</span> <span class="o">!=</span> <span class="p">{}:</span>
+        <span class="k">return</span> <span class="n">new_dict</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="udf_dict"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.udf_dict">[docs]</a><span class="k">def</span> <span class="nf">udf_dict</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">exeptions</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">exclude</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Takes a lims element and tertuns a dictionary of its udfs, where the udf </span>
+<span class="sd">    names are trensformed to statusdb keys (underscore and lowercase).</span>
+<span class="sd">    </span>
+<span class="sd">    exeptions and exclude = False - will return a dict with only the exeptions</span>
+<span class="sd">    exeptions and exclude = True - will return a dict without the exeptions  </span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        element     lims element (Sample, Artifact, Process, Project...)</span>
+<span class="sd">        exeptions   list of exception udf keys (underscore and lowercase)</span>
+<span class="sd">        exlude      (True/False)&quot;&quot;&quot;</span>
+
+    <span class="n">udf_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">udf</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span> <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span> <span class="k">pass</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">exeptions</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">exclude</span><span class="p">:</span>
+            <span class="n">udf_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">exeptions</span> <span class="ow">and</span> <span class="n">exclude</span><span class="p">:</span>
+            <span class="n">udf_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="n">udf_dict</span>
+</div>
+<div class="viewcode-block" id="get_last_first"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.get_last_first">[docs]</a><span class="k">def</span> <span class="nf">get_last_first</span><span class="p">(</span><span class="n">process_list</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="n">returned_process</span><span class="o">=</span><span class="bp">None</span>
+    <span class="k">for</span> <span class="n">pro</span> <span class="ow">in</span> <span class="n">process_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">returned_process</span><span class="p">)</span> \
+        <span class="ow">or</span> <span class="p">(</span><span class="n">pro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;date&#39;</span><span class="p">)</span><span class="o">&gt;</span><span class="n">returned_process</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;date&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">last</span><span class="p">)</span> \
+        <span class="ow">or</span> <span class="p">(</span><span class="n">pro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;date&#39;</span><span class="p">)</span><span class="o">&lt;</span><span class="n">returned_process</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;date&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">last</span><span class="p">):</span>
+            <span class="n">returned_process</span><span class="o">=</span> <span class="n">pro</span>
+    <span class="k">return</span> <span class="n">returned_process</span>
+</div>
+<div class="viewcode-block" id="get_caliper_img"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.functions.get_caliper_img">[docs]</a><span class="k">def</span> <span class="nf">get_caliper_img</span><span class="p">(</span><span class="n">sample_name</span><span class="p">,</span> <span class="n">caliper_id</span><span class="p">,</span> <span class="n">lims</span><span class="p">):</span>
+    <span class="n">caliper_image</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">last_caliper</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span><span class="nb">id</span> <span class="o">=</span> <span class="n">caliper_id</span><span class="p">)</span>
+        <span class="n">outarts</span> <span class="o">=</span> <span class="n">last_caliper</span><span class="o">.</span><span class="n">all_outputs</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">out</span> <span class="ow">in</span> <span class="n">outarts</span><span class="p">:</span>
+            <span class="n">s_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">samples</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">sample_name</span> <span class="ow">in</span> <span class="n">s_names</span> <span class="ow">and</span> <span class="n">out</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;ResultFile&quot;</span><span class="p">):</span>
+                <span class="n">files</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">files</span>
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="s">&quot;.png&quot;</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">content_location</span><span class="p">:</span>
+                        <span class="n">caliper_image</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">content_location</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="c">#Should happen when no caliper processes are found</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">caliper_image</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../index.html">PSUL 1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Maya.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
