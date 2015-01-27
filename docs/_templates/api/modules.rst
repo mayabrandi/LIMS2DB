@@ -1,7 +1,7 @@
-LIMS2DB
-=======
+objectsDB
+=========
 
 .. toctree::
    :maxdepth: 4
 
-   LIMS2DB
+   objectsDB
