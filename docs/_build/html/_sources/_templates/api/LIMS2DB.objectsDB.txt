@@ -26,6 +26,7 @@ LIMS2DB.objectsDB.objectsDB module
 .. automodule:: LIMS2DB.objectsDB.objectsDB
     :members:
     :undoc-members:
+    :private-members:
     :show-inheritance:
 
 LIMS2DB.objectsDB.process_categories module
