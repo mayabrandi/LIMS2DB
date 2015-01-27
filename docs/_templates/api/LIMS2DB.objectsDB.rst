@@ -1,9 +1,6 @@
 LIMS2DB.objectsDB package
 =========================
 
-Submodules
-----------
-
 LIMS2DB.objectsDB.objectsDB module
 ----------------------------------
 
@@ -12,10 +9,3 @@ LIMS2DB.objectsDB.objectsDB module
     :private-members:
     :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: LIMS2DB.objectsDB
-    :members:
-    :undoc-members:
-    :show-inheritance:
