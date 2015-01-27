@@ -136,20 +136,124 @@ statusdb with lims as the main source of information.</p>
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.InitialQC">
 <em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">InitialQC</tt><big>(</big><em>lims_inst</em>, <em>sample</em>, <em>procs_per_art</em>, <em>application</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#InitialQC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<dd><p>khkhkjk</p>
+<dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info">
 <tt class="descname">set_initialqc_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#InitialQC.set_initialqc_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/initial_qc/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="6%" />
+<col width="7%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps found for in the artifact history of the output artifact of one of the AGRINITQC stepst</td>
+</tr>
+<tr class="row-odd"><td>finish_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>One of the AGRINITQC steps</td>
+</tr>
+<tr class="row-even"><td>initials</td>
+<td>Technician</td>
+<td>initials</td>
+<td>technician.initials of the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps</td>
+</tr>
+<tr class="row-odd"><td>initial_qc_status</td>
+<td>Artifact</td>
+<td>qc-flag</td>
+<td>qc-flag of thre input artifact to the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps</td>
+</tr>
+<tr class="row-even"><td>caliper_image</td>
+<td>Artifact</td>
+<td>content-location</td>
+<td>content-location of output Result files of the last of all CALIPER steps in the artifact history of the output artifact of one of the AGRINITQC steps</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.Prep">
 <em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">Prep</tt><big>(</big><em>sample_name</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<dd><p>khkhkjk</p>
+<dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info">
 <tt class="descname">set_prep_info</tt><big>(</big><em>steps</em>, <em>aplication</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep.set_prep_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[lib prep id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="10%" />
+<col width="9%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>prep_start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>The date-run of a PREPSTART step</td>
+</tr>
+<tr class="row-odd"><td>prep_finished_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>The date-run of a PREPEND step</td>
+</tr>
+<tr class="row-even"><td>prep_id</td>
+<td>Process</td>
+<td>id</td>
+<td>The lims id of a PREPEND step</td>
+</tr>
+<tr class="row-odd"><td>workset_setup</td>
+<td>False</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>pre_prep_start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>The date-run of process &#8216;Shear DNA (SS XT) 4.0&#8217;. Only for &#8216;Exome capture&#8217; projects</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -159,29 +263,13 @@ statusdb with lims as the main source of information.</p>
 <dd><p>This class takes a list of process type names. Eg 
 &#8216;Aggregate QC (Library Validation) 4.0&#8217; and forms  a dict with info about 
 all processes of the type specified in runs which the project has gon through.</p>
-<dl class="docutils">
-<dt>info = {24-8460:{ </dt>
-<dd><blockquote class="first">
-<div><p>&#8216;start_date&#8217;
-&#8216;samples&#8217;:{&#8216;P424_111&#8217;:{in_art_id1 : [in_art1, out_art1],</p>
-<blockquote>
-<div><blockquote>
-<div>in_art_id2: [in_art2, out_art2]},</div></blockquote>
-<dl class="docutils">
-<dt>&#8216;P424_115&#8217;: ...},</dt>
-<dd>...},</dd>
-</dl>
-</div></blockquote>
-</div></blockquote>
-<p class="last">&#8216;24-8480&#8217;:...}</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProcessSpec">
 <em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProcessSpec</tt><big>(</big><em>hist_sort</em>, <em>hist_list</em>, <em>application</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProcessSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProcessSpec" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>khkhkjk</p>
+</dd></dl>
 
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB">

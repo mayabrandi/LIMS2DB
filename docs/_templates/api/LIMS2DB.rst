@@ -1,15 +1,17 @@
 LIMS2DB package
 ===============
 
+Subpackages
+-----------
+
 .. toctree::
 
+    LIMS2DB.objectsDB
 
-objectsDB module
------------------
+Module contents
+---------------
 
-.. automodule:: LIMS2DB.objectsDB.objectsDB
+.. automodule:: LIMS2DB
     :members:
-    :private-members:
+    :undoc-members:
     :show-inheritance:
-
-

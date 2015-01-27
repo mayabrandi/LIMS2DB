@@ -54,18 +54,18 @@
 
 <span class="sd">Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">codecs</span>
-<span class="kn">from</span> <span class="nn">genologics.lims</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">genologics.entities</span> <span class="kn">as</span> <span class="nn">gent</span>
-<span class="kn">from</span> <span class="nn">genologics.lims_utils</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">process_categories</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">statusdb.db.utils</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">functions</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">couchdb</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+<span class="c">#import codecs</span>
+<span class="c">#from genologics.lims import *</span>
+<span class="c">#import genologics.entities as gent</span>
+<span class="c">#from genologics.lims_utils import *</span>
+<span class="c">#from process_categories import *</span>
+<span class="c">#from statusdb.db.utils import *</span>
+<span class="c">#from functions import *</span>
+<span class="c">#import os</span>
+<span class="c">#import couchdb</span>
+<span class="c">#import time</span>
+<span class="c">#from datetime import date</span>
+<span class="c">#import logging</span>
 
 <div class="viewcode-block" id="ProjectDB"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB">[docs]</a><span class="k">class</span> <span class="nc">ProjectDB</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Instances of this class holds a dictionary formatted for building up the </span>
@@ -90,6 +90,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_open_escalations</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_get_open_escalations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># Need Denis input</span>
         <span class="n">escalation_ids</span><span class="o">=</span><span class="p">[]</span>
         <span class="n">processes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="o">.</span><span class="n">get_processes</span><span class="p">(</span><span class="n">projectname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
@@ -104,6 +105,21 @@
 
 
     <span class="k">def</span> <span class="nf">_get_project_level_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :project/[KEY]:</span>
+
+<span class="sd">        ============    ============    =========== ================</span>
+<span class="sd">        KEY             lims_element    lims_field  description</span>
+<span class="sd">        ============    ============    =========== ================ </span>
+<span class="sd">        application     Project         Application </span>
+<span class="sd">        samples         Sample          Name        Dict of all samples registered for the project. Keys are sample names.</span>
+<span class="sd">        open_date       Project         open-date   </span>
+<span class="sd">        close_date      Project         close-date  </span>
+<span class="sd">        contact         Researcher      email       </span>
+<span class="sd">        project_name    Project         Name        </span>
+<span class="sd">        project_id      Project         id          </span>
+<span class="sd">        ============    ============    =========== ================&quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;source&#39;</span> <span class="p">:</span> <span class="s">&#39;lims&#39;</span><span class="p">,</span>
                         <span class="s">&#39;application&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
                         <span class="s">&#39;samples&#39;</span><span class="p">:{},</span>
@@ -119,12 +135,30 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_project_summary_info</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_get_affiliation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :project/[KEY]:</span>
+
+<span class="sd">        ============    ============    =========== ================</span>
+<span class="sd">        KEY             lims_element    lims_field  description</span>
+<span class="sd">        ============    ============    =========== ================</span>
+<span class="sd">        affiliation     Source          Affiliation</span>
+<span class="sd">        ============    ============    =========== ================&quot;&quot;&quot;</span>
+
         <span class="n">researcher_udfs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">researcher</span><span class="o">.</span><span class="n">lab</span><span class="o">.</span><span class="n">udf</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">researcher_udfs</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;Affiliation&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;affiliation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">researcher_udfs</span><span class="p">[</span><span class="s">&#39;Affiliation&#39;</span><span class="p">]</span>
 
 
     <span class="k">def</span> <span class="nf">_get_project_summary_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :project/[KEY]:</span>
+
+<span class="sd">        =============== ============    =========== ================</span>
+<span class="sd">        KEY             lims_element    lims_field  description</span>
+<span class="sd">        =============== ============    =========== ================</span>
+<span class="sd">        project_summary Source</span>
+<span class="sd">        =============== ============    =========== ================&quot;&quot;&quot;</span>
+
         <span class="n">project_summary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="o">.</span><span class="n">get_processes</span><span class="p">(</span><span class="n">projectname</span> <span class="o">=</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">SUMMARY</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">project_summary</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -133,8 +167,18 @@
             <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;Warning. project summary process run more than once&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_sequencing_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Finish Date = last seq date if proj closed. Will be removed and </span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :project/[KEY]:</span>
+
+<span class="sd">        =================== ============    =========== ================</span>
+<span class="sd">        KEY                 lims_element    lims_field  description</span>
+<span class="sd">        =================== ============    =========== ================</span>
+<span class="sd">        sequencing_finished Source</span>
+<span class="sd">        =================== ============    =========== ================</span>
+
+<span class="sd">        Finish Date = last seq date if proj closed. Will be removed and </span>
 <span class="sd">        feched from lims.&quot;&quot;&quot;</span>
+
         <span class="n">seq_fin</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">close_date</span> <span class="ow">and</span> <span class="s">&#39;samples&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">for</span> <span class="n">samp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
@@ -151,6 +195,17 @@
 
     <span class="k">def</span> <span class="nf">_make_DB_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c">## Getting sample info</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :project/[KEY]:</span>
+
+<span class="sd">        ================    ============    =========== ================</span>
+<span class="sd">        KEY                 lims_element    lims_field  description</span>
+<span class="sd">        ================    ============    =========== ================</span>
+<span class="sd">        first_initial_qc    Source</span>
+<span class="sd">        no_of_samples       Project         -           Number of registered samples for the project</span>
+<span class="sd">        samples             Sample          Name        Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.</span>
+<span class="sd">        ================    ============    =========== ================&quot;&quot;&quot;</span>
+
         <span class="n">samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="n">projectlimsid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;no_of_samples&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
         <span class="n">runinfo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">demux_procs</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq_procs</span> 
@@ -184,6 +239,7 @@
 <span class="sd">        present should be included. The values of the dictionary is sets, to avoid</span>
 <span class="sd">        duplicated projects for a single artifact.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">processes</span> <span class="o">=</span> <span class="n">lims</span><span class="o">.</span><span class="n">get_processes</span><span class="p">(</span><span class="n">projectname</span> <span class="o">=</span> <span class="n">pname</span><span class="p">)</span>
         <span class="n">processes_per_artifact</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">process</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
@@ -199,15 +255,8 @@
 <div class="viewcode-block" id="ProcessInfo"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProcessInfo">[docs]</a><span class="k">class</span> <span class="nc">ProcessInfo</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;This class takes a list of process type names. Eg </span>
 <span class="sd">    &#39;Aggregate QC (Library Validation) 4.0&#39; and forms  a dict with info about </span>
-<span class="sd">    all processes of the type specified in runs which the project has gon through.</span>
+<span class="sd">    all processes of the type specified in runs which the project has gon through.&quot;&quot;&quot;</span> 
 
-<span class="sd">    info = {24-8460:{ </span>
-<span class="sd">              &#39;start_date&#39;</span>
-<span class="sd">              &#39;samples&#39;:{&#39;P424_111&#39;:{in_art_id1 : [in_art1, out_art1],</span>
-<span class="sd">                         in_art_id2: [in_art2, out_art2]},</span>
-<span class="sd">                     &#39;P424_115&#39;: ...},</span>
-<span class="sd">                       ...},</span>
-<span class="sd">        &#39;24-8480&#39;:...}&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lims_instance</span><span class="p">,</span> <span class="n">processes</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lims</span> <span class="o">=</span> <span class="n">lims_instance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_process_info</span><span class="p">(</span><span class="n">processes</span><span class="p">)</span>
@@ -236,6 +285,7 @@
     <span class="sd">&quot;&quot;&quot;Instances of this class holds a dictionary formatted for building up the </span>
 <span class="sd">    samples in the project database on status db. Source of information come </span>
 <span class="sd">    from different lims artifacts and processes.&quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lims_instance</span> <span class="p">,</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">project_name</span><span class="p">,</span> <span class="n">samp_db</span><span class="p">,</span>
                         <span class="n">application</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">AgrLibQCs</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">run_info</span> <span class="o">=</span> <span class="p">[],</span>
                         <span class="n">processes_per_artifact</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span> 
@@ -251,6 +301,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_sample_info</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_get_sample_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :project/samples/[sample id]/[KEY]:</span>
+
+<span class="sd">        =========================== ============    =========== ================</span>
+<span class="sd">        KEY                         lims_element    lims_field  description</span>
+<span class="sd">        =========================== ============    =========== ================</span>
+<span class="sd">        scilife_name                Sample          name        ..</span>
+<span class="sd">        well_location               Fals            ..          ..</span>
+<span class="sd">        details                     Sample          udf         All Sample level udfs exept SAMP_UDF_EXCEPTIONS defined in lims_utils.py</span>
+<span class="sd">        sample_run_metrics          -               -           Keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf (&#39;Run ID&#39;) of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.</span>
+<span class="sd">        library_prep                Process         date-run    The keys of this dict are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-&gt; prep A, second date -&gt; prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.</span>
+<span class="sd">        initial_qc                  Process         -           Dict ...</span>
+<span class="sd">        first_initial_qc_start_date Process         date-run    If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step</span>
+<span class="sd">        first_prep_start_date       ..              ..          Fals</span>
+<span class="sd">        =========================== ============    =========== ================&quot;&quot;&quot;</span> 
+
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;scilife_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;well_location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lims_sample</span><span class="o">.</span><span class="n">artifact</span><span class="o">.</span><span class="n">location</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;details&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">udf_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lims_sample</span><span class="p">,</span> <span class="n">SAMP_UDF_EXCEPTIONS</span><span class="p">)</span>
@@ -277,7 +343,8 @@
 
     <span class="k">def</span> <span class="nf">_get_firts_day</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample_name</span> <span class="p">,</span><span class="n">process_list</span><span class="p">,</span> <span class="n">last_day</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;process_list is a list of process type names, sample_name is a </span>
-<span class="sd">        sample name :)&quot;&quot;&quot;</span>
+<span class="sd">        sample name&quot;&quot;&quot;</span>
+
         <span class="n">arts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lims</span><span class="o">.</span><span class="n">get_artifacts</span><span class="p">(</span><span class="n">sample_name</span> <span class="o">=</span> <span class="n">sample_name</span><span class="p">,</span> 
                                         <span class="n">process_type</span> <span class="o">=</span> <span class="n">process_list</span><span class="p">)</span>
         <span class="n">index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">last_day</span> <span class="k">else</span> <span class="mi">0</span> 
@@ -289,6 +356,7 @@
 
     <span class="k">def</span> <span class="nf">_get_barcode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reagent_label</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Extracts barcode from list of artifact.reagent_labels&quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="n">reagent_label</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">index</span> <span class="o">=</span> <span class="n">reagent_label</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;(&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&#39;)&#39;</span><span class="p">)</span>
@@ -303,25 +371,22 @@
 <span class="sd">        DEMULTIPLEX processes as argument</span>
 <span class="sd">        For each SEQUENCING process run on the sample, this function steps </span>
 <span class="sd">        bacward in the artifact history of the input artifact of the SEQUENCING </span>
-<span class="sd">        process to find the folowing information:</span>
+<span class="sd">        process to find the folowing information</span>
 
-<span class="sd">        dillution_and_pooling_start_date  date-run of DILSTART step</span>
-<span class="sd">        sequencing_start_date             date-run of SEQSTART step</span>
-<span class="sd">        sequencing_run_QC_finished        date-run of SEQUENCING step</span>
-<span class="sd">        sequencing_finish_date            udf (&#39;Finish Date&#39;) of SEQUENCING step</span>
-<span class="sd">        sample_run_metrics_id             The sample database (statusdb) _id for</span>
-<span class="sd">                                          the sample_run_metrics corresponding </span>
-<span class="sd">                                           to the run, sample, lane in question.</span>
-<span class="sd">        samp_run_met_id = lane_date_fcid_barcode            </span>
-<span class="sd">            date and fcid:  from udf (&#39;Run ID&#39;) of the SEQUENCING step. </span>
-<span class="sd">            barcode:        The reagent-lables of the input artifact of process </span>
-<span class="sd">                            type AGRLIBVAL</span>
-<span class="sd">            lane:           from the location of the input artifact to the </span>
-<span class="sd">                            SEQUENCING step    </span>
-<span class="sd">        preps are defined as the id of the PREPSTART step in the artifact </span>
-<span class="sd">        history. If appllication== Finished library, prep is defined as </span>
-<span class="sd">        &quot;Finnished&quot;. These keys are used to connect the seqeuncing steps to the </span>
-<span class="sd">        correct preps.&quot;&quot;&quot;</span>
+<span class="sd">        :project/samples/[sample id]/library_prep/[prep id]/sample_run_metrics/[samp run id]/[KEY]:</span>
+
+<span class="sd">        ================================    ============    =========== ================</span>
+<span class="sd">        KEY                                 lims_element    lims_field  description</span>
+<span class="sd">        ================================    ============    =========== ================</span>
+<span class="sd">        dillution_and_pooling_start_date    Process         date-run    date-run of DILSTART step</span>
+<span class="sd">        sequencing_start_date               Process         date-run    ate-run of SEQSTART step</span>
+<span class="sd">        sequencing_run_QC_finished          Process         date-run    date-run of SEQUENCING step</span>
+<span class="sd">        sequencing_finish_date              Process         Finish Date udf (&#39;Finish Date&#39;) of SEQUENCING step</span>
+<span class="sd">        sample_run_metrics_id               -               -           The sample database (statusdb) _id for the sample_run_metrics corresponding to the run, sample, lane in question.</span>
+<span class="sd">        dem_qc_flag                         ...</span>
+<span class="sd">        seq_qc_flag                         ...</span>
+<span class="sd">        ================================    ============    =========== ================&quot;&quot;&quot;</span> 
+
         <span class="n">sample_runs</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">demux_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">run</span><span class="p">[</span><span class="s">&#39;samples&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
@@ -399,6 +464,7 @@
         <span class="sd">&quot;&quot;&quot;Get preps and prep names; A,B,C... based on prep dates for </span>
 <span class="sd">        sample_name. </span>
 <span class="sd">        Output: A dict where keys are prep_art_id and values are prep names.&quot;&quot;&quot;</span>
+
         <span class="n">dates</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">prep_info_new</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">preps_keys</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">chr</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">prep_info</span><span class="p">)))</span>
@@ -415,7 +481,19 @@
         <span class="k">return</span> <span class="n">prep_info_new</span>
 
     <span class="k">def</span> <span class="nf">_get_preps_and_libval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :project/samples/[sample id]/library_prep/[prep id]/[KEY]:</span>
+
+<span class="sd">        =========================== ============    =========== ================</span>
+<span class="sd">        KEY                         lims_element    lims_field  description</span>
+<span class="sd">        =========================== ============    =========== ================</span>
+<span class="sd">        pre_prep_library_validation True</span>
+<span class="sd">        library_validation          </span>
+<span class="sd">        prep_status                 True</span>
+<span class="sd">        reagent_label               True</span>
+<span class="sd">        =========================== ============    =========== ================</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">top_level_agrlibval_steps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_top_level_agrlibval_steps</span><span class="p">()</span>
         <span class="n">preps</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">very_last_libval_key</span> <span class="o">=</span> <span class="p">{}</span>
@@ -504,7 +582,7 @@
         <span class="k">return</span> <span class="n">topLevel_AgrLibQC</span>
 </div>
 <div class="viewcode-block" id="InitialQC"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.InitialQC">[docs]</a><span class="k">class</span> <span class="nc">InitialQC</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;khkhkjk&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lims_inst</span> <span class="p">,</span><span class="n">sample</span><span class="p">,</span> <span class="n">procs_per_art</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lims</span> <span class="o">=</span> <span class="n">lims_inst</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">processes_per_artifact</span> <span class="o">=</span> <span class="n">procs_per_art</span>
@@ -529,6 +607,20 @@
                                                                <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
 
 <div class="viewcode-block" id="InitialQC.set_initialqc_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_initialqc_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :project/samples/[sample id]/initial_qc/[KEY]: </span>
+
+<span class="sd">        =================== ============    ================    ================</span>
+<span class="sd">        KEY                 lims_element    lims_field          description</span>
+<span class="sd">        =================== ============    ================    ================</span>
+<span class="sd">        start_date          Process         date-run            First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps found for in the artifact history of the output artifact of one of the AGRINITQC stepst </span>
+<span class="sd">        finish_date         Process         date-run            One of the AGRINITQC steps</span>
+<span class="sd">        initials            Technician      initials            technician.initials of the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps</span>
+<span class="sd">        initial_qc_status   Artifact        qc-flag             qc-flag of thre input artifact to the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps</span>
+<span class="sd">        caliper_image       Artifact        content-location    content-location of output Result files of the last of all CALIPER steps in the artifact history of the output artifact of one of the AGRINITQC steps</span>
+<span class="sd">        =================== ============    ================    ================</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_initialqc_processes</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">initialqstart</span><span class="p">:</span>
@@ -549,6 +641,7 @@
 
 </div></div>
 <div class="viewcode-block" id="ProcessSpec"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProcessSpec">[docs]</a><span class="k">class</span> <span class="nc">ProcessSpec</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;khkhkjk&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hist_sort</span><span class="p">,</span> <span class="n">hist_list</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">application</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">init_qc</span> <span class="o">=</span> <span class="n">INITALQCFINISHEDLIB</span> <span class="k">if</span> <span class="n">application</span> <span class="ow">in</span> <span class="n">FINLIB</span> <span class="k">else</span> <span class="n">INITALQC</span>
@@ -669,6 +762,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">seqstart</span> <span class="o">=</span> <span class="n">get_last_first</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seqstarts</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="Prep"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.Prep">[docs]</a><span class="k">class</span> <span class="nc">Prep</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;khkhkjk&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample_name</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sample_name</span><span class="o">=</span><span class="n">sample_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prep_info</span> <span class="o">=</span> <span class="p">{</span>
@@ -694,6 +788,20 @@
             <span class="s">&#39;caliper_image&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
 
 <div class="viewcode-block" id="Prep.set_prep_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_prep_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">aplication</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :project/samples/[sample id]/library_prep/[lib prep id]/[KEY]:</span>
+
+<span class="sd">        =================== ============    =========== ================</span>
+<span class="sd">        KEY                 lims_element    lims_field  description</span>
+<span class="sd">        =================== ============    =========== ================</span>
+<span class="sd">        prep_start_date     Process         date-run    The date-run of a PREPSTART step</span>
+<span class="sd">        prep_finished_date  Process         date-run    The date-run of a PREPEND step</span>
+<span class="sd">        prep_id             Process         id          The lims id of a PREPEND step</span>
+<span class="sd">        workset_setup       False</span>
+<span class="sd">        pre_prep_start_date Process         date-run    The date-run of process &#39;Shear DNA (SS XT) 4.0&#39;. Only for &#39;Exome capture&#39; projects   </span>
+<span class="sd">        =================== ============    =========== ================</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="n">aplication</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;Amplicon with adaptors&#39;</span><span class="p">,</span> <span class="s">&#39;Finished library&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">id2AB</span> <span class="o">=</span> <span class="s">&#39;Finished&#39;</span>
         <span class="k">else</span><span class="p">:</span>
@@ -724,6 +832,27 @@
 
         </div>
     <span class="k">def</span> <span class="nf">_get_lib_val_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agrlibQCsteps</span><span class="p">,</span> <span class="n">libvalstart</span><span class="p">,</span> <span class="n">latest_caliper_id</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[lib val id]/[KEY]:</span>
+
+<span class="sd">        =================== ============    =============   ================</span>
+<span class="sd">        KEY                 lims_element    lims_field      description</span>
+<span class="sd">        =================== ============    =============   ================</span>
+<span class="sd">        finish_date         Process         date-run        date-run of AGRLIBVAL step</span>
+<span class="sd">        start_date          Process         date-run        First of all LIBVAL steps found for in the artifact history of the output artifact of one of the AGRLIBVAL step</span>
+<span class="sd">        well_location       </span>
+<span class="sd">        prep_status     </span>
+<span class="sd">        reagent_labels </span>
+<span class="sd">        initials </span>
+<span class="sd">        average_size_bp     Artifact        Size (bp)       udf (&#39;Size (bp)&#39;) of the input artifact to the process AGRLIBVAL</span>
+<span class="sd">        caliper_image    </span>
+<span class="sd">        conc_units          Artifact        Conc. Units     udf (&#39;Conc. Units&#39;) of the input artifact to the process AGRLIBVAL</span>
+<span class="sd">        concentration       Artifact        Concentration   udf (&#39;Concentration&#39;) of the input artifact to the process AGRLIBVAL</span>
+<span class="sd">        volume_(ul)</span>
+<span class="sd">        =================== ============    =============   ================</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
         <span class="n">library_validations</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">start_date</span> <span class="o">=</span> <span class="n">libvalstart</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">libvalstart</span> <span class="ow">and</span> 
                                          <span class="n">libvalstart</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&#39;date&#39;</span><span class="p">))</span> <span class="k">else</span> <span class="bp">None</span>
