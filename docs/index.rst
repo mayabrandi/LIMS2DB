@@ -14,7 +14,7 @@ Process Categories
 ^^^^^^^^^^^^^^^^^^^
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    process_categories
 
