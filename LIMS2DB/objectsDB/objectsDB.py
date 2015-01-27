@@ -41,6 +41,7 @@ class ProjectDB():
         self._get_open_escalations()
 
     def _get_open_escalations(self):
+        # Need Denis input
         escalation_ids=[]
         processes=self.lims.get_processes(projectname=self.project.name)
         for p in processes:
@@ -780,6 +781,27 @@ class Prep():
 
         
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
+        """
+        :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[lib val id]/[KEY]:
+
+        =================== ============    ===========     ================
+        KEY                 lims_element    lims_field      description
+        =================== ============    ===========     ================
+        finish_date         Process         date-run        date-run of AGRLIBVAL step
+        start_date          Process         date-run        First of all LIBVAL steps found for in the artifact history of the output artifact of one of the AGRLIBVAL step
+        well_location       
+        prep_status     
+        reagent_labels 
+        initials 
+        average_size_bp     Artifact        Size (bp)       udf ('Size (bp)') of the input artifact to the process AGRLIBVAL
+        caliper_image    
+        conc_units          Artifact        Conc. Units     udf ('Conc. Units') of the input artifact to the process AGRLIBVAL
+        concentration       Artifact        Concentration   udf ('Concentration') of the input artifact to the process AGRLIBVAL
+        volume_(ul)
+        =================== ============    ===========     ================
+        """
+
+
         library_validations = {}
         start_date = libvalstart['date'] if (libvalstart and 
                                          libvalstart.has_key('date')) else None
