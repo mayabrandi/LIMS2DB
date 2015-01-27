@@ -2,7 +2,6 @@ LIMS2DB package
 ===============
 
 .. toctree::
-      :maxdepth: 8
 
 
 objectsDB module
