@@ -786,9 +786,9 @@ class Prep():
         """
         :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[lib val id]/[KEY]:
 
-        =================== ============    ===========     ================
+        =================== ============    =============   ================
         KEY                 lims_element    lims_field      description
-        =================== ============    ===========     ================
+        =================== ============    =============   ================
         finish_date         Process         date-run        date-run of AGRLIBVAL step
         start_date          Process         date-run        First of all LIBVAL steps found for in the artifact history of the output artifact of one of the AGRLIBVAL step
         well_location       
@@ -800,7 +800,7 @@ class Prep():
         conc_units          Artifact        Conc. Units     udf ('Conc. Units') of the input artifact to the process AGRLIBVAL
         concentration       Artifact        Concentration   udf ('Concentration') of the input artifact to the process AGRLIBVAL
         volume_(ul)
-        =================== ============    ===========     ================
+        =================== ============    =============   ================
         """
 
 
