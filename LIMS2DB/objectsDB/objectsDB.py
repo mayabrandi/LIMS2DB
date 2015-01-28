@@ -106,6 +106,7 @@ class ProjectDB():
     def _get_project_summary_info(self):
         """
         The funktion sets the following statusdb KEYs
+
         :project/[KEY]:
 
         =============== ============    =========== ================
