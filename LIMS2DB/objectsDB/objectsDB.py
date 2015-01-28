@@ -162,7 +162,7 @@ class ProjectDB():
         KEY                 lims_element    lims_field  description
         ================    ============    =========== ================
         first_initial_qc    Process         date-run    First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps run on any sample in inte project.
-        no_of_samples       Project         -           Number of registered samples for the project
+        no_of_samples       Project                     Number of registered samples for the project
         samples             Sample          Name        Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.
         ================    ============    =========== ================"""
 
@@ -272,7 +272,7 @@ class SampleDB():
         scilife_name                Sample          name        ..
         well_location               Artifact        location    ..          ..
         details                     Sample          udfs        A dict with all Sample level udfs
-        library_prep                Process         -           A dict where the keys are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-> prep A, second date -> prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.
+        library_prep                Process                     A dict where the keys are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-> prep A, second date -> prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.
         first_initial_qc_start_date Process         date-run    If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step
         first_prep_start_date       Process         date-run    First of all PREPSTART and  PREPREPSTART steps run on the sample
         =========================== ============    =========== ================
@@ -282,7 +282,7 @@ class SampleDB():
         =================== ============    =========== ================
         KEY                 lims_element    lims_field  description
         =================== ============    =========== ================
-        sample_run_metrics  Process         -           A dict of sample runs where keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf ('Run ID') of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.
+        sample_run_metrics  Process                     A dict of sample runs where keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf ('Run ID') of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.
         =================== ============    =========== ================ """ 
 
         self.obj['scilife_name'] = self.name
@@ -352,7 +352,7 @@ class SampleDB():
         sequencing_start_date               Process         date-run    date-run of the first of all SEQSTART steps in the artifact history of this SEQUENCING step
         sequencing_run_QC_finished          Process         date-run    date-run of this SEQUENCING step
         sequencing_finish_date              Process         Finish Date udf ('Finish Date') of this SEQUENCING step
-        sample_run_metrics_id               -               -           The sample database (statusdb) _id for the sample_run_metrics corresponding to the run, sample, lane in question.
+        sample_run_metrics_id                                           The sample database (statusdb) _id for the sample_run_metrics corresponding to the run, sample, lane in question.
         dem_qc_flag                         Artifact        qc-flagg    Qc-flagg of the output artifact of the latest of all DEMULTIPLEX steps run in the artifact history of this SEQUENCING step
         seq_qc_flag                         Artifact        qc-flagg    Qc-flagg of the input artifact to this SEQUENCING step
         ================================    ============    =========== ================""" 
@@ -784,7 +784,7 @@ class Prep():
         prep_id             Process         id          The lims id of a PREPEND step
         workset_setup       Process         id          The lims id of the last WORKSET step
         pre_prep_start_date Process         date-run    The date-run of process 'Shear DNA (SS XT) 4.0'. Only for 'Exome capture' projects   
-        -                   Artifact        -           udf of the output artifact of the first PREPSTART and PREPREPSTART steps in the history
+                            Artifact                    udf of the output artifact of the first PREPSTART and PREPREPSTART steps in the history
         amount_taken_(ng)
 
         =================== ============    =========== ================
