@@ -258,13 +258,20 @@ class SampleDB():
         KEY                         lims_element    lims_field  description
         =========================== ============    =========== ================
         scilife_name                Sample          name        ..
-        well_location               Fals            ..          ..
-        details                     Sample          udf         All Sample level udfs
-        library_prep                Process         date-run    The keys of this dict are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-> prep A, second date -> prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.
-        initial_qc                  Process         -           Dict ...
+        well_location               Artifact        location    ..          ..
+        details                     Sample          udfs        A dict with all Sample level udfs
+        library_prep                Process         -           A dict where the keys are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-> prep A, second date -> prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.
         first_initial_qc_start_date Process         date-run    If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step
-        first_prep_start_date       ..              ..          Fals
-        =========================== ============    =========== ================""" 
+        first_prep_start_date       Process         date-run    First of all PREPSTART and  PREPREPSTART steps run on the sample
+        =========================== ============    =========== ================
+        
+        :project/samples/[sample id]/library_prep/[prep id]/[KEY]:
+
+        =================== ============    =========== ================
+        KEY                 lims_element    lims_field  description
+        =================== ============    =========== ================
+        sample_run_metrics  Process         -           A dict of sample runs where keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf ('Run ID') of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.
+        =================== ============    =========== ================ """ 
 
         self.obj['scilife_name'] = self.name
         self.obj['well_location'] = self.lims_sample.artifact.location[1]
@@ -327,13 +334,13 @@ class SampleDB():
         ================================    ============    =========== ================
         KEY                                 lims_element    lims_field  description
         ================================    ============    =========== ================
-        dillution_and_pooling_start_date    Process         date-run    date-run of DILSTART step
-        sequencing_start_date               Process         date-run    ate-run of SEQSTART step
-        sequencing_run_QC_finished          Process         date-run    date-run of SEQUENCING step
-        sequencing_finish_date              Process         Finish Date udf ('Finish Date') of SEQUENCING step
+        dillution_and_pooling_start_date    Process         date-run    date-run of the first of all DILSTART steps in the artifact history of this SEQUENCING step
+        sequencing_start_date               Process         date-run    date-run of the first of all SEQSTART steps in the artifact history of this SEQUENCING step
+        sequencing_run_QC_finished          Process         date-run    date-run of this SEQUENCING step
+        sequencing_finish_date              Process         Finish Date udf ('Finish Date') of this SEQUENCING step
         sample_run_metrics_id               -               -           The sample database (statusdb) _id for the sample_run_metrics corresponding to the run, sample, lane in question.
-        dem_qc_flag                         ...
-        seq_qc_flag                         ...
+        dem_qc_flag                         Artifact        qc-flagg    Qc-flagg of the output artifact of the latest of all DEMULTIPLEX steps run in the artifact history of this SEQUENCING step
+        seq_qc_flag                         Artifact        qc-flagg    Qc-flagg of the input artifact to this SEQUENCING step
         ================================    ============    =========== ================""" 
 
         sample_runs = {}
@@ -361,7 +368,7 @@ class SampleDB():
                         if preps[key].has_key('reagent_label') and run_dict.has_key('Finish Date'):
                             try:
                                 dem_art = Artifact(lims, id = steps.latestdem['outart'])
-                                dem_qc=dem_art.qc_flag
+                                dem_qc = dem_art.qc_flag
                             except ValueError:
                                 #Miseq projects might not have a demultiplexing step here
                                 #so the artifact id might be None
@@ -436,10 +443,10 @@ class SampleDB():
         =========================== ============    =========== ================
         KEY                         lims_element    lims_field  description
         =========================== ============    =========== ================
-        pre_prep_library_validation True
+        pre_prep_library_validation 
         library_validation          
-        prep_status                 True
-        reagent_label               True
+        prep_status                 Artifact        qc-flag     The qc-flag of the input artifact of the last AGRLIBVAL step      
+        reagent_label               
         =========================== ============    =========== ================
         """
 
