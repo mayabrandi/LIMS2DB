@@ -440,14 +440,12 @@ class SampleDB():
         """
         :project/samples/[sample id]/library_prep/[prep id]/[KEY]:
 
-        =========================== ============    =========== ================
-        KEY                         lims_element    lims_field  description
-        =========================== ============    =========== ================
-        pre_prep_library_validation 
-        library_validation          
-        prep_status                 Artifact        qc-flag     The qc-flag of the input artifact of the last AGRLIBVAL step      
-        reagent_label               
-        =========================== ============    =========== ================
+        =========================== ============    =============    ================
+        KEY                         lims_element    lims_field      description
+        =========================== ============    =============   ================
+        prep_status                 Artifact        qc-flag         The qc-flag of the input artifact of the last AGRLIBVAL step      
+        reagent_label               Artifact        reagent-label   If the sample went throuh POOLING the reagent_labels must be feched from the input artifact of the firtst POOLING step. If the sample did not go through POOLING, the reagent_labels are fetched from the input artifact to the last AGRLIBVAL step in the history 
+        =========================== ============    =============   ================
         """
 
         top_level_agrlibval_steps = self._get_top_level_agrlibval_steps()
@@ -499,6 +497,10 @@ class SampleDB():
 
 
     def _pars_reagent_labels(self, steps, last_libval):
+        """If the sample went throuh POOLING the reagent_labels must be feched 
+        from the input artifact of the firtst POOLING step. If the sample did 
+        not go through POOLING, the reagent_labels are fetched from the input 
+        artifact to the last AGRLIBVAL step in the history"""
         if steps.firstpoolstep:
             inart = Artifact(lims, id = steps.firstpoolstep['inart'])
             if len(inart.reagent_labels) == 1:
@@ -790,24 +792,24 @@ class Prep():
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
         """
         :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[lib val id]/[KEY]:
+        :project/samples/[sample id]/library_prep/[lib prep id]/pre_prep_library_validation/[lib val id]/[KEY]:
 
         =================== ============    =============   ================
         KEY                 lims_element    lims_field      description
         =================== ============    =============   ================
-        finish_date         Process         date-run        date-run of AGRLIBVAL step
-        start_date          Process         date-run        First of all LIBVAL steps found for in the artifact history of the output artifact of one of the AGRLIBVAL step
-        well_location       
-        prep_status     
-        reagent_labels 
-        initials 
-        average_size_bp     Artifact        Size (bp)       udf ('Size (bp)') of the input artifact to the process AGRLIBVAL
+        finish_date         Process         date-run        date-run of the last AGRLIBVAL step in the history
+        start_date          Process         date-run        First of all LIBVAL steps found for in the artifact history of the output artifact of one of the last AGRLIBVAL step in the history
+        well_location       Artifact        location        location of the input artifact to the last AGRLIBVAL step in the history
+        prep_status         Artifact        qc-flag         qc-flag of the input artifact to the last AGRLIBVAL step in the history
+        reagent_labels      Artifact        reagent-label   reagent-label of the input artifact to the last AGRLIBVAL step in the history
+        initials            Researcher      initials        technician.initials of the last AGRLIBVAL step in the history
+        average_size_bp     Artifact        Size (bp)       udf ('Size (bp)') of the input artifact to the last AGRLIBVAL step in the history
         caliper_image    
-        conc_units          Artifact        Conc. Units     udf ('Conc. Units') of the input artifact to the process AGRLIBVAL
-        concentration       Artifact        Concentration   udf ('Concentration') of the input artifact to the process AGRLIBVAL
-        volume_(ul)
+        conc_units          Artifact        Conc. Units     udf ('Conc. Units') of the input artifact to the last AGRLIBVAL step in the history
+        concentration       Artifact        Concentration   udf ('Concentration') of the input artifact to the last AGRLIBVAL step in the history
+        volume_(ul)         Artifact        volume (ul)     udf ('volume (ul)') of the input artifact to the last AGRLIBVAL step in the history
         =================== ============    =============   ================
         """
-
 
         library_validations = {}
         start_date = libvalstart['date'] if (libvalstart and 
