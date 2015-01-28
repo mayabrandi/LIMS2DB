@@ -57,19 +57,20 @@ class ProjectDB():
 
     def _get_project_level_info(self):
         """
+
         :project/[KEY]:
 
         ============    ============    =========== ================
         KEY             lims_element    lims_field  description
         ============    ============    =========== ================ 
-        application     Project         Application  
+        application     Project         Application Project level udfs
         samples         Sample          Name        Dict of all samples registered for the project. Keys are sample names.
         open_date       Project         open-date   
         close_date      Project         close-date  
         contact         Researcher      email       project.researcher.email
-        project_name    Project         Name        
+        project_name    Project         name        
         project_id      Project         id 
-        details         Project         udfs        A dict with all Project level udfs   
+        details         Project         udfs        A dict with Project level udfs   
         ============    ============    =========== ================"""
 
         self.obj = {'source' : 'lims',
@@ -88,6 +89,7 @@ class ProjectDB():
 
     def _get_affiliation(self):
         """
+        he funktion sets the following statusdb KEYs
         :project/[KEY]:
 
         ============    ============    =========== ================
@@ -103,6 +105,7 @@ class ProjectDB():
 
     def _get_project_summary_info(self):
         """
+        The funktion sets the following statusdb KEYs
         :project/[KEY]:
 
         =============== ============    =========== ================
