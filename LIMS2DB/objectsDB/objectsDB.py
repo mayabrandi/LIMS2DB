@@ -57,6 +57,7 @@ class ProjectDB():
 
     def _get_project_level_info(self):
         """
+        The following statusdb KEYs are set in this funktion.
 
         :project/[KEY]:
 
@@ -89,7 +90,8 @@ class ProjectDB():
 
     def _get_affiliation(self):
         """
-        he funktion sets the following statusdb KEYs
+        The following statusdb KEYs are set in this funktion.
+
         :project/[KEY]:
 
         ============    ============    =========== ================
@@ -105,7 +107,7 @@ class ProjectDB():
 
     def _get_project_summary_info(self):
         """
-        The funktion sets the following statusdb KEYs
+        The following statusdb KEYs are set in this funktion.
 
         :project/[KEY]:
 
@@ -124,6 +126,8 @@ class ProjectDB():
 
     def _get_sequencing_finished(self):
         """
+        The following statusdb KEYs are set in this funktion.
+
         :project/[KEY]:
 
         =================== ============    =========== ================
@@ -150,6 +154,8 @@ class ProjectDB():
     def _make_DB_samples(self):
         ## Getting sample info
         """
+        The following statusdb KEYs are set in this funktion.
+
         :project/[KEY]:
 
         ================    ============    =========== ================
@@ -256,6 +262,8 @@ class SampleDB():
 
     def _get_sample_info(self):
         """
+        The following statusdb KEYs are set in this funktion.
+
         :project/samples/[sample id]/[KEY]:
 
         =========================== ============    =========== ================
@@ -332,6 +340,8 @@ class SampleDB():
         For each SEQUENCING process run on the sample, this function steps 
         bacward in the artifact history of the input artifact of the SEQUENCING 
         process to find the folowing information
+
+        The following statusdb KEYs are set in this funktion.
 
         :project/samples/[sample id]/library_prep/[prep id]/sample_run_metrics/[samp run id]/[KEY]:
 
@@ -442,6 +452,8 @@ class SampleDB():
 
     def _get_preps_and_libval(self):
         """
+        The following statusdb KEYs are set in this funktion.
+
         :project/samples/[sample id]/library_prep/[prep id]/[KEY]:
 
         =========================== ============    =============   ================
@@ -572,6 +584,8 @@ class InitialQC():
 
     def set_initialqc_info(self):
         """
+        The following statusdb KEYs are set in this funktion.
+
         :project/samples/[sample id]/initial_qc/[KEY]: 
 
         =================== ============    ================    ================
@@ -758,6 +772,8 @@ class Prep():
 
     def set_prep_info(self, steps, aplication):
         """
+        The following statusdb KEYs are set in this funktion.
+
         :project/samples/[sample id]/library_prep/[lib prep id]/[KEY]:
 
         =================== ============    =========== ================
@@ -805,6 +821,8 @@ class Prep():
         
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
         """
+        The following statusdb KEYs are set in this funktion.
+
         :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[lib val id]/[KEY]:
         :project/samples/[sample id]/library_prep/[lib prep id]/pre_prep_library_validation/[lib val id]/[KEY]:
 
