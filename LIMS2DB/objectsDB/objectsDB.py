@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """A module for building up the project objects that build up the project database on 
-statusdb with lims as the main source of information.
+statusdb. Lims isthe main source of information.
 
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
