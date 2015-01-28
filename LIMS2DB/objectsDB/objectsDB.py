@@ -62,7 +62,7 @@ class ProjectDB():
         ============    ============    =========== ================
         KEY             lims_element    lims_field  description
         ============    ============    =========== ================ 
-        application     Project         Application 
+        application     Project         Application  
         samples         Sample          Name        Dict of all samples registered for the project. Keys are sample names.
         open_date       Project         open-date   
         close_date      Project         close-date  
@@ -540,7 +540,8 @@ class SampleDB():
         return topLevel_AgrLibQC
 
 class InitialQC():
-    """khkhkjk"""
+   """Instances of this class holds a dictionary formatted for building up the 
+    initial_qc field per sample in the project database on status db.""" 
     def __init__(self, lims_inst ,sample, procs_per_art, application):
         self.lims = lims_inst
         self.processes_per_artifact = procs_per_art
@@ -599,7 +600,8 @@ class InitialQC():
 
 
 class ProcessSpec():
-    """khkhkjk"""
+    """Class to identify to what process chategory a particular process belongs 
+    in the artifact history."""
     def __init__(self, hist_sort, hist_list, application):
         self.application = application
         self.init_qc = INITALQCFINISHEDLIB if application in FINLIB else INITALQC
@@ -720,7 +722,9 @@ class ProcessSpec():
         self.seqstart = get_last_first(self.seqstarts, last = False)
 
 class Prep():
-    """khkhkjk"""
+    """Instances of this class holds a dictionary formatted for building a
+     sample prep in the project database on status db. Each sample can have 
+    many preps. Their keys are named A,B,C,etc.""" 
     def __init__(self, sample_name):
         self.sample_name=sample_name
         self.prep_info = {
