@@ -440,7 +440,7 @@ class SampleDB():
         """
         :project/samples/[sample id]/library_prep/[prep id]/[KEY]:
 
-        =========================== ============    =============    ================
+        =========================== ============    =============   ================
         KEY                         lims_element    lims_field      description
         =========================== ============    =============   ================
         prep_status                 Artifact        qc-flag         The qc-flag of the input artifact of the last AGRLIBVAL step      
