@@ -8,7 +8,8 @@ GENERALINFO = """
 What is a Process Category?
 ============================
 
-In the project-statusdb context, lims processes are categorised into groups that define, or are used to define a certain type of status-db key in a project database. The categories are specified here. When a new work flow is initialised in lims, the different categories needs to be updated to contain any aditional steps that has not already been included from some other workfrow. 
+In the project-statusdb context, lims processes are categorised into groups that define, or are used to define a certain type of status-db key in a project database. The categories are specified here. 
+
 
 Adding a work flow.
 ==========================
