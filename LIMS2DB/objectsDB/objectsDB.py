@@ -821,13 +821,11 @@ class Prep():
         
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
         """
+        This function holds for both library_validation and pre_prep_library_validation KEYSs
+
         The following statusdb KEYs are set in this funktion.
 
-        :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[lib val id]/[KEY]:
-        
-        or 
-
-        :project/samples/[sample id]/library_prep/[lib prep id]/pre_prep_library_validation/[lib val id]/[KEY]:
+        :project/samples/[sample id]/library_prep/[lib prep id]/(re_prep_)library_validation/[lib val id]/[KEY]:
 
         =================== ============    =============   ================
         KEY                 lims_element    lims_field      description
