@@ -1,26 +1,28 @@
-#!/home/maya.brandi/anaconda/envs/scilife150125/bin/python
+#!/home/maya.brandi/anaconda/envs/LIMS2DB150125/bin/python
 from __future__ import print_function
 """Script to load project info from Lims into the project database in statusdb.
 
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
 
-import sys
-import os
-import codecs
-from optparse import OptionParser
-from statusdb.db.utils import *
-from functions import *
-from pprint import pprint
-from genologics.lims import *
-from genologics.config import BASEURI, USERNAME, PASSWORD
-import objectsDB as DB
-import datetime
-import time
-import multiprocessing as mp
-import Queue
-import logging
-import logging.handlers
+#import sys
+#import os
+#import codecs
+#from optparse import OptionParser
+#from statusdb.db.utils import *
+#from pprint import pprint
+#from genologics.lims import *
+#from genologics.config import BASEURI, USERNAME, PASSWORD
+
+#import LIMS2DB.objectsDB.objectsDB as DB
+#from LIMS2DB.objectsDB.functions import *
+
+#import datetime
+#import time
+#import multiprocessing as mp
+#import Queue
+#import logging
+#import logging.handlers
 
    
 class PSUL():

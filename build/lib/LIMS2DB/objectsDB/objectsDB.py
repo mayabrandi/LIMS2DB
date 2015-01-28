@@ -1,22 +1,22 @@
 #!/usr/bin/env python
 
 """A module for building up the project objects that build up the project database on 
-statusdb with lims as the main source of information.
+statusdb. Lims isthe main source of information.
 
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
-import codecs
-from genologics.lims import *
-import genologics.entities as gent
-from genologics.lims_utils import *
-from process_categories import *
-from statusdb.db.utils import *
-from functions import *
-import os
-import couchdb
-import time
-from datetime import date
-import logging
+#import codecs
+#from genologics.lims import *
+#import genologics.entities as gent
+#from genologics.lims_utils import *
+#from process_categories import *
+#from statusdb.db.utils import *
+#from functions import *
+#import os
+#import couchdb
+#import time
+#from datetime import date
+#import logging
 
 class ProjectDB():
     """Instances of this class holds a dictionary formatted for building up the 
@@ -41,20 +41,39 @@ class ProjectDB():
         self._get_open_escalations()
 
     def _get_open_escalations(self):
-        escalation_ids=[]
-        processes=self.lims.get_processes(projectname=self.project.name)
+        # Need Denis input
+        escalation_ids = []
+        processes = self.lims.get_processes(projectname=self.project.name)
         for p in processes:
-            step=gent.Step(self.lims, id=p.id)
+            step = gent.Step(self.lims, id = p.id)
             if step.actions.escalation:
-                samples_escalated=set()
+                samples_escalated = set()
                 if step.actions.escalation['status'] == "Pending":
-                    shortid=step.id.split("-")[1]
+                    shortid = step.id.split("-")[1]
                     escalation_ids.append(shortid)
         if escalation_ids:
-            self.obj['escalations']=escalation_ids
+            self.obj['escalations'] = escalation_ids
 
 
     def _get_project_level_info(self):
+        """
+        The following statusdb KEYs are set in this funktion.
+
+        :project/[KEY]:
+
+        ============    ============    =========== ================
+        KEY             lims_element    lims_field  description
+        ============    ============    =========== ================ 
+        application     Project         Application Project level udfs
+        samples         Sample          Name        Dict of all samples registered for the project. Keys are sample names.
+        open_date       Project         open-date   
+        close_date      Project         close-date  
+        contact         Researcher      email       project.researcher.email
+        project_name    Project         name        
+        project_id      Project         id 
+        details         Project         udfs        A dict with Project level udfs   
+        ============    ============    =========== ================"""
+
         self.obj = {'source' : 'lims',
                         'application' : None,
                         'samples':{},
@@ -70,12 +89,34 @@ class ProjectDB():
         self._get_project_summary_info()
 
     def _get_affiliation(self):
+        """
+        The following statusdb KEYs are set in this funktion.
+
+        :project/[KEY]:
+
+        ============    ============    =========== ================
+        KEY             lims_element    lims_field  description
+        ============    ============    =========== ================
+        affiliation     Lab             Affiliation project.researcher.lab
+        ============    ============    =========== ================"""
+
         researcher_udfs = dict(self.project.researcher.lab.udf.items())
         if researcher_udfs.has_key('Affiliation'):
             self.obj['affiliation'] = researcher_udfs['Affiliation']
 
 
     def _get_project_summary_info(self):
+        """
+        The following statusdb KEYs are set in this funktion.
+
+        :project/[KEY]:
+
+        =============== ============    =========== ================
+        KEY             lims_element    lims_field  description
+        =============== ============    =========== ================
+        project_summary Process         udfs        A dict with all Process level udfs fetched from the process of type SUMMARY that has been run on the project.
+        =============== ============    =========== ================"""
+
         project_summary = self.lims.get_processes(projectname =
                                 self.project.name, type = SUMMARY.values())
         if len(project_summary) > 0:
@@ -84,8 +125,18 @@ class ProjectDB():
             logging.warn('Warning. project summary process run more than once')
 
     def _get_sequencing_finished(self):
-        """Finish Date = last seq date if proj closed. Will be removed and 
-        feched from lims."""
+        """
+        The following statusdb KEYs are set in this funktion.
+
+        :project/[KEY]:
+
+        =================== ============    =========== ================
+        KEY                 lims_element    lims_field  description
+        =================== ============    =========== ================
+        sequencing_finished Process         Finish Date Last sequencing_finish_date where sequencing_finish_date is the 'Finish Date' udf of a SEQUENCING step
+        =================== ============    =========== ================"""
+
+        ##   sequencing_finishe should be betched from some other udf in the future
         seq_fin = []
         if self.project.close_date and 'samples' in self.obj.keys():
             for samp in self.obj['samples'].values():
@@ -102,6 +153,19 @@ class ProjectDB():
 
     def _make_DB_samples(self):
         ## Getting sample info
+        """
+        The following statusdb KEYs are set in this funktion.
+
+        :project/[KEY]:
+
+        ================    ============    =========== ================
+        KEY                 lims_element    lims_field  description
+        ================    ============    =========== ================
+        first_initial_qc    Process         date-run    First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps run on any sample in inte project.
+        no_of_samples       Project                     Number of registered samples for the project
+        samples             Sample          Name        Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.
+        ================    ============    =========== ================"""
+
         samples = self.lims.get_samples(projectlimsid = self.project.id)
         self.obj['no_of_samples'] = len(samples)
         runinfo=self.demux_procs or self.seq_procs 
@@ -135,6 +199,7 @@ class ProjectDB():
         present should be included. The values of the dictionary is sets, to avoid
         duplicated projects for a single artifact.
         """
+
         processes = lims.get_processes(projectname = pname)
         processes_per_artifact = {}
         for process in processes:
@@ -150,15 +215,8 @@ class ProjectDB():
 class ProcessInfo():
     """This class takes a list of process type names. Eg 
     'Aggregate QC (Library Validation) 4.0' and forms  a dict with info about 
-    all processes of the type specified in runs which the project has gon through.
+    all processes of the type specified in runs which the project has gon through.""" 
 
-    info = {24-8460:{ 
-              'start_date'
-              'samples':{'P424_111':{in_art_id1 : [in_art1, out_art1],
-                         in_art_id2: [in_art2, out_art2]},
-                     'P424_115': ...},
-                       ...},
-        '24-8480':...}"""
     def __init__(self, lims_instance, processes):
         self.lims = lims_instance
         self.info = self._get_process_info(processes)
@@ -187,6 +245,7 @@ class SampleDB():
     """Instances of this class holds a dictionary formatted for building up the 
     samples in the project database on status db. Source of information come 
     from different lims artifacts and processes."""
+
     def __init__(self, lims_instance , sample_id, project_name, samp_db,
                         application = None, AgrLibQCs = [], run_info = [],
                         processes_per_artifact = None): 
@@ -202,6 +261,30 @@ class SampleDB():
         self._get_sample_info()
 
     def _get_sample_info(self):
+        """
+        The following statusdb KEYs are set in this funktion.
+
+        :project/samples/[sample id]/[KEY]:
+
+        =========================== ============    =========== ================
+        KEY                         lims_element    lims_field  description
+        =========================== ============    =========== ================
+        scilife_name                Sample          name        ..
+        well_location               Artifact        location    ..          ..
+        details                     Sample          udfs        A dict with all Sample level udfs
+        library_prep                Process                     A dict where the keys are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-> prep A, second date -> prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.
+        first_initial_qc_start_date Process         date-run    If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step
+        first_prep_start_date       Process         date-run    First of all PREPSTART and  PREPREPSTART steps run on the sample
+        =========================== ============    =========== ================
+        
+        :project/samples/[sample id]/library_prep/[prep id]/[KEY]:
+
+        =================== ============    =========== ================
+        KEY                 lims_element    lims_field  description
+        =================== ============    =========== ================
+        sample_run_metrics  Process                     A dict of sample runs where keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf ('Run ID') of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.
+        =================== ============    =========== ================ """ 
+
         self.obj['scilife_name'] = self.name
         self.obj['well_location'] = self.lims_sample.artifact.location[1]
         self.obj['details'] = udf_dict(self.lims_sample, SAMP_UDF_EXCEPTIONS)
@@ -228,7 +311,8 @@ class SampleDB():
 
     def _get_firts_day(self, sample_name ,process_list, last_day = False):
         """process_list is a list of process type names, sample_name is a 
-        sample name :)"""
+        sample name"""
+
         arts = self.lims.get_artifacts(sample_name = sample_name, 
                                         process_type = process_list)
         index = -1 if last_day else 0 
@@ -240,6 +324,7 @@ class SampleDB():
 
     def _get_barcode(self, reagent_label):
         """Extracts barcode from list of artifact.reagent_labels"""
+
         if reagent_label:
             try:
                 index = reagent_label.split('(')[1].strip(')')
@@ -254,25 +339,24 @@ class SampleDB():
         DEMULTIPLEX processes as argument
         For each SEQUENCING process run on the sample, this function steps 
         bacward in the artifact history of the input artifact of the SEQUENCING 
-        process to find the folowing information:
+        process to find the folowing information
 
-        dillution_and_pooling_start_date  date-run of DILSTART step
-        sequencing_start_date             date-run of SEQSTART step
-        sequencing_run_QC_finished        date-run of SEQUENCING step
-        sequencing_finish_date            udf ('Finish Date') of SEQUENCING step
-        sample_run_metrics_id             The sample database (statusdb) _id for
-                                          the sample_run_metrics corresponding 
-                                           to the run, sample, lane in question.
-        samp_run_met_id = lane_date_fcid_barcode            
-            date and fcid:  from udf ('Run ID') of the SEQUENCING step. 
-            barcode:        The reagent-lables of the input artifact of process 
-                            type AGRLIBVAL
-            lane:           from the location of the input artifact to the 
-                            SEQUENCING step    
-        preps are defined as the id of the PREPSTART step in the artifact 
-        history. If appllication== Finished library, prep is defined as 
-        "Finnished". These keys are used to connect the seqeuncing steps to the 
-        correct preps."""
+        The following statusdb KEYs are set in this funktion.
+
+        :project/samples/[sample id]/library_prep/[prep id]/sample_run_metrics/[samp run id]/[KEY]:
+
+        ================================    ============    =========== ================
+        KEY                                 lims_element    lims_field  description
+        ================================    ============    =========== ================
+        dillution_and_pooling_start_date    Process         date-run    date-run of the first of all DILSTART steps in the artifact history of this SEQUENCING step
+        sequencing_start_date               Process         date-run    date-run of the first of all SEQSTART steps in the artifact history of this SEQUENCING step
+        sequencing_run_QC_finished          Process         date-run    date-run of this SEQUENCING step
+        sequencing_finish_date              Process         Finish Date udf ('Finish Date') of this SEQUENCING step
+        sample_run_metrics_id                                           The sample database (statusdb) _id for the sample_run_metrics corresponding to the run, sample, lane in question.
+        dem_qc_flag                         Artifact        qc-flagg    Qc-flagg of the output artifact of the latest of all DEMULTIPLEX steps run in the artifact history of this SEQUENCING step
+        seq_qc_flag                         Artifact        qc-flagg    Qc-flagg of the input artifact to this SEQUENCING step
+        ================================    ============    =========== ================""" 
+
         sample_runs = {}
         for id, run in demux_info.items():
             if run['samples'].has_key(self.name):
@@ -298,7 +382,7 @@ class SampleDB():
                         if preps[key].has_key('reagent_label') and run_dict.has_key('Finish Date'):
                             try:
                                 dem_art = Artifact(lims, id = steps.latestdem['outart'])
-                                dem_qc=dem_art.qc_flag
+                                dem_qc = dem_art.qc_flag
                             except ValueError:
                                 #Miseq projects might not have a demultiplexing step here
                                 #so the artifact id might be None
@@ -350,6 +434,7 @@ class SampleDB():
         """Get preps and prep names; A,B,C... based on prep dates for 
         sample_name. 
         Output: A dict where keys are prep_art_id and values are prep names."""
+
         dates = {}
         prep_info_new = {}
         preps_keys = map(chr, range(65, 65+len(prep_info)))
@@ -366,7 +451,19 @@ class SampleDB():
         return prep_info_new
 
     def _get_preps_and_libval(self):
-        """"""
+        """
+        The following statusdb KEYs are set in this funktion.
+
+        :project/samples/[sample id]/library_prep/[prep id]/[KEY]:
+
+        =========================== ============    =============   ================
+        KEY                         lims_element    lims_field      description
+        =========================== ============    =============   ================
+        prep_status                 Artifact        qc-flag         The qc-flag of the input artifact of the last AGRLIBVAL step      
+        reagent_label               Artifact        reagent-label   If the sample went throuh POOLING the reagent_labels must be feched from the input artifact of the firtst POOLING step. If the sample did not go through POOLING, the reagent_labels are fetched from the input artifact to the last AGRLIBVAL step in the history 
+        =========================== ============    =============   ================
+        """
+
         top_level_agrlibval_steps = self._get_top_level_agrlibval_steps()
         preps = {}
         very_last_libval_key = {}
@@ -416,6 +513,10 @@ class SampleDB():
 
 
     def _pars_reagent_labels(self, steps, last_libval):
+        """If the sample went throuh POOLING the reagent_labels must be feched 
+        from the input artifact of the firtst POOLING step. If the sample did 
+        not go through POOLING, the reagent_labels are fetched from the input 
+        artifact to the last AGRLIBVAL step in the history"""
         if steps.firstpoolstep:
             inart = Artifact(lims, id = steps.firstpoolstep['inart'])
             if len(inart.reagent_labels) == 1:
@@ -455,7 +556,9 @@ class SampleDB():
         return topLevel_AgrLibQC
 
 class InitialQC():
-    """"""
+    """Instances of this class holds a dictionary formatted for building up the 
+    initial_qc field per sample in the project database on status db.""" 
+    
     def __init__(self, lims_inst ,sample, procs_per_art, application):
         self.lims = lims_inst
         self.processes_per_artifact = procs_per_art
@@ -480,6 +583,22 @@ class InitialQC():
                                                                self.application)
 
     def set_initialqc_info(self):
+        """
+        The following statusdb KEYs are set in this funktion.
+
+        :project/samples/[sample id]/initial_qc/[KEY]: 
+
+        =================== ============    ================    ================
+        KEY                 lims_element    lims_field          description
+        =================== ============    ================    ================
+        start_date          Process         date-run            First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps found for in the artifact history of the output artifact of one of the AGRINITQC stepst 
+        finish_date         Process         date-run            One of the AGRINITQC steps
+        initials            Researcher      initials            technician.initials of the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
+        initial_qc_status   Artifact        qc-flag             qc-flag of thre input artifact to the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
+        caliper_image       Artifact        content-location    content-location of output Result files of the last of all CALIPER steps in the artifact history of the output artifact of one of the AGRINITQC steps
+        =================== ============    ================    ================
+        """
+
         self._get_initialqc_processes()
         if self.steps:
             if self.steps.initialqstart:
@@ -500,6 +619,9 @@ class InitialQC():
 
 
 class ProcessSpec():
+    """Class to identify to what process chategory a particular process belongs 
+    in the artifact history."""
+
     def __init__(self, hist_sort, hist_list, application):
         self.application = application
         self.init_qc = INITALQCFINISHEDLIB if application in FINLIB else INITALQC
@@ -578,7 +700,7 @@ class ProcessSpec():
             # 5) PREPEND            - get latest prep end
             self.prepends += filter(lambda pro: (pro['type'] in 
                             PREPEND) and pro['outart'] , art_steps.values())
-            # 8) WORKSET            - get latest workset
+            # 8) WORKSET            - get worksets
             self.worksets += filter(lambda pro: (pro['type'] in 
                             WORKSET) and pro['outart'], art_steps.values()) 
             # 9) SEQSTART dubbelkolla
@@ -620,6 +742,10 @@ class ProcessSpec():
         self.seqstart = get_last_first(self.seqstarts, last = False)
 
 class Prep():
+    """Instances of this class holds a dictionary formatted for building a
+    sample prep in the project database on status db. Each sample can have 
+    many preps. Their keys are named A,B,C,etc.""" 
+    
     def __init__(self, sample_name):
         self.sample_name=sample_name
         self.prep_info = {
@@ -645,6 +771,25 @@ class Prep():
             'caliper_image' : None}
 
     def set_prep_info(self, steps, aplication):
+        """
+        The following statusdb KEYs are set in this funktion.
+
+        :project/samples/[sample id]/library_prep/[lib prep id]/[KEY]:
+
+        =================== ============    =========== ================
+        KEY                 lims_element    lims_field  description
+        =================== ============    =========== ================
+        prep_start_date     Process         date-run    The date-run of a PREPSTART step
+        prep_finished_date  Process         date-run    The date-run of a PREPEND step
+        prep_id             Process         id          The lims id of a PREPEND step
+        workset_setup       Process         id          The lims id of the last WORKSET step
+        pre_prep_start_date Process         date-run    The date-run of process 'Shear DNA (SS XT) 4.0'. Only for 'Exome capture' projects   
+                            Artifact                    udf of the output artifact of the first PREPSTART and PREPREPSTART steps in the history
+        amount_taken_(ng)
+
+        =================== ============    =========== ================
+        """
+
         if aplication in ['Amplicon with adaptors', 'Finished library']:
             self.id2AB = 'Finished'
         else:
@@ -675,6 +820,30 @@ class Prep():
 
         
     def _get_lib_val_info(self, agrlibQCsteps, libvalstart, latest_caliper_id = None):
+        """
+        This function holds for both library_validation and pre_prep_library_validation KEYSs
+
+        The following statusdb KEYs are set in this funktion.
+
+        :project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[lib val id]/[KEY]:
+
+        =================== ============    =============   ================
+        KEY                 lims_element    lims_field      description
+        =================== ============    =============   ================
+        finish_date         Process         date-run        date-run of the last AGRLIBVAL step in the history
+        start_date          Process         date-run        First of all LIBVAL steps found for in the artifact history of the output artifact of one of the last AGRLIBVAL step in the history
+        well_location       Artifact        location        location of the input artifact to the last AGRLIBVAL step in the history
+        prep_status         Artifact        qc-flag         qc-flag of the input artifact to the last AGRLIBVAL step in the history
+        reagent_labels      Artifact        reagent-label   reagent-label of the input artifact to the last AGRLIBVAL step in the history
+        initials            Researcher      initials        technician.initials of the last AGRLIBVAL step in the history
+        average_size_bp     Artifact        Size (bp)       udf ('Size (bp)') of the input artifact to the last AGRLIBVAL step in the history
+        caliper_image    
+        conc_units          Artifact        Conc. Units     udf ('Conc. Units') of the input artifact to the last AGRLIBVAL step in the history
+        concentration       Artifact        Concentration   udf ('Concentration') of the input artifact to the last AGRLIBVAL step in the history
+        volume_(ul)         Artifact        volume (ul)     udf ('volume (ul)') of the input artifact to the last AGRLIBVAL step in the history
+        =================== ============    =============   ================
+        """
+
         library_validations = {}
         start_date = libvalstart['date'] if (libvalstart and 
                                          libvalstart.has_key('date')) else None

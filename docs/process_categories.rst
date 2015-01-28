@@ -1,19 +1,16 @@
 
 What is a Process Category?
-===========================
+============================
 
-In the project-statusdb context, lims processes are categorised into groups that define, or are used to define a certain type of status-db key in a project database. The categories are specified here. When a new work flow is initialised in lims, the different categories needs to be updated to contain any aditional steps that has not already been included from some other workfrow. If a work flow does not fit with the categories one might have to change the category definitions or ad new categories. This needs to be done in corperation with the developer of project_summary_uppload_LIMS.py.
+In the project-statusdb context, lims processes are categorised into groups that define, or are used to define a certain type of status-db key in a project database. The categories are specified here. When a new work flow is initialised in lims, the different categories needs to be updated to contain any aditional steps that has not already been included from some other workfrow. 
 
 Adding a work flow.
-===================
-...
+==========================
 
-
-Chategories
-=============
+If a work flow does not fit with the categories one might have to change the category definitions or ad new categories. This needs to be done in corperation with the developer of project_summary_uppload_LIMS.py. The cathegories are defined in process_categories.py within the objectsDB package.
 
 SEQSTART
--------------------
+==================
 These processes are used to set the sequencing_start_date
 
 
@@ -26,7 +23,9 @@ ID  process Name
     
 
 LIBVALFINISHEDLIB
--------------------
+==================
+
+
 
 === =======================================
 ID  process Name
@@ -41,21 +40,19 @@ ID  process Name
     
 
 PREPREPSTART
--------------------
-
+==================
 Process/processes that can be defined as a start of the library preparation protocol. If the work flow involves two library preparation protocols, such as for exome captue, only the steps of the first protocol should be given here.
 
 
-=== =========================================
+=== =======================================
 ID  process Name
-=== =========================================
+=== =======================================
 304	Ligate 3' adapters (TruSeq small RNA) 1.0
-=== =========================================
+=== =======================================
     
 
 INITALQCFINISHEDLIB
--------------------
-
+==================
 All processes included in the initial qc protocol for finished libraries, except the aggregation step.
 
 
@@ -72,8 +69,7 @@ ID  process Name
     
 
 AGRINITQC
--------------------
-
+==================
 Aggregation step of the initial qc protocol
 
 
@@ -86,7 +82,7 @@ ID  process Name
     
 
 POOLING
--------------------
+==================
 To identify the reagent labels (indexes) of each sample. If multiple pooling steps, the first pooling step after indexing should be specified
 
 
@@ -107,7 +103,8 @@ ID  process Name
     
 
 CALIPER
--------------------
+==================
+
 
 
 === =======================================
@@ -119,8 +116,7 @@ ID  process Name
     
 
 WORKSET
--------------------
-
+==================
 To identify the work sets on which the samples has been run. The process used to define a workset for the protocol. 
 
 
@@ -132,8 +128,7 @@ ID  process Name
     
 
 PREPEND
--------------------
-
+==================
 Process that can be defined as a end of the library preparation. If more than one library preparation protocol is included in the work flow, only the prep end step of the second protocol should be given here. Used to set the prep finished date.
 
 
@@ -150,8 +145,7 @@ ID  process Name
     
 
 DILSTART
--------------------
-
+==================
 These processes are used to set the dilution_and_pooling_start_date
 
 
@@ -164,8 +158,7 @@ ID  process Name
     
 
 INITALQC
--------------------
-
+==================
 All processes included in the initial qc protocol, except the aggrigation step.
 
 
@@ -186,7 +179,8 @@ ID  process Name
     
 
 SUMMARY
--------------------
+==================
+
 
 
 === =======================================
@@ -197,8 +191,7 @@ ID  process Name
     
 
 LIBVAL
--------------------
-
+==================
 All processes included in the library validation protocol, except the aggregation step. If the work flow involves two library preparation protocols, such as for exome capture, only the steps of the second protocol should be given here.
 
 
@@ -214,8 +207,7 @@ ID  process Name
     
 
 SEQUENCING
--------------------
-
+==================
 Sequencing
 
 
@@ -228,19 +220,19 @@ ID  process Name
     
 
 DEMULTIPLEX
--------------------
+==================
 
 
-=== ==================================================
+
+=== =======================================
 ID  process Name
-=== ==================================================
+=== =======================================
 13	Bcl Conversion & Demultiplexing (Illumina SBS) 4.0
-=== ==================================================
+=== =======================================
     
 
 PREPSTART
--------------------
-
+==================
 Process/processes that can be defined as a start of the library preparation protocol. The first one of these that are run in lims is used to set the prep start date. If the work flow involves two library preparation protocols, such as for exome capture, the prep start step of the second protocol should be given here. 
 
 
@@ -258,8 +250,7 @@ ID  process Name
     
 
 AGRLIBVAL
--------------------
-
+==================
 The aggregation step of the library validation protocol
 
 

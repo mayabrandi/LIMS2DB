@@ -14,6 +14,10 @@ setup(name = "LIMS2DB",
     author = "Maya Brandi",
     author_email = "maya.brandi@scilifelab.se",
     description = "Feching data from LIMS and pushes into statusdb",
-#    py_modules = ['LIMS2DB/objectsDB', 'scripts'],
     packages=find_packages(),
     scripts = glob.glob('scripts/*.py'))
+
+
+from LIMS2DB.objectsDB import make_process_category_doc
+make_process_category_doc.make_doc()
+
