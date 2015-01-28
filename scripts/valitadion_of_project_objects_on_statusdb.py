@@ -43,23 +43,22 @@ import os
 import codecs
 from optparse import OptionParser
 from statusdb.db.utils import *
-from helpers import *
+from LIMS2DB.objectsDB.functions import *
 from pprint import pprint
 import objectsDB as DB
 from datetime import date
-import scilifelab.log
+import logging
 
 def comp_obj(proj_tools_dev, diff, keys):
     """compares the two dictionaries obj and dbobj"""
     if proj_tools_dev.has_key('project_name'):
         if keys:
-            print keys
-            LOG.info('tools and tools-dev are differing for proj %s: %s' % (
+            logging.info('tools and tools-dev are differing for proj %s: %s' % (
                                                 proj_tools_dev['project_name'],diff))
-        LOG.info('tools and tools-dev are differing for proj %s: %s' % ( 
+        logging.info('tools and tools-dev are differing for proj %s: %s' % ( 
                                     proj_tools_dev['project_name'],diff))
     elif proj_tools_dev:
-        LOG.info('project_name missing in %s' % (proj_tools_dev['_id']))
+        logging.info('project_name missing in %s' % (proj_tools_dev['_id']))
 
 def missing_keys(proj_tools_dev, proj_tools,proj_name,application,diff_keys=[],diff = False):
     G20158 = ['m_reads_sequenced','status','size_(bp)']
@@ -67,7 +66,7 @@ def missing_keys(proj_tools_dev, proj_tools,proj_name,application,diff_keys=[],d
     keys = list(set(proj_tools_dev.keys() + proj_tools.keys()))
     for key in keys:
         if len(key.split('_'))==2 and key[0]=='P':
-                        LOG.info('SAMPLE:   %s' %(key))
+                        logging.info('SAMPLE:   %s' %(key))
         if (key not in BASEDIF+G20158) and (proj_tools.has_key(key)) and proj_tools[key]:
             if proj_tools_dev.has_key(key) and proj_tools_dev[key]:
                 proj_tools_val = proj_tools[key]
@@ -79,7 +78,7 @@ def missing_keys(proj_tools_dev, proj_tools,proj_name,application,diff_keys=[],d
                         diff,diff_keys = missing_keys(proj_tools_dev_val, 
                                proj_tools_val,proj_name,application,diff_keys=diff_keys,diff = diff)
             elif not proj_tools_dev.has_key(key):
-                LOG.info('tools-dev proj %s-%s - missing Key %s' %(proj_name,
+                logging.info('tools-dev proj %s-%s - missing Key %s' %(proj_name,
                                                 application,key))
                 diff = True
                 diff_keys.append(key)
@@ -92,11 +91,11 @@ def differing_keys(proj_tools_dev,proj_tools,proj_name,application,diff_keys = [
     keys = list(set(proj_tools_dev.keys() + proj_tools.keys()))
     for key in keys:
         if len(key.split('_'))==2 and key[0]=='P':
-            LOG.info('SAMPLE:   %s' %(key))
+            logging.info('SAMPLE:   %s' %(key))
         if key not in BASEDIF+G20158:
             if proj_tools.has_key(key) and proj_tools_dev.has_key(key):
                 if not proj_tools_dev[key]:
-                    LOG.info('empty key %s in proj %s'%(key,proj_name))
+                    logging.info('empty key %s in proj %s'%(key,proj_name))
                 proj_tools_val = proj_tools[key]
                 proj_tools_dev_val = proj_tools_dev[key]
                 if (proj_tools_val != proj_tools_dev_val):
@@ -107,7 +106,7 @@ def differing_keys(proj_tools_dev,proj_tools,proj_name,application,diff_keys = [
                     else:
                         diff = True
                         diff_keys.append(key)
-                        LOG.info('Key %s is differing for proj %s-%s: tools gives:' 
+                        logging.info('Key %s is differing for proj %s-%s: tools gives:' 
                                  '%s. tools-dev gives %s. ' %( key, proj_name,
                                  application,proj_tools_val,
                                  proj_tools_dev_val))
@@ -127,16 +126,16 @@ def  main(proj_name, all_projects, conf_tools_dev, conf_tools):
             proj_tools_dev = proj_db_tools_dev.get(key)
             try:
                 proj_name = proj_tools['project_name']
-                LOG.info('Handeling %s %s' % (proj_name, key))
+                logging.info('Handeling %s %s' % (proj_name, key))
                 try:
                     application = proj_tools['application']
                 except:
-                    LOG.info('Application is missing for proj %s in tools' %(proj_name))
+                    logging.info('Application is missing for proj %s in tools' %(proj_name))
             except:
                 proj_name = 'XX'
-                LOG.info('Project name missing in tools: %s' %(key))
+                logging.info('Project name missing in tools: %s' %(key))
             if not proj_tools_dev:
-                LOG.warning("Found no projects on tools-dev with name %s" % 
+                logging.warning("Found no projects on tools-dev with name %s" % 
                                                                   proj_name)
             elif proj_name and application:
                 diff , keys= differing_keys(proj_tools_dev, proj_tools, proj_name, 
@@ -151,9 +150,9 @@ def  main(proj_name, all_projects, conf_tools_dev, conf_tools):
         key = find_proj_from_view(proj_db_tools, proj_name)
         proj_tools = proj_db_tools.get(key)
         proj_tools_dev = proj_db_tools_dev.get(key)
-        LOG.info('Handeling %s %s' % (proj_name, key))
+        logging.info('Handeling %s %s' % (proj_name, key))
         if (not proj_tools) | (not proj_tools_dev):
-            LOG.warning("Found no project named %s" %(proj_name))
+            logging.warning("Found no project named %s" %(proj_name))
         else:
             diff,keys = differing_keys(proj_tools_dev, proj_tools,proj_name,
                                              proj_tools['application'], diff_keys=keys)
@@ -176,9 +175,8 @@ if __name__ == '__main__':
         help = "Config file for tools-dev.") 
     (options, args) = parser.parse_args()
 
-    LOG = scilifelab.log.file_logger('LOG',options.conf ,
-                                     'validate_projects_statusdb.log', 
-                                     'log_dir_tools')
+    logging.basicConfig(filename='validate_projects_statusdb.log',level=logging.INFO)
+
     main(options.project_name, options.all_projects, options.conf_dev, 
                                                         options.conf)
 

@@ -43,31 +43,32 @@ import os
 import codecs
 from optparse import OptionParser
 from statusdb.db.utils import *
-from functions import *
+from LIMS2DB.objectsDB.functions import *
 from pprint import pprint
 from genologics.lims import *
 from genologics.config import BASEURI, USERNAME, PASSWORD
 import objectsDB as DB
 from datetime import date
-import scilifelab.log
 lims = Lims(BASEURI, USERNAME, PASSWORD)
 lims_stage = Lims('https://genologics-stage.scilifelab.se:8443', USERNAME, PASSWORD)
+import logging
+
 
 def comp_obj(stage, prod):
     """compares the two dictionaries obj and dbobj"""
-    LOG.info('project %s is being handeled' % stage['project_name'])
+    logging.info('project %s is being handeled' % stage['project_name'])
     diff = recursive_comp(stage, prod)
-    LOG.info('Lims stage and Lims production are differing for proj %s: %s' % ( stage['project_name'],diff))
+    logging.info('Lims stage and Lims production are differing for proj %s: %s' % ( stage['project_name'],diff))
 
 def recursive_comp(stage, prod):
     diff = False
     keys = list(set(stage.keys() + prod.keys()))
     for key in keys:
         if not (stage.has_key(key)):
-            LOG.info('Key %s missing in Lims stage to db object ' % key)
+            logging.info('Key %s missing in Lims stage to db object ' % key)
             diff = True
         elif not  prod.has_key(key):
-            LOG.info('Key %s missing in Lims production to db object ' % key)
+            logging.info('Key %s missing in Lims production to db object ' % key)
             diff = True
         else:
             prod_val = prod[key]
@@ -77,7 +78,7 @@ def recursive_comp(stage, prod):
                 if (type(prod_val) is dict) and (type(stage_val) is dict):
                     diff = diff and recursive_comp(stage_val, prod_val)
                 else:
-                    LOG.info('Key %s differing: Lims production gives: %s. Lims stage gives %s. ' %( key,prod_val,stage_val))
+                    logging.info('Key %s differing: Lims production gives: %s. Lims stage gives %s. ' %( key,prod_val,stage_val))
     return diff
 
 def  main(proj_name, all_projects, conf, only_closed):
@@ -97,7 +98,7 @@ def  main(proj_name, all_projects, conf, only_closed):
                 try:
                     proj_stage = lims_stage.get_projects(name = proj_name)
                     if len(proj_stage)==0 :
-                        LOG.warning("""Found no projects on Lims stage with name %s""" % proj_name)
+                        logging.warning("""Found no projects on Lims stage with name %s""" % proj_name)
                     else:
                         proj_stage = proj_stage[0]
                         opened = proj.open_date
@@ -108,14 +109,14 @@ def  main(proj_name, all_projects, conf, only_closed):
                                 print
                                 comp_obj(obj_stage.obj, obj.obj)
                         else:
-                            LOG.info('Open date missing for project %s' % proj_name)
+                            logging.info('Open date missing for project %s' % proj_name)
                 except:
-                    LOG.info('Failed comparing stage and prod for proj %s' % proj_name)    
+                    logging.info('Failed comparing stage and prod for proj %s' % proj_name)    
     elif proj_name is not None:
         proj = lims.get_projects(name = proj_name)
         proj_stage = lims_stage.get_projects(name = proj_name)
         if (not proj) | (not proj_stage):
-            LOG.warning("""Found %s projects on Lims stage, and %s projects 
+            logging.warning("""Found %s projects on Lims stage, and %s projects 
                         on Lims production with project name %s""" % (str(len(proj_stage)), str(len(proj)), proj_name))
         else:
             proj = proj[0]
@@ -132,7 +133,7 @@ def  main(proj_name, all_projects, conf, only_closed):
                     obj_stage = DB.ProjectDB(lims_stage, proj.id, None)
                     comp_obj(obj_stage.obj, obj.obj)
             else:
-                LOG.info('Open date missing for project %s' % proj_name)
+                logging.info('Open date missing for project %s' % proj_name)
 
 if __name__ == '__main__':
     parser = OptionParser(usage=usage)
@@ -149,8 +150,8 @@ if __name__ == '__main__':
     parser.add_option("-c", "--conf", dest="conf", 
     default=os.path.join(os.environ['HOME'],'opt/config/post_process.yaml'),         
     help = "Config file.  Default: ~/opt/config/post_process.yaml")
+    logging.basicConfig(filename='PSUL_validation.log',level=logging.INFO)
 
     (options, args) = parser.parse_args()
-    LOG = scilifelab.log.file_logger('LOG',options.conf ,'validate_LIMS_upgrade.log', 'log_dir_tools')
     main(options.project_name, options.all_projects, options.conf, options.closed_projects)
 

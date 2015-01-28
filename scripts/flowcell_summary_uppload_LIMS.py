@@ -15,9 +15,10 @@ from genologics.lims_utils import *
 from genologics.config import BASEURI, USERNAME, PASSWORD
 from datetime import date
 from statusdb.db.utils import *
-import scilifelab.log
+from LIMS2DB.objectsDB.process_categories import *
+
 lims = Lims(BASEURI, USERNAME, PASSWORD)
-LOG = scilifelab.log.minimal_logger('LOG')
+import logging
 
 def get_run_qcs(fc, lanesobj):
     for art in fc.all_inputs():
@@ -69,7 +70,7 @@ def  main(flowcell, all_flowcells,days,conf):
                     if delta.days < days:
                         dbobj["illumina"]["run_summary"] = get_sequencing_info(fc)
                         info = save_couchdb_obj(fc_db, dbobj)
-                        LOG.info('flowcell %s %s : _id = %s' % (flowcell_name, info, key))
+                        logging.info('flowcell %s %s : _id = %s' % (flowcell_name, info, key))
     elif flowcell is not None:
         if '-' in flowcell:
             flowcell_name = flowcell
@@ -85,7 +86,7 @@ def  main(flowcell, all_flowcells,days,conf):
             dbobj["illumina"]["run_summary"] = get_sequencing_info(fc)
             get_run_qcs(fc, dbobj['lanes'])
             info = save_couchdb_obj(fc_db, dbobj)
-            LOG.info('flowcell %s %s : _id = %s' % (flowcell_name, info, key))
+            logging.info('flowcell %s %s : _id = %s' % (flowcell_name, info, key))
                 
 
 if __name__ == '__main__':
@@ -106,7 +107,6 @@ if __name__ == '__main__':
     help = "Config file.  Default: ~/opt/config/post_process.yaml")
 
     (options, args) = parser.parse_args()
-
-    LOG = scilifelab.log.file_logger('LOG', options.conf, 'lims2db_flowcells.log','log_dir_tools')
+    logging.basicConfig(filename='fsul.log',level=logging.INFO)
     main(options.flowcell_name, options.all_flowcells, options.days, options.conf)
 

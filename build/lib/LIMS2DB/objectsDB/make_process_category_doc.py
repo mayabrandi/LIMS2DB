@@ -1,4 +1,5 @@
-from LIMS2DB.objectsDB import process_categories
+from LIMS2DB.objectsDB.process_categories import *
+
 
 """Script to generate the process chategory info to a Read the Docs friendly rst
 file. The script should be run from setup.py"""
@@ -8,7 +9,8 @@ GENERALINFO = """
 What is a Process Category?
 ============================
 
-In the project-statusdb context, lims processes are categorised into groups that define, or are used to define a certain type of status-db key in a project database. The categories are specified here. When a new work flow is initialised in lims, the different categories needs to be updated to contain any aditional steps that has not already been included from some other workfrow. 
+In the project-statusdb context, lims processes are categorised into groups that define, or are used to define a certain type of status-db key in a project database. The categories are specified here. 
+
 
 Adding a work flow.
 ==========================
@@ -28,12 +30,12 @@ SECTIONEND = """=== =======================================
 def make_doc():
     f = open('docs/process_categories.rst', 'w')
     print >> f, GENERALINFO
-    for cat in process_categories.PROCESSCATEGORIES:
+    for cat in PROCESSCATEGORIES:
         print >> f, cat
         print >> f, SECTIONSTART
-        print >> f, process_categories.PROCESSCATEGORIES[cat]['Description']
+        print >> f, PROCESSCATEGORIES[cat]['Description']
         print >> f, SECTIONMIDLE
-        for id, name in process_categories.PROCESSCATEGORIES[cat].items():
+        for id, name in PROCESSCATEGORIES[cat].items():
             if not id=='Description':
                 print >> f, '\t'.join([id, name])
         print >> f, SECTIONEND
