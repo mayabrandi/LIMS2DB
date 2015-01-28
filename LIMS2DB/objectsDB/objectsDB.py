@@ -573,7 +573,7 @@ class InitialQC():
         =================== ============    ================    ================
         start_date          Process         date-run            First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps found for in the artifact history of the output artifact of one of the AGRINITQC stepst 
         finish_date         Process         date-run            One of the AGRINITQC steps
-        initials            Technician      initials            technician.initials of the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
+        initials            Researcher      initials            technician.initials of the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
         initial_qc_status   Artifact        qc-flag             qc-flag of thre input artifact to the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps
         caliper_image       Artifact        content-location    content-location of output Result files of the last of all CALIPER steps in the artifact history of the output artifact of one of the AGRINITQC steps
         =================== ============    ================    ================
@@ -678,7 +678,7 @@ class ProcessSpec():
             # 5) PREPEND            - get latest prep end
             self.prepends += filter(lambda pro: (pro['type'] in 
                             PREPEND) and pro['outart'] , art_steps.values())
-            # 8) WORKSET            - get latest workset
+            # 8) WORKSET            - get worksets
             self.worksets += filter(lambda pro: (pro['type'] in 
                             WORKSET) and pro['outart'], art_steps.values()) 
             # 9) SEQSTART dubbelkolla
@@ -755,8 +755,11 @@ class Prep():
         prep_start_date     Process         date-run    The date-run of a PREPSTART step
         prep_finished_date  Process         date-run    The date-run of a PREPEND step
         prep_id             Process         id          The lims id of a PREPEND step
-        workset_setup       False
+        workset_setup       Process         id          The lims id of the last WORKSET step
         pre_prep_start_date Process         date-run    The date-run of process 'Shear DNA (SS XT) 4.0'. Only for 'Exome capture' projects   
+        -                   Artifact        -           udf of the output artifact of the first PREPSTART and PREPREPSTART steps in the history
+        amount_taken_(ng)
+
         =================== ============    =========== ================
         """
 
