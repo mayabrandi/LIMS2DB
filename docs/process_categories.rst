@@ -53,7 +53,7 @@ ID  process Name
     
 
 INITALQCFINISHEDLIB
-==================
+=====================
 All processes included in the initial qc protocol for finished libraries, except the aggregation step.
 
 
