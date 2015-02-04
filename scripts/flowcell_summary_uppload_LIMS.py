@@ -5,20 +5,20 @@ into the flowcell database in statusdb.
 
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
-#import sys
-#import os
-#import codecs
-#from optparse import OptionParser
-#from pprint import pprint
-#from genologics.lims import *
-#from genologics.lims_utils import *
-#from genologics.config import BASEURI, USERNAME, PASSWORD
-#from datetime import date
-#from statusdb.db.utils import *
-#from LIMS2DB.objectsDB.process_categories import *
+import sys
+import os
+import codecs
+from optparse import OptionParser
+from pprint import pprint
+from genologics.lims import *
+from genologics.lims_utils import *
+from genologics.config import BASEURI, USERNAME, PASSWORD
+from datetime import date
+from statusdb.db.utils import *
+from LIMS2DB.objectsDB.process_categories import *
 
-#lims = Lims(BASEURI, USERNAME, PASSWORD)
-#import logging
+lims = Lims(BASEURI, USERNAME, PASSWORD)
+import logging
 
 def get_run_qcs(fc, lanesobj):
     for art in fc.all_inputs():
