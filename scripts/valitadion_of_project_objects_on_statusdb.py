@@ -38,16 +38,16 @@ If you get output when grepping for True, there are differences. Then read the l
 file to find what is differing. 
 
 """
-import sys
-import os
-import codecs
-from optparse import OptionParser
-from statusdb.db.utils import *
-from LIMS2DB.objectsDB.functions import *
-from pprint import pprint
-import objectsDB as DB
-from datetime import date
-import logging
+#import sys
+#import os
+#import codecs
+#from optparse import OptionParser
+#from statusdb.db.utils import *
+#from LIMS2DB.objectsDB.functions import *
+#from pprint import pprint
+#import objectsDB as DB
+#from datetime import date
+#import logging
 
 def comp_obj(proj_tools_dev, diff, keys):
     """compares the two dictionaries obj and dbobj"""

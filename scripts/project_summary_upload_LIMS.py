@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-from __future__ import print_function
 """Script to load project info from Lims into the project database in statusdb.
 
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
-
+#from __future__ import print_function
 #import sys
 #import os
 #import codecs

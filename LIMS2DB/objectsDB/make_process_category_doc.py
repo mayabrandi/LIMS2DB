@@ -1,4 +1,4 @@
-from LIMS2DB.objectsDB.process_categories import *
+#from LIMS2DB.objectsDB.process_categories import *
 
 
 """Script to generate the process chategory info to a Read the Docs friendly rst
@@ -17,7 +17,7 @@ Adding a work flow.
 
 If a work flow does not fit with the categories one might have to change the category definitions or ad new categories. This needs to be done in corperation with the developer of project_summary_uppload_LIMS.py. The cathegories are defined in process_categories.py within the objectsDB package.
 """
-SECTIONSTART = "=================="
+SECTIONSTART = "==============================="
 SECTIONMIDLE = """
 
 === =======================================
