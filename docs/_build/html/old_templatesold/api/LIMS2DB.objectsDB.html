@@ -1,0 +1,836 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>LIMS2DB.objectsDB package &mdash; PSUL 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="PSUL 1 documentation" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">PSUL 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="lims2db-objectsdb-package">
+<h1>LIMS2DB.objectsDB package<a class="headerlink" href="#lims2db-objectsdb-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-LIMS2DB.objectsDB.objectsDB">
+<span id="lims2db-objectsdb-objectsdb-module"></span><h2>LIMS2DB.objectsDB.objectsDB module<a class="headerlink" href="#module-LIMS2DB.objectsDB.objectsDB" title="Permalink to this headline">¶</a></h2>
+<p>A module for building up the project objects that build up the project database on 
+statusdb. Lims isthe main source of information.</p>
+<p>Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.</p>
+<dl class="class">
+<dt id="LIMS2DB.objectsDB.objectsDB.InitialQC">
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">InitialQC</tt><big>(</big><em>lims_inst</em>, <em>sample</em>, <em>procs_per_art</em>, <em>application</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#InitialQC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instances of this class holds a dictionary formatted for building up the 
+initial_qc field per sample in the project database on status db.</p>
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info">
+<tt class="descname">set_initialqc_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#InitialQC.set_initialqc_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/initial_qc/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="6%" />
+<col width="7%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps found for in the artifact history of the output artifact of one of the AGRINITQC stepst</td>
+</tr>
+<tr class="row-odd"><td>finish_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>One of the AGRINITQC steps</td>
+</tr>
+<tr class="row-even"><td>initials</td>
+<td>Researcher</td>
+<td>initials</td>
+<td>technician.initials of the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps</td>
+</tr>
+<tr class="row-odd"><td>initial_qc_status</td>
+<td>Artifact</td>
+<td>qc-flag</td>
+<td>qc-flag of thre input artifact to the last of all (AGRLIBVAL if application in FINLIB else AGRINITQC) steps</td>
+</tr>
+<tr class="row-even"><td>caliper_image</td>
+<td>Artifact</td>
+<td>content-location</td>
+<td>content-location of output Result files of the last of all CALIPER steps in the artifact history of the output artifact of one of the AGRINITQC steps</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="LIMS2DB.objectsDB.objectsDB.Prep">
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">Prep</tt><big>(</big><em>sample_name</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instances of this class holds a dictionary formatted for building a
+sample prep in the project database on status db. Each sample can have 
+many preps. Their keys are named A,B,C,etc.</p>
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.Prep._get_lib_val_info">
+<tt class="descname">_get_lib_val_info</tt><big>(</big><em>agrlibQCsteps</em>, <em>libvalstart</em>, <em>latest_caliper_id=None</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep._get_lib_val_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep._get_lib_val_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function holds for both library_validation and pre_prep_library_validation KEYSs</p>
+<p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[lib prep id]/library_validation/[lib val id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="7%" />
+<col width="7%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>finish_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>date-run of the last AGRLIBVAL step in the history</td>
+</tr>
+<tr class="row-odd"><td>start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>First of all LIBVAL steps found for in the artifact history of the output artifact of one of the last AGRLIBVAL step in the history</td>
+</tr>
+<tr class="row-even"><td>well_location</td>
+<td>Artifact</td>
+<td>location</td>
+<td>location of the input artifact to the last AGRLIBVAL step in the history</td>
+</tr>
+<tr class="row-odd"><td>prep_status</td>
+<td>Artifact</td>
+<td>qc-flag</td>
+<td>qc-flag of the input artifact to the last AGRLIBVAL step in the history</td>
+</tr>
+<tr class="row-even"><td>reagent_labels</td>
+<td>Artifact</td>
+<td>reagent-label</td>
+<td>reagent-label of the input artifact to the last AGRLIBVAL step in the history</td>
+</tr>
+<tr class="row-odd"><td>initials</td>
+<td>Researcher</td>
+<td>initials</td>
+<td>technician.initials of the last AGRLIBVAL step in the history</td>
+</tr>
+<tr class="row-even"><td>average_size_bp</td>
+<td>Artifact</td>
+<td>Size (bp)</td>
+<td>udf (&#8216;Size (bp)&#8217;) of the input artifact to the last AGRLIBVAL step in the history</td>
+</tr>
+<tr class="row-odd"><td>caliper_image</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>conc_units</td>
+<td>Artifact</td>
+<td>Conc. Units</td>
+<td>udf (&#8216;Conc. Units&#8217;) of the input artifact to the last AGRLIBVAL step in the history</td>
+</tr>
+<tr class="row-odd"><td>concentration</td>
+<td>Artifact</td>
+<td>Concentration</td>
+<td>udf (&#8216;Concentration&#8217;) of the input artifact to the last AGRLIBVAL step in the history</td>
+</tr>
+<tr class="row-even"><td>volume_(ul)</td>
+<td>Artifact</td>
+<td>volume (ul)</td>
+<td>udf (&#8216;volume (ul)&#8217;) of the input artifact to the last AGRLIBVAL step in the history</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info">
+<tt class="descname">set_prep_info</tt><big>(</big><em>steps</em>, <em>aplication</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep.set_prep_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[lib prep id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="9%" />
+<col width="9%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>prep_start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>The date-run of a PREPSTART step</td>
+</tr>
+<tr class="row-odd"><td>prep_finished_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>The date-run of a PREPEND step</td>
+</tr>
+<tr class="row-even"><td>prep_id</td>
+<td>Process</td>
+<td>id</td>
+<td>The lims id of a PREPEND step</td>
+</tr>
+<tr class="row-odd"><td>workset_setup</td>
+<td>Process</td>
+<td>id</td>
+<td>The lims id of the last WORKSET step</td>
+</tr>
+<tr class="row-even"><td>pre_prep_start_date</td>
+<td>Process
+Artifact</td>
+<td>date-run</td>
+<td>The date-run of process &#8216;Shear DNA (SS XT) 4.0&#8217;. Only for &#8216;Exome capture&#8217; projects
+udf of the output artifact of the first PREPSTART and PREPREPSTART steps in the history</td>
+</tr>
+<tr class="row-odd"><td>amount_taken_(ng)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProcessInfo">
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProcessInfo</tt><big>(</big><em>lims_instance</em>, <em>processes</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProcessInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProcessInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class takes a list of process type names. Eg 
+&#8216;Aggregate QC (Library Validation) 4.0&#8217; and forms  a dict with info about 
+all processes of the type specified in runs which the project has gon through.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProcessSpec">
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProcessSpec</tt><big>(</big><em>hist_sort</em>, <em>hist_list</em>, <em>application</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProcessSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProcessSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to identify to what process chategory a particular process belongs 
+in the artifact history.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB">
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProjectDB</tt><big>(</big><em>lims_instance</em>, <em>project_id</em>, <em>samp_db</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instances of this class holds a dictionary formatted for building up the 
+project database on statusdb. Source of information come from different lims
+artifacts and processes.</p>
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_affiliation">
+<tt class="descname">_get_affiliation</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_affiliation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_affiliation" title="Permalink to this definition">¶</a></dt>
+<dd><p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="21%" />
+<col width="19%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>affiliation</td>
+<td>Lab</td>
+<td>Affiliation</td>
+<td>project.researcher.lab</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info">
+<tt class="descname">_get_project_level_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_project_level_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="10%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>application</td>
+<td>Project</td>
+<td>Application</td>
+<td>Project level udfs</td>
+</tr>
+<tr class="row-odd"><td>samples</td>
+<td>Sample</td>
+<td>Name</td>
+<td>Dict of all samples registered for the project. Keys are sample names.</td>
+</tr>
+<tr class="row-even"><td>open_date</td>
+<td>Project</td>
+<td>open-date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>close_date</td>
+<td>Project</td>
+<td>close-date</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>contact</td>
+<td>Researcher</td>
+<td>email</td>
+<td>project.researcher.email</td>
+</tr>
+<tr class="row-odd"><td>project_name</td>
+<td>Project</td>
+<td>name</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>project_id</td>
+<td>Project</td>
+<td>id</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>details</td>
+<td>Project</td>
+<td>udfs</td>
+<td>A dict with Project level udfs</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_summary_info">
+<tt class="descname">_get_project_summary_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_project_summary_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_summary_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="8%" />
+<col width="7%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>project_summary</td>
+<td>Process</td>
+<td>udfs</td>
+<td>A dict with all Process level udfs fetched from the process of type SUMMARY that has been run on the project.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished">
+<tt class="descname">_get_sequencing_finished</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_sequencing_finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished" title="Permalink to this definition">¶</a></dt>
+<dd><p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="8%" />
+<col width="8%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>sequencing_finished</td>
+<td>Process</td>
+<td>Finish Date</td>
+<td>Last sequencing_finish_date where sequencing_finish_date is the &#8216;Finish Date&#8217; udf of a SEQUENCING step</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._make_DB_samples">
+<tt class="descname">_make_DB_samples</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._make_DB_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._make_DB_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Project/[KEY]:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="7%" />
+<col width="7%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>first_initial_qc</td>
+<td>Process</td>
+<td>date-run</td>
+<td>First of all (INITALQCFINISHEDLIB if application in FINLIB else INITALQC) steps run on any sample in inte project.</td>
+</tr>
+<tr class="row-odd"><td>no_of_samples</td>
+<td>Project</td>
+<td>&nbsp;</td>
+<td>Number of registered samples for the project</td>
+</tr>
+<tr class="row-even"><td>samples</td>
+<td>Sample</td>
+<td>Name</td>
+<td>Dict of all samples registered for the project. Keys are sample names. Values are described by the project/samples/[sample] doc.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB.build_processes_per_artifact">
+<tt class="descname">build_processes_per_artifact</tt><big>(</big><em>lims</em>, <em>pname</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB.build_processes_per_artifact"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB.build_processes_per_artifact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a dictionary linking each artifact id with its processes.
+Other artifacts can be present as keys. All processes where the project is
+present should be included. The values of the dictionary is sets, to avoid
+duplicated projects for a single artifact.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB">
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">SampleDB</tt><big>(</big><em>lims_instance</em>, <em>sample_id</em>, <em>project_name</em>, <em>samp_db</em>, <em>application=None</em>, <em>AgrLibQCs=[]</em>, <em>run_info=[]</em>, <em>processes_per_artifact=None</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instances of this class holds a dictionary formatted for building up the 
+samples in the project database on status db. Source of information come 
+from different lims artifacts and processes.</p>
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_barcode">
+<tt class="descname">_get_barcode</tt><big>(</big><em>reagent_label</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_barcode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_barcode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts barcode from list of artifact.reagent_labels</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_firts_day">
+<tt class="descname">_get_firts_day</tt><big>(</big><em>sample_name</em>, <em>process_list</em>, <em>last_day=False</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_firts_day"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_firts_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>process_list is a list of process type names, sample_name is a 
+sample name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_prep_leter">
+<tt class="descname">_get_prep_leter</tt><big>(</big><em>prep_info</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_prep_leter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_prep_leter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get preps and prep names; A,B,C... based on prep dates for 
+sample_name. 
+Output: A dict where keys are prep_art_id and values are prep names.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_preps_and_libval">
+<tt class="descname">_get_preps_and_libval</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_preps_and_libval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_preps_and_libval" title="Permalink to this definition">¶</a></dt>
+<dd><p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[prep id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="4%" />
+<col width="4%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>prep_status</td>
+<td>Artifact</td>
+<td>qc-flag</td>
+<td>The qc-flag of the input artifact of the last AGRLIBVAL step</td>
+</tr>
+<tr class="row-odd"><td>reagent_label</td>
+<td>Artifact</td>
+<td>reagent-label</td>
+<td>If the sample went throuh POOLING the reagent_labels must be feched from the input artifact of the firtst POOLING step. If the sample did not go through POOLING, the reagent_labels are fetched from the input artifact to the last AGRLIBVAL step in the history</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_info">
+<tt class="descname">_get_sample_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_sample_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="3%" />
+<col width="3%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>scilife_name</td>
+<td>Sample</td>
+<td>name</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td>well_location</td>
+<td>Artifact</td>
+<td>location</td>
+<td></td>
+</tr>
+<tr class="row-even"><td>details</td>
+<td>Sample</td>
+<td>udfs</td>
+<td>A dict with all Sample level udfs</td>
+</tr>
+<tr class="row-odd"><td>library_prep</td>
+<td>Process</td>
+<td>&nbsp;</td>
+<td>A dict where the keys are named A, B, etc and represent A-prep, B-prep etc. Preps are named A,B,... and are defined by the date of any PREPSTART step. First date-&gt; prep A, second date -&gt; prep B, etc. These are however not logged into the database until the process AGRLIBVAL has been run on the related artifact.</td>
+</tr>
+<tr class="row-even"><td>first_initial_qc_start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>If aplication is Finished library this value is feched from the date-run of a the first INITALQCFINISHEDLIB step, otherwise from the date-run of a the first INITALQC step</td>
+</tr>
+<tr class="row-odd"><td>first_prep_start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>First of all PREPSTART and  PREPREPSTART steps run on the sample</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[prep id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="4%" />
+<col width="3%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>sample_run_metrics</td>
+<td>Process</td>
+<td>&nbsp;</td>
+<td>A dict of sample runs where keys have the formate: LANE_DATE_FCID_BARCODE, where DATE and FCID: from udf (&#8216;Run ID&#8217;) of the SEQUENCING step. BARCODE: from reagent-lables of output artifact from SEQSTART step. LANE: from the location of the input artifact to the SEQUENCING step.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_run_metrics">
+<tt class="descname">_get_sample_run_metrics</tt><big>(</big><em>demux_info</em>, <em>preps</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_sample_run_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_run_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input: demux_info - instance of the ProcessInfo class with 
+DEMULTIPLEX processes as argument
+For each SEQUENCING process run on the sample, this function steps 
+bacward in the artifact history of the input artifact of the SEQUENCING 
+process to find the folowing information</p>
+<p>The following statusdb KEYs are set in this funktion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Project/samples/[sample id]/library_prep/[prep id]/sample_run_metrics/[samp run id]/[KEY]:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="7%" />
+<col width="6%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">KEY</th>
+<th class="head">lims_element</th>
+<th class="head">lims_field</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>dillution_and_pooling_start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>date-run of the first of all DILSTART steps in the artifact history of this SEQUENCING step</td>
+</tr>
+<tr class="row-odd"><td>sequencing_start_date</td>
+<td>Process</td>
+<td>date-run</td>
+<td>date-run of the first of all SEQSTART steps in the artifact history of this SEQUENCING step</td>
+</tr>
+<tr class="row-even"><td>sequencing_run_QC_finished</td>
+<td>Process</td>
+<td>date-run</td>
+<td>date-run of this SEQUENCING step</td>
+</tr>
+<tr class="row-odd"><td>sequencing_finish_date</td>
+<td>Process</td>
+<td>Finish Date</td>
+<td>udf (&#8216;Finish Date&#8217;) of this SEQUENCING step</td>
+</tr>
+<tr class="row-even"><td>sample_run_metrics_id</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>The sample database (statusdb) _id for the sample_run_metrics corresponding to the run, sample, lane in question.</td>
+</tr>
+<tr class="row-odd"><td>dem_qc_flag</td>
+<td>Artifact</td>
+<td>qc-flagg</td>
+<td>Qc-flagg of the output artifact of the latest of all DEMULTIPLEX steps run in the artifact history of this SEQUENCING step</td>
+</tr>
+<tr class="row-even"><td>seq_qc_flag</td>
+<td>Artifact</td>
+<td>qc-flagg</td>
+<td>Qc-flagg of the input artifact to this SEQUENCING step</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._pars_reagent_labels">
+<tt class="descname">_pars_reagent_labels</tt><big>(</big><em>steps</em>, <em>last_libval</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._pars_reagent_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._pars_reagent_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the sample went throuh POOLING the reagent_labels must be feched 
+from the input artifact of the firtst POOLING step. If the sample did 
+not go through POOLING, the reagent_labels are fetched from the input 
+artifact to the last AGRLIBVAL step in the history</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">LIMS2DB.objectsDB package</a><ul>
+<li><a class="reference internal" href="#module-LIMS2DB.objectsDB.objectsDB">LIMS2DB.objectsDB.objectsDB module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/old_templatesold/api/LIMS2DB.objectsDB.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">PSUL 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Maya.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

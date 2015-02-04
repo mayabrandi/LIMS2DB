@@ -67,7 +67,7 @@
 <span class="c">#from datetime import date</span>
 <span class="c">#import logging</span>
 
-<div class="viewcode-block" id="ProjectDB"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB">[docs]</a><span class="k">class</span> <span class="nc">ProjectDB</span><span class="p">():</span>
+<div class="viewcode-block" id="ProjectDB"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB">[docs]</a><span class="k">class</span> <span class="nc">ProjectDB</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Instances of this class holds a dictionary formatted for building up the </span>
 <span class="sd">    project database on statusdb. Source of information come from different lims</span>
 <span class="sd">    artifacts and processes.&quot;&quot;&quot;</span>
@@ -104,7 +104,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;escalations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">escalation_ids</span>
 
 
-<div class="viewcode-block" id="ProjectDB._get_project_level_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_project_level_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDB._get_project_level_info"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_project_level_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The following statusdb KEYs are set in this funktion.</span>
 
@@ -137,7 +137,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_affiliation</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_project_summary_info</span><span class="p">()</span>
 </div>
-<div class="viewcode-block" id="ProjectDB._get_affiliation"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_affiliation">[docs]</a>    <span class="k">def</span> <span class="nf">_get_affiliation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDB._get_affiliation"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_affiliation">[docs]</a>    <span class="k">def</span> <span class="nf">_get_affiliation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The following statusdb KEYs are set in this funktion.</span>
 
@@ -154,7 +154,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;affiliation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">researcher_udfs</span><span class="p">[</span><span class="s">&#39;Affiliation&#39;</span><span class="p">]</span>
 
 </div>
-<div class="viewcode-block" id="ProjectDB._get_project_summary_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_summary_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_project_summary_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDB._get_project_summary_info"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_summary_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_project_summary_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The following statusdb KEYs are set in this funktion.</span>
 
@@ -173,7 +173,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">project_summary</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;Warning. project summary process run more than once&#39;</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="ProjectDB._get_sequencing_finished"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished">[docs]</a>    <span class="k">def</span> <span class="nf">_get_sequencing_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDB._get_sequencing_finished"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished">[docs]</a>    <span class="k">def</span> <span class="nf">_get_sequencing_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The following statusdb KEYs are set in this funktion.</span>
 
@@ -200,7 +200,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">[</span><span class="s">&#39;sequencing_finished&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
 </div>
-<div class="viewcode-block" id="ProjectDB._make_DB_samples"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._make_DB_samples">[docs]</a>    <span class="k">def</span> <span class="nf">_make_DB_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDB._make_DB_samples"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB._make_DB_samples">[docs]</a>    <span class="k">def</span> <span class="nf">_make_DB_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c">## Getting sample info</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The following statusdb KEYs are set in this funktion.</span>
@@ -242,7 +242,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">delete_Nones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">)</span>
 
 </div>
-<div class="viewcode-block" id="ProjectDB.build_processes_per_artifact"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB.build_processes_per_artifact">[docs]</a>    <span class="k">def</span> <span class="nf">build_processes_per_artifact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lims</span><span class="p">,</span> <span class="n">pname</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectDB.build_processes_per_artifact"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProjectDB.build_processes_per_artifact">[docs]</a>    <span class="k">def</span> <span class="nf">build_processes_per_artifact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lims</span><span class="p">,</span> <span class="n">pname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructs a dictionary linking each artifact id with its processes.</span>
 <span class="sd">        Other artifacts can be present as keys. All processes where the project is</span>
 <span class="sd">        present should be included. The values of the dictionary is sets, to avoid</span>
@@ -261,7 +261,7 @@
 
         <span class="k">return</span> <span class="n">processes_per_artifact</span>
 </div></div>
-<div class="viewcode-block" id="ProcessInfo"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProcessInfo">[docs]</a><span class="k">class</span> <span class="nc">ProcessInfo</span><span class="p">():</span>
+<div class="viewcode-block" id="ProcessInfo"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProcessInfo">[docs]</a><span class="k">class</span> <span class="nc">ProcessInfo</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;This class takes a list of process type names. Eg </span>
 <span class="sd">    &#39;Aggregate QC (Library Validation) 4.0&#39; and forms  a dict with info about </span>
 <span class="sd">    all processes of the type specified in runs which the project has gon through.&quot;&quot;&quot;</span> 
@@ -290,7 +290,7 @@
         <span class="k">return</span> <span class="n">process_info</span>
 
 </div>
-<div class="viewcode-block" id="SampleDB"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB">[docs]</a><span class="k">class</span> <span class="nc">SampleDB</span><span class="p">():</span>
+<div class="viewcode-block" id="SampleDB"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB">[docs]</a><span class="k">class</span> <span class="nc">SampleDB</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Instances of this class holds a dictionary formatted for building up the </span>
 <span class="sd">    samples in the project database on status db. Source of information come </span>
 <span class="sd">    from different lims artifacts and processes.&quot;&quot;&quot;</span>
@@ -309,7 +309,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_sample_info</span><span class="p">()</span>
 
-<div class="viewcode-block" id="SampleDB._get_sample_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_sample_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleDB._get_sample_info"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_sample_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The following statusdb KEYs are set in this funktion.</span>
 
@@ -358,7 +358,7 @@
                                     <span class="n">PREPSTART</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="o">+</span> <span class="n">PREPREPSTART</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">delete_Nones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="SampleDB._get_firts_day"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_firts_day">[docs]</a>    <span class="k">def</span> <span class="nf">_get_firts_day</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample_name</span> <span class="p">,</span><span class="n">process_list</span><span class="p">,</span> <span class="n">last_day</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleDB._get_firts_day"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_firts_day">[docs]</a>    <span class="k">def</span> <span class="nf">_get_firts_day</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample_name</span> <span class="p">,</span><span class="n">process_list</span><span class="p">,</span> <span class="n">last_day</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;process_list is a list of process type names, sample_name is a </span>
 <span class="sd">        sample name&quot;&quot;&quot;</span>
 
@@ -371,7 +371,7 @@
         <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">None</span>
 </div>
-<div class="viewcode-block" id="SampleDB._get_barcode"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_barcode">[docs]</a>    <span class="k">def</span> <span class="nf">_get_barcode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reagent_label</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleDB._get_barcode"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_barcode">[docs]</a>    <span class="k">def</span> <span class="nf">_get_barcode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reagent_label</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Extracts barcode from list of artifact.reagent_labels&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">reagent_label</span><span class="p">:</span>
@@ -383,7 +383,7 @@
             <span class="k">return</span> <span class="bp">None</span>
         <span class="k">return</span> <span class="n">index</span>
 </div>
-<div class="viewcode-block" id="SampleDB._get_sample_run_metrics"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_run_metrics">[docs]</a>    <span class="k">def</span> <span class="nf">_get_sample_run_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">demux_info</span><span class="p">,</span> <span class="n">preps</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleDB._get_sample_run_metrics"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_run_metrics">[docs]</a>    <span class="k">def</span> <span class="nf">_get_sample_run_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">demux_info</span><span class="p">,</span> <span class="n">preps</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Input: demux_info - instance of the ProcessInfo class with </span>
 <span class="sd">        DEMULTIPLEX processes as argument</span>
 <span class="sd">        For each SEQUENCING process run on the sample, this function steps </span>
@@ -479,7 +479,7 @@
                 <span class="k">raise</span> <span class="ne">TypeError</span>
         <span class="k">return</span> <span class="n">samp_run_met_id</span>
 
-<div class="viewcode-block" id="SampleDB._get_prep_leter"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_prep_leter">[docs]</a>    <span class="k">def</span> <span class="nf">_get_prep_leter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prep_info</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleDB._get_prep_leter"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_prep_leter">[docs]</a>    <span class="k">def</span> <span class="nf">_get_prep_leter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prep_info</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get preps and prep names; A,B,C... based on prep dates for </span>
 <span class="sd">        sample_name. </span>
 <span class="sd">        Output: A dict where keys are prep_art_id and values are prep names.&quot;&quot;&quot;</span>
@@ -499,7 +499,7 @@
                 <span class="n">prep_info_new</span><span class="p">[</span><span class="n">preps_keys</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">delete_Nones</span><span class="p">(</span><span class="n">prep_info</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">prep_info_new</span>
 </div>
-<div class="viewcode-block" id="SampleDB._get_preps_and_libval"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_preps_and_libval">[docs]</a>    <span class="k">def</span> <span class="nf">_get_preps_and_libval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleDB._get_preps_and_libval"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._get_preps_and_libval">[docs]</a>    <span class="k">def</span> <span class="nf">_get_preps_and_libval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The following statusdb KEYs are set in this funktion.</span>
 
@@ -561,7 +561,7 @@
         <span class="k">return</span> <span class="n">preps</span>
 
 </div>
-<div class="viewcode-block" id="SampleDB._pars_reagent_labels"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._pars_reagent_labels">[docs]</a>    <span class="k">def</span> <span class="nf">_pars_reagent_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">last_libval</span><span class="p">):</span>
+<div class="viewcode-block" id="SampleDB._pars_reagent_labels"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.SampleDB._pars_reagent_labels">[docs]</a>    <span class="k">def</span> <span class="nf">_pars_reagent_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">last_libval</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;If the sample went throuh POOLING the reagent_labels must be feched </span>
 <span class="sd">        from the input artifact of the firtst POOLING step. If the sample did </span>
 <span class="sd">        not go through POOLING, the reagent_labels are fetched from the input </span>
@@ -604,7 +604,7 @@
                             <span class="n">topLevel_AgrLibQC</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">AgrLibQC</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">topLevel_AgrLibQC</span>
 </div>
-<div class="viewcode-block" id="InitialQC"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.InitialQC">[docs]</a><span class="k">class</span> <span class="nc">InitialQC</span><span class="p">():</span>
+<div class="viewcode-block" id="InitialQC"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.InitialQC">[docs]</a><span class="k">class</span> <span class="nc">InitialQC</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Instances of this class holds a dictionary formatted for building up the </span>
 <span class="sd">    initial_qc field per sample in the project database on status db.&quot;&quot;&quot;</span> 
     
@@ -631,7 +631,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="n">ProcessSpec</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">,</span> <span class="n">history</span><span class="o">.</span><span class="n">history_list</span><span class="p">,</span>
                                                                <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="p">)</span>
 
-<div class="viewcode-block" id="InitialQC.set_initialqc_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_initialqc_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="InitialQC.set_initialqc_info"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_initialqc_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The following statusdb KEYs are set in this funktion.</span>
 
@@ -667,7 +667,7 @@
         <span class="k">return</span> <span class="n">delete_Nones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initialqc_info</span><span class="p">)</span>
 
 </div></div>
-<div class="viewcode-block" id="ProcessSpec"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProcessSpec">[docs]</a><span class="k">class</span> <span class="nc">ProcessSpec</span><span class="p">():</span>
+<div class="viewcode-block" id="ProcessSpec"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.ProcessSpec">[docs]</a><span class="k">class</span> <span class="nc">ProcessSpec</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Class to identify to what process chategory a particular process belongs </span>
 <span class="sd">    in the artifact history.&quot;&quot;&quot;</span>
 
@@ -790,7 +790,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dilstart</span> <span class="o">=</span> <span class="n">get_last_first</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dilstarts</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seqstart</span> <span class="o">=</span> <span class="n">get_last_first</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seqstarts</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="Prep"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.Prep">[docs]</a><span class="k">class</span> <span class="nc">Prep</span><span class="p">():</span>
+<div class="viewcode-block" id="Prep"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.Prep">[docs]</a><span class="k">class</span> <span class="nc">Prep</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Instances of this class holds a dictionary formatted for building a</span>
 <span class="sd">    sample prep in the project database on status db. Each sample can have </span>
 <span class="sd">    many preps. Their keys are named A,B,C,etc.&quot;&quot;&quot;</span> 
@@ -819,7 +819,7 @@
             <span class="s">&#39;initials&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
             <span class="s">&#39;caliper_image&#39;</span> <span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
 
-<div class="viewcode-block" id="Prep.set_prep_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_prep_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">aplication</span><span class="p">):</span>
+<div class="viewcode-block" id="Prep.set_prep_info"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_prep_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">aplication</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The following statusdb KEYs are set in this funktion.</span>
 
@@ -868,7 +868,7 @@
                               <span class="n">steps</span><span class="o">.</span><span class="n">prepreplibvalends</span><span class="p">,</span> <span class="n">steps</span><span class="o">.</span><span class="n">prepreplibvalstart</span><span class="p">)</span>
 
         </div>
-<div class="viewcode-block" id="Prep._get_lib_val_info"><a class="viewcode-back" href="../../../_templates/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.Prep._get_lib_val_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_lib_val_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agrlibQCsteps</span><span class="p">,</span> <span class="n">libvalstart</span><span class="p">,</span> <span class="n">latest_caliper_id</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Prep._get_lib_val_info"><a class="viewcode-back" href="../../../old_templatesold/api/LIMS2DB.objectsDB.html#LIMS2DB.objectsDB.objectsDB.Prep._get_lib_val_info">[docs]</a>    <span class="k">def</span> <span class="nf">_get_lib_val_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agrlibQCsteps</span><span class="p">,</span> <span class="n">libvalstart</span><span class="p">,</span> <span class="n">latest_caliper_id</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function holds for both library_validation and pre_prep_library_validation KEYSs</span>
 
