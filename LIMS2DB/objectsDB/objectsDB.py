@@ -11,23 +11,7 @@ The LIMS source of each statusdb KEY is documented here within the function in
 witch the KEY it is set. The documentation frequently referes to the different 
 process chategories. The process chategories are the following:
 
-SEQSTART
-LIBVALFINISHEDLIB
-PREPREPSTART
-INITALQCFINISHEDLIB
-AGRINITQC
-POOLING
-CALIPER
-WORKSET
-PREPEND
-DILSTART
-INITALQC
-SUMMARY
-LIBVAL
-SEQUENCING
-DEMULTIPLEX
-PREPSTART
-AGRLIBVAL
+SEQSTART, LIBVALFINISHEDLIB, PREPREPSTART, INITALQCFINISHEDLIB, AGRINITQC, POOLING, CALIPER, WORKSET, PREPEND, DILSTART, INITALQC, SUMMARY, LIBVAL, SEQUENCING, DEMULTIPLEX, PREPSTART, AGRLIBVAL
  
 The categories are set in process_categories.py and their definitions are 
 documented in process_categories.rst. There you can allso read about how to add 
