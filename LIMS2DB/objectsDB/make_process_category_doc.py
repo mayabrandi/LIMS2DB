@@ -1,4 +1,4 @@
-#from LIMS2DB.objectsDB.process_categories import *
+from LIMS2DB.objectsDB.process_categories import *
 
 
 """Script to generate the process chategory info to a Read the Docs friendly rst
