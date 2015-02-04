@@ -38,20 +38,20 @@ If you get output when grepping for True, there are differences. Then read the l
 file to find what is differing. 
 
 """
-#import sys
-#import os
-#import codecs
-#from optparse import OptionParser
-#from statusdb.db.utils import *
-#from LIMS2DB.objectsDB.functions import *
-#from pprint import pprint
-#from genologics.lims import *
-#from genologics.config import BASEURI, USERNAME, PASSWORD
-#import objectsDB as DB
-#from datetime import date
-#lims = Lims(BASEURI, USERNAME, PASSWORD)
-#lims_stage = Lims('https://genologics-stage.scilifelab.se:8443', USERNAME, PASSWORD)
-#import logging
+import sys
+import os
+import codecs
+from optparse import OptionParser
+from statusdb.db.utils import *
+from LIMS2DB.objectsDB.functions import *
+from pprint import pprint
+from genologics.lims import *
+from genologics.config import BASEURI, USERNAME, PASSWORD
+import objectsDB as DB
+from datetime import date
+lims = Lims(BASEURI, USERNAME, PASSWORD)
+lims_stage = Lims('https://genologics-stage.scilifelab.se:8443', USERNAME, PASSWORD)
+import logging
 
 
 def comp_obj(stage, prod):
