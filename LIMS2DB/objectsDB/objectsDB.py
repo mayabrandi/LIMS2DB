@@ -1,7 +1,37 @@
 #!/usr/bin/env python
 
 """A module for building up the project objects that build up the project database on 
-statusdb. Lims isthe main source of information.
+statusdb. Lims is the main source of information.
+
+In the project-statusdb context, lims processes are categorised into groups that
+define, or are used to define a certain type of statusdb KEY in a project 
+database. 
+
+The LIMS source of each statusdb KEY is documented here within the function in 
+witch the KEY it is set. The documentation frequently referes to the different 
+process chategories. The process chategories are the following:
+
+SEQSTART
+LIBVALFINISHEDLIB
+PREPREPSTART
+INITALQCFINISHEDLIB
+AGRINITQC
+POOLING
+CALIPER
+WORKSET
+PREPEND
+DILSTART
+INITALQC
+SUMMARY
+LIBVAL
+SEQUENCING
+DEMULTIPLEX
+PREPSTART
+AGRLIBVAL
+ 
+The categories are set in process_categories.py and their definitions are 
+documented in process_categories.rst. There you can allso read about how to add 
+or change a process chategory.
 
 Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 """
