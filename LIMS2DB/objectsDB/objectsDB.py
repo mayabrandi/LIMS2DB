@@ -12,7 +12,7 @@ Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 #from process_categories import *
 #from statusdb.db.utils import *
 #from functions import *
-#€import os
+#import os
 #import couchdb
 #import time
 #from datetime import date
