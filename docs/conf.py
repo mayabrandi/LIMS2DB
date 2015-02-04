@@ -22,9 +22,6 @@ import mock
 sys.path.insert(0, os.path.abspath('../'))
 
 
-#MOCK_MODULES = ['codecs', 'genologics', 'genologics.lims', 'genologics.entities',
-#        'genologics.lims_utils', 'process_categories', 'statusdb', 'statusdb.db',
-#        'statusdb.db.utils', 'functions','couchdb','time','datetime', 'logging']
 MOCK_MODULES = ['couchdb','genologics', 'genologics.lims', 'genologics.entities', 'genologics.lims_utils','statusdb','statusdb.db', 'statusdb.db.utils']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
