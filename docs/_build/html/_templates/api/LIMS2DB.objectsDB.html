@@ -64,12 +64,12 @@ statusdb. Lims isthe main source of information.</p>
 <p>Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.</p>
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.InitialQC">
-<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">InitialQC</tt><big>(</big><em>lims_inst</em>, <em>sample</em>, <em>procs_per_art</em>, <em>application</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">InitialQC</tt><big>(</big><em>lims_inst</em>, <em>sample</em>, <em>procs_per_art</em>, <em>application</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#InitialQC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instances of this class holds a dictionary formatted for building up the 
 initial_qc field per sample in the project database on status db.</p>
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info">
-<tt class="descname">set_initialqc_info</tt><big>(</big><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_initialqc_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#InitialQC.set_initialqc_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.InitialQC.set_initialqc_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>The following statusdb KEYs are set in this funktion.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -128,13 +128,13 @@ initial_qc field per sample in the project database on status db.</p>
 
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.Prep">
-<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">Prep</tt><big>(</big><em>sample_name</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">Prep</tt><big>(</big><em>sample_name</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instances of this class holds a dictionary formatted for building a
 sample prep in the project database on status db. Each sample can have 
 many preps. Their keys are named A,B,C,etc.</p>
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.Prep._get_lib_val_info">
-<tt class="descname">_get_lib_val_info</tt><big>(</big><em>agrlibQCsteps</em>, <em>libvalstart</em>, <em>latest_caliper_id=None</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep._get_lib_val_info" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_lib_val_info</tt><big>(</big><em>agrlibQCsteps</em>, <em>libvalstart</em>, <em>latest_caliper_id=None</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep._get_lib_val_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep._get_lib_val_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function holds for both library_validation and pre_prep_library_validation KEYSs</p>
 <p>The following statusdb KEYs are set in this funktion.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -222,7 +222,7 @@ many preps. Their keys are named A,B,C,etc.</p>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info">
-<tt class="descname">set_prep_info</tt><big>(</big><em>steps</em>, <em>aplication</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">set_prep_info</tt><big>(</big><em>steps</em>, <em>aplication</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#Prep.set_prep_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.Prep.set_prep_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>The following statusdb KEYs are set in this funktion.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -288,7 +288,7 @@ udf of the output artifact of the first PREPSTART and PREPREPSTART steps in the 
 
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProcessInfo">
-<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProcessInfo</tt><big>(</big><em>lims_instance</em>, <em>processes</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProcessInfo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProcessInfo</tt><big>(</big><em>lims_instance</em>, <em>processes</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProcessInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProcessInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class takes a list of process type names. Eg 
 &#8216;Aggregate QC (Library Validation) 4.0&#8217; and forms  a dict with info about 
 all processes of the type specified in runs which the project has gon through.</p>
@@ -296,20 +296,20 @@ all processes of the type specified in runs which the project has gon through.</
 
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProcessSpec">
-<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProcessSpec</tt><big>(</big><em>hist_sort</em>, <em>hist_list</em>, <em>application</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProcessSpec" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProcessSpec</tt><big>(</big><em>hist_sort</em>, <em>hist_list</em>, <em>application</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProcessSpec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProcessSpec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to identify to what process chategory a particular process belongs 
 in the artifact history.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB">
-<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProjectDB</tt><big>(</big><em>lims_instance</em>, <em>project_id</em>, <em>samp_db</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">ProjectDB</tt><big>(</big><em>lims_instance</em>, <em>project_id</em>, <em>samp_db</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instances of this class holds a dictionary formatted for building up the 
 project database on statusdb. Source of information come from different lims
 artifacts and processes.</p>
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_affiliation">
-<tt class="descname">_get_affiliation</tt><big>(</big><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_affiliation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_affiliation</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_affiliation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_affiliation" title="Permalink to this definition">¶</a></dt>
 <dd><p>The following statusdb KEYs are set in this funktion.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -345,7 +345,7 @@ artifacts and processes.</p>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info">
-<tt class="descname">_get_project_level_info</tt><big>(</big><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_project_level_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_project_level_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_level_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>The following statusdb KEYs are set in this funktion.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -416,7 +416,7 @@ artifacts and processes.</p>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_summary_info">
-<tt class="descname">_get_project_summary_info</tt><big>(</big><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_summary_info" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_project_summary_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_project_summary_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_project_summary_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>The following statusdb KEYs are set in this funktion.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -452,7 +452,7 @@ artifacts and processes.</p>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished">
-<tt class="descname">_get_sequencing_finished</tt><big>(</big><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_sequencing_finished</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._get_sequencing_finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._get_sequencing_finished" title="Permalink to this definition">¶</a></dt>
 <dd><p>The following statusdb KEYs are set in this funktion.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -488,7 +488,7 @@ artifacts and processes.</p>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB._make_DB_samples">
-<tt class="descname">_make_DB_samples</tt><big>(</big><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._make_DB_samples" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_make_DB_samples</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB._make_DB_samples"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB._make_DB_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p>The following statusdb KEYs are set in this funktion.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -534,7 +534,7 @@ artifacts and processes.</p>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.ProjectDB.build_processes_per_artifact">
-<tt class="descname">build_processes_per_artifact</tt><big>(</big><em>lims</em>, <em>pname</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB.build_processes_per_artifact" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">build_processes_per_artifact</tt><big>(</big><em>lims</em>, <em>pname</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#ProjectDB.build_processes_per_artifact"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.ProjectDB.build_processes_per_artifact" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a dictionary linking each artifact id with its processes.
 Other artifacts can be present as keys. All processes where the project is
 present should be included. The values of the dictionary is sets, to avoid
@@ -545,26 +545,26 @@ duplicated projects for a single artifact.</p>
 
 <dl class="class">
 <dt id="LIMS2DB.objectsDB.objectsDB.SampleDB">
-<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">SampleDB</tt><big>(</big><em>lims_instance</em>, <em>sample_id</em>, <em>project_name</em>, <em>samp_db</em>, <em>application=None</em>, <em>AgrLibQCs=[]</em>, <em>run_info=[]</em>, <em>processes_per_artifact=None</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">LIMS2DB.objectsDB.objectsDB.</tt><tt class="descname">SampleDB</tt><big>(</big><em>lims_instance</em>, <em>sample_id</em>, <em>project_name</em>, <em>samp_db</em>, <em>application=None</em>, <em>AgrLibQCs=[]</em>, <em>run_info=[]</em>, <em>processes_per_artifact=None</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instances of this class holds a dictionary formatted for building up the 
 samples in the project database on status db. Source of information come 
 from different lims artifacts and processes.</p>
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_barcode">
-<tt class="descname">_get_barcode</tt><big>(</big><em>reagent_label</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_barcode" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_barcode</tt><big>(</big><em>reagent_label</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_barcode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_barcode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extracts barcode from list of artifact.reagent_labels</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_firts_day">
-<tt class="descname">_get_firts_day</tt><big>(</big><em>sample_name</em>, <em>process_list</em>, <em>last_day=False</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_firts_day" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_firts_day</tt><big>(</big><em>sample_name</em>, <em>process_list</em>, <em>last_day=False</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_firts_day"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_firts_day" title="Permalink to this definition">¶</a></dt>
 <dd><p>process_list is a list of process type names, sample_name is a 
 sample name</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_prep_leter">
-<tt class="descname">_get_prep_leter</tt><big>(</big><em>prep_info</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_prep_leter" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_prep_leter</tt><big>(</big><em>prep_info</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_prep_leter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_prep_leter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get preps and prep names; A,B,C... based on prep dates for 
 sample_name. 
 Output: A dict where keys are prep_art_id and values are prep names.</p>
@@ -572,7 +572,7 @@ Output: A dict where keys are prep_art_id and values are prep names.</p>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_preps_and_libval">
-<tt class="descname">_get_preps_and_libval</tt><big>(</big><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_preps_and_libval" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_preps_and_libval</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_preps_and_libval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_preps_and_libval" title="Permalink to this definition">¶</a></dt>
 <dd><p>The following statusdb KEYs are set in this funktion.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -614,7 +614,7 @@ Output: A dict where keys are prep_art_id and values are prep names.</p>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_info">
-<tt class="descname">_get_sample_info</tt><big>(</big><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_info" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_sample_info</tt><big>(</big><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_sample_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>The following statusdb KEYs are set in this funktion.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -707,7 +707,7 @@ Output: A dict where keys are prep_art_id and values are prep names.</p>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_run_metrics">
-<tt class="descname">_get_sample_run_metrics</tt><big>(</big><em>demux_info</em>, <em>preps</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_run_metrics" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_get_sample_run_metrics</tt><big>(</big><em>demux_info</em>, <em>preps</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._get_sample_run_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._get_sample_run_metrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Input: demux_info - instance of the ProcessInfo class with 
 DEMULTIPLEX processes as argument
 For each SEQUENCING process run on the sample, this function steps 
@@ -779,7 +779,7 @@ process to find the folowing information</p>
 
 <dl class="method">
 <dt id="LIMS2DB.objectsDB.objectsDB.SampleDB._pars_reagent_labels">
-<tt class="descname">_pars_reagent_labels</tt><big>(</big><em>steps</em>, <em>last_libval</em><big>)</big><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._pars_reagent_labels" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">_pars_reagent_labels</tt><big>(</big><em>steps</em>, <em>last_libval</em><big>)</big><a class="reference internal" href="../../_modules/LIMS2DB/objectsDB/objectsDB.html#SampleDB._pars_reagent_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LIMS2DB.objectsDB.objectsDB.SampleDB._pars_reagent_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the sample went throuh POOLING the reagent_labels must be feched 
 from the input artifact of the firtst POOLING step. If the sample did 
 not go through POOLING, the reagent_labels are fetched from the input 
