@@ -14,11 +14,20 @@
 
 import sys
 import os
+import mock
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('../'))
+
+
+MOCK_MODULES = ['codecs', 'genologics', 'genologics.lims', 'genologics.entities',
+        'genologics.lims_utils', 'process_categories', 'statusdb', 'statusdb.db',
+        'statusdb.db.utils', 'functions','couchdb','time','datetime', 'logging']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = mock.Mock()
+
 
 # -- General configuration ------------------------------------------------
 
