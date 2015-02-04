@@ -22,7 +22,7 @@ Maya Brandi, Science for Life Laboratory, Stockholm, Sweden.
 #import codecs
 from genologics.lims import *
 import genologics.entities as gent
-#from genologics.lims_utils import *
+from genologics.lims_utils import *
 #from process_categories import *
 #from statusdb.db.utils import *
 #from functions import *
